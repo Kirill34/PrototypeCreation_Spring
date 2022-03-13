@@ -1,0 +1,996 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/problem-ontology#"
+     xml:base="http://www.semanticweb.org/problem-ontology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:untitled-ontology-62="http://www.semanticweb.org/problem-ontology#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/problem-ontology"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#chosePresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#chosePresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#chosenComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#chosenComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#chosenPresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#chosenPresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#describe -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#describe"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#elementType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#elementType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasAceptablePresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasAceptablePresentation">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasDomainTypePresentation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasActivity -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasActivity"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasData -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasData"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasDomainType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasDomainType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasDomainTypePresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasDomainTypePresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasElement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasEntityField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasEntityField"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstField"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFormulation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFormulation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasInputData -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasInputData">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasData"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasInputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasInputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasInvalidPresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasInvalidPresentation">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasDomainTypePresentation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNextComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNextField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextField"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasOutputData -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasOutputData">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasData"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasOutputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasOutputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasParameter"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasPresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasPresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasPrototype -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasPrototype"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasReturnValue -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasReturnValue"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasStructElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasStructElement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasUpdatableParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasUpdatableParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#next -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#next"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ofDataElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#ofDataElement"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasComponentName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasComponentName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasDirection -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasDirection"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasElementName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasElementName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFinishedText -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFinishedText"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFullText -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFullText"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasID"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasLeftBorder -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasLeftBorder"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasPresentationName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasPresentationName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasRightBorder -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasRightBorder"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasTransferMethod -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasTransferMethod"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasTypeName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasTypeName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#maxValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#maxValue"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#minValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#minValue"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#mission -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#mission"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#name"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ofParameterWithName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#ofParameterWithName"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ofReturnValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#ofReturnValue"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#range -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#range"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#text -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#text"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#textDescription -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#textDescription"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#transferMethod -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#transferMethod"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Activity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Activity"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Char -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Char">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Scalar"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Collection -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Collection">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#CollectionPresentation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#CollectionPresentation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#DomainTypePresentation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#DataElement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#DomainType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainTypePresentation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#DomainTypePresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Element -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Element"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Entity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Entity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#FloatNumber -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#FloatNumber">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Number"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ImitateElement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#ImitateElement">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Element"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#InputParameterChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#InputParameterChoose">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#ParameterChoose"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#IntegerNumber -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#IntegerNumber">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Number"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#List -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#List">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Collection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Number -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Number">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Scalar"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#OutputParameterChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#OutputParameterChoose">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#ParameterChoose"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Parameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Parameter"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ParameterChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#ParameterChoose"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Phrase -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Phrase"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#PresentationChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#PresentationChoose"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Problem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Problem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ReturnValueChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#ReturnValueChoose"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Scalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Scalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#ScalarPresentation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#ScalarPresentation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#DomainTypePresentation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Set -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Set">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Collection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#SovereginElement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#SovereginElement">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Element"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#String -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#String">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#List"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#StructPresentation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#StructPresentation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#DomainTypePresentation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#ParameterChoose"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Activity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Activity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Activity"/>
+        <mission>Calculate count of days between birthday and first day at school</mission>
+        <name>Interval between dates</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Birthday -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Birthday">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields4"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number"/>
+        <mission>Date of birth</mission>
+        <name>date_of_birth</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_Date"/>
+        <mission>An entity with 3 characteristics: day (number), month (number), year (number)</mission>
+        <name>entity</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber"/>
+        <mission>3 scalars: day (number), month (number), year (number)</mission>
+        <name>freefields</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_2Fields"/>
+        <mission>2 scalars: day (number), month (number)</mission>
+        <name>freefields2</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_4Fields"/>
+        <mission>4 scalars: day (number), month (number), year (number), count of days from 1900 (number)</mission>
+        <name>freefields4</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Sequence">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation"/>
+        <hasFirstComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays"/>
+        <mission>Number</mission>
+        <name>number</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_CountOfDays">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
+        <mission>Count of days</mission>
+        <name>count_of_days</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_Date -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_Date">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <mission>date</mission>
+        <name>date</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber"/>
+        <mission>Number of day</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_2Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_2Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_2Fields"/>
+        <mission>Number of day</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_4Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_4Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_4Fields"/>
+        <mission>Number of day</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber"/>
+        <hasNextField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_Entity"/>
+        <mission>Number of day</mission>
+        <name>day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_DaysCount_4Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_DaysCount_4Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
+        <mission>Count of days from 1900</mission>
+        <name>daysFrom1900</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber"/>
+        <mission>Number of month</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_2Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_2Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <mission>Number of month</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_4Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_4Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_4Fields"/>
+        <mission>Number of month</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_MonthNumber_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber"/>
+        <hasNextField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_Entity"/>
+        <mission>Number of month</mission>
+        <name>month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_YearNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber"/>
+        <mission>Number of year</mission>
+        <name>year</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_4Fields -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_4Fields">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber"/>
+        <hasNextComponent rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DaysCount_4Fields"/>
+        <mission>Number of year</mission>
+        <name>year</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_Entity -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DataElement_YearNumber_Entity">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber"/>
+        <mission>Number of year</mission>
+        <name>year</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DaysCount -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DaysCount">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_DaysCount_Number"/>
+        <mission>Count of days between dates</mission>
+        <name>dayscount</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_Date -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_Date">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Entity"/>
+        <hasFirstField rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement_DayNumber_Entity"/>
+        <name>date</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_DayNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_DayNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31</maxValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</minValue>
+        <name>Number of day</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_MonthNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">12</maxValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</minValue>
+        <name>Number of month</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_PeriodInDays">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</minValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">74000</minValue>
+        <name>Interval as a count of days</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_Sequence_Date -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_Sequence_Date">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#List"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#DomainType_YearNumber -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#DomainType_YearNumber">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#IntegerNumber"/>
+        <maxValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">2100</maxValue>
+        <minValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1900</minValue>
+        <name>Number of year</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#FirstSchoolDay -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#FirstSchoolDay">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#DataElement"/>
+        <hasDomainType rdf:resource="http://www.semanticweb.org/problem-ontology#DomainType_Date"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_Entity"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields2"/>
+        <hasPresentation rdf:resource="http://www.semanticweb.org/problem-ontology#DataElementPresentation_Birthday_FreeFields4"/>
+        <mission>First date at school</mission>
+        <name>first_date_at_school</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Phrase_Birthday -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Phrase_Birthday">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Phrase"/>
+        <describe rdf:resource="http://www.semanticweb.org/problem-ontology#Birthday"/>
+        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">14</hasLeftBorder>
+        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">16</hasRightBorder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Phrase_DaysCount -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Phrase_DaysCount">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Phrase"/>
+        <describe rdf:resource="http://www.semanticweb.org/problem-ontology#DaysCount"/>
+        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</hasLeftBorder>
+        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</hasRightBorder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#Phrase_FirstSchoolDay -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#Phrase_FirstSchoolDay">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Phrase"/>
+        <describe rdf:resource="http://www.semanticweb.org/problem-ontology#FirstSchoolDay"/>
+        <hasLeftBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</hasLeftBorder>
+        <hasRightBorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</hasRightBorder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#PrototypeProblem -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/problem-ontology#PrototypeProblem">
+        <rdf:type rdf:resource="http://www.semanticweb.org/problem-ontology#Problem"/>
+        <hasActivity rdf:resource="http://www.semanticweb.org/problem-ontology#Activity"/>
+        <hasInputData rdf:resource="http://www.semanticweb.org/problem-ontology#Birthday"/>
+        <hasInputData rdf:resource="http://www.semanticweb.org/problem-ontology#FirstSchoolDay"/>
+        <hasOutputData rdf:resource="http://www.semanticweb.org/problem-ontology#DaysCount"/>
+        <hasFullText>Create a prototype for the function that calculates the count of days between the birth date and the first date at school</hasFullText>
+        <hasID rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</hasID>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

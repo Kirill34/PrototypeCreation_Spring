@@ -1,0 +1,283 @@
+[
+    ScalarForScalar:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComp)
+    (?firstComp http://www.semanticweb.org/problem-ontology#hasDomainType ?presDomainType)
+    noValue(?firstComp http://www.semanticweb.org/problem-ontology#hasNextComponent)
+
+    (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    ScalarForScalar:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComp)
+    (?firstComp http://www.semanticweb.org/problem-ontology#hasDomainType ?presDomainType)
+    (?firstComp http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComp)
+
+    (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Использование нескольких компонентов для представления одного скаляра")
+]
+
+[
+    EntityForScalar:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComp)
+    (?firstComp http://www.semanticweb.org/problem-ontology#hasDomainType ?presDomainType)
+
+    (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Использование сущности для скалярного значения")
+]
+
+[
+    TypesOfFirstComponentsEquals:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComp)
+    (?firstComp http://www.semanticweb.org/problem-ontology#hasDomainType ?presDomainType)
+
+    (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasFirstField ?fieldElement)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?componentPresentation)
+
+    (?fieldElement http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+
+    equal(?presDomainType, ?fieldDomainType)
+
+    ->
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?fieldElement)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?componentPresentation)
+
+
+]
+
+
+[
+    TypesOfFirstElementsIsNotEquals:
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComp)
+    (?firstComp http://www.semanticweb.org/problem-ontology#hasDomainType ?presDomainType)
+
+    (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasFirstField ?fieldElement)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?componentPresentation)
+
+    (?fieldElement http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+
+    notEqual(?presDomainType, ?fieldDomainType)
+
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Расхождение компонентов")
+
+]
+
+[
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?fieldDomainType)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?presDomainType)
+
+    (?fieldDomainType http://www.semanticweb.org/problem-ontology#hasNextField ?nextField)
+    (?presDomainType http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComponent)
+
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+    noValue(?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?nextField)
+
+    (?nextComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?nextDomainType)
+    (?nextField http://www.semanticweb.org/problem-ontology#hasDomainType ?nextFieldDomainType)
+    equal(?nextDomainType, ?nextFieldDomainType)
+    ->
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?nextField)
+
+]
+
+[
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?fieldDomainType)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?presComponent)
+
+    (?fieldDomainType http://www.semanticweb.org/problem-ontology#hasNextField ?nextField)
+    (?presComponent http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComponent)
+
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+    noValue(?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?nextField)
+
+    (?nextComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?nextDomainType)
+    (?nextField http://www.semanticweb.org/problem-ontology#hasDomainType ?nextFieldDomainType)
+    notEqual(?nextDomainType, ?nextFieldDomainType)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Расхождение компонентов")
+
+]
+
+[
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?fieldDomainType)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?presDomainType)
+
+    (?fieldDomainType http://www.semanticweb.org/problem-ontology#hasNextField ?nextField)
+    (?nextField http://www.semanticweb.org/problem-ontology#mission ?fieldName)
+
+    noValue(?presDomainType http://www.semanticweb.org/problem-ontology#hasNextComponent)
+    noValue(?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?nextField)
+
+    strConcat("Не представлена характеристика ",?fieldName, ?errorMsg)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+
+]
+
+[
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?fieldDomainType)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?presDomainType)
+
+    (?presDomainType http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComp)
+    (?nextComp http://www.semanticweb.org/problem-ontology#mission ?compName)
+
+    noValue(?fieldDomainType http://www.semanticweb.org/problem-ontology#hasNextField)
+    noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComp)
+
+    strConcat("Представлена избыточная характеристика ",?compName, ?errorMsg)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+
+]
+
+
+[
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasPresentationName ?presName)
+    (?element http://www.semanticweb.org/problem-ontology#hasDomainType ?elementDomainType)
+    (?presentation rdf:type http://www.semanticweb.org/problem-ontology#DataElementPresentation)
+    (?presentation http://www.semanticweb.org/problem-ontology#name ?presName)
+
+    (?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?fieldDomainType)
+    (?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?presDomainType)
+
+
+    noValue(?fieldDomainType http://www.semanticweb.org/problem-ontology#hasNextField)
+    noValue(?presDomainType http://www.semanticweb.org/problem-ontology#hasNextComponent)
+
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+
+]
+

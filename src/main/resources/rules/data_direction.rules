@@ -1,0 +1,228 @@
+[
+ProblemText:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFormulation ?firstPhrase)
+(?firstPhrase http://www.semanticweb.org/problem-ontology#text ?firstPhraseText)
+noValue(?p http://www.semanticweb.org/problem-ontology#hasFullText ?text)
+->
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?firstPhrase)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?firstPhraseText)
+
+]
+
+[
+ProblemHasntFullText:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+noValue(?p,http://www.semanticweb.org/problem-ontology#hasFullText)
+->
+(?p http://www.semanticweb.org/problem-ontology#hasFinishedText '0')
+]
+
+[
+ProblemTextContinue:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?text)
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?cp)
+(?cp http://www.semanticweb.org/problem-ontology#next ?next_phrase)
+(?next_phrase http://www.semanticweb.org/problem-ontology#text ?nextText)
+noValue(?p http://www.semanticweb.org/problem-ontology#hasFinishedText '1')
+strConcat(?text,' ',?nextText,?newText)
+->
+remove(1,2)
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?next_phrase)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?newText)
+]
+
+[
+ProblemTextFinish:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasCurrentPhrase ?cp)
+(?cp http://www.semanticweb.org/problem-ontology#text ?cp_text)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
+noValue(?cp http://www.semanticweb.org/problem-ontology#next ?nextPhrase)
+->
+(?p http://www.semanticweb.org/problem-ontology#hasFinishedText '1')
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "input")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#mission ?elementMission)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "output")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    strConcat("Разве ", ?elementMission, " вычисляется в данной функции?", ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOutput)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput)
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasInputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#mission ?elementMission)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "updatable")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    strConcat("Разве ", ?elementMission, " изменяется в данной функции?", ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectUpdatable)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput)
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+]
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "output")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    ->
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "input")
+    (?element http://www.semanticweb.org/problem-ontology#mission ?elementMission)
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    strConcat("Разве ", ?elementMission, " изначально известен?", ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectInput)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutput)
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasOutputData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "updatable")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?element http://www.semanticweb.org/problem-ontology#mission ?elementMission)
+    strConcat("Разве ", ?elementMission, " изменяется в данной функции?", ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectUpdatable)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutput)
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+]
+
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "updatable")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "input")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?element http://www.semanticweb.org/problem-ontology#mission ?elementMission)
+    strConcat("Разве ", ?elementMission, " не изменяется в данной функции?", ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectInput)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatable)
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+]
+
+[
+    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+    (?answ http://www.semanticweb.org/problem-ontology#hasElementName ?elementName)
+    (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
+    (?answ http://www.semanticweb.org/problem-ontology#hasDirection "output")
+    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?element http://www.semanticweb.org/problem-ontology#mission ?elementMission)
+    strConcat("Разве ", ?elementMission, "  изначально не известен?", ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOutput)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatable)
+    (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataElement ?element)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
+]
+
+
