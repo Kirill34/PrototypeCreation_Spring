@@ -1,476 +1,379 @@
 [
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?type2)
-    (?type2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?type2Lexem)
-    makeSkolem(?ptrLexem, ?type, ?type2)
-    ->
-    (?ptrLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PointerLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?ptrLexem)
-    (?ptrLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?type2Lexem)
-]
-
-[
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
-    makeSkolem(?lexem,?type)
-    ->
-    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexem)
-]
-
-[
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
-    makeSkolem(?lexem,?type)
-    ->
-    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CharLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexem)
-]
-
-[
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Float)
-    makeSkolem(?lexem,?type)
-    ->
-    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FloatLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexem)
-]
-
-[
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Double)
-    makeSkolem(?lexem,?type)
-    ->
-    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#DoubleLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexem)
-]
-
-[
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long)
-    makeSkolem(?lexem,?type)
-    ->
-    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LongLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexem)
-]
-
-[
-    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Short)
-    makeSkolem(?lexem,?type)
-    ->
-    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ShortLexem)
-    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexem)
-]
-
-[
-    (?return rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
-    (?return http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
-    (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntLexem)
-    noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Да, должен быть int")
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?firstLexem)
 ]
 
 [
-    noValue(?return rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?nextLexem)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?nextLexem)
+]
+
+[
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Да, должен быть void")
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
 ]
 
+
 [
-    noValue(?return rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     noValue(?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве у этой функции есть возвращаемое значение?")
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве эта функция имеет тип возвращаемого значения?")
 ]
 
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
-    noValue(?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?secondLexem)
+    noValue(?secondLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?secondLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Прототип функции должен начинаться с типа возвращаемого значения")
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?secondLexem)
+    noValue(?secondLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?secondLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    ->
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве это имя функции?")
 ]
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?funcNameLexem)
+    (?funcNameLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    (?funcNameLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?firstLexem)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
 ]
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?funcNameLexem)
+    (?funcNameLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    (?funcNameLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве это скобка?")
+]
+
+
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?braceLexem)
+    (?braceLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    (?braceLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFirstParameter ?param)
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?ethalonLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type1)
+    (?ethalonLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type2)
+    equal(?type1, ?type2)
+    ->
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum 1)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?braceLexem)
+    (?braceLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    (?braceLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFirstParameter ?param)
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?ethalonLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type1)
+    (?ethalonLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type2)
+    notEqual(?type1, ?type2)
+    ->
+    print("type1=",?type1)
+    print("type2=",?type2)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Это разве тип параметра?")
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum 1)
+]
+
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
     (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextParamLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val1)
+    (?nextParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
+    equal(?val1,?val2)
+
+    addOne(?lexemNum,?newLexemNum)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?nextLexem)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?newLexemNum)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+
+    print("========")
+    print("Очередная лексема параметра на месте ",?val2)
+    print("========")
+    print("")
+    print("")
 ]
+
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Имя функции разве ",?value," ?", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 1)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextParamLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val1)
+    (?nextParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
+    notEqual(?val1,?val2)
+
+    addOne(?lexemNum,?newLexemNum)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?newLexemNum)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверная лексема")
 ]
+
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, после типа возвращаемого значения должно быть имя функции ",?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted 1)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    noValue(?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    print("========")
+    print("Запятая на месте")
+    print("========")
+    print("")
+    print("")
 ]
+
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, после имени функции должна быть ",?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#openBracketIsCompleted 1)
-]
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
 
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("А вы уверены, что после имени функции должна быть ",?value, ". Может что-то другое?", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    noValue(?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Не обнаружен разделитель параметров")
+    print("========")
+    print("Ни скобка, ни запятая")
+    print("========")
+    print("")
+    print("")
 ]
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, после ( должен быть ",?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-]
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
 
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Разве ",?value, " это тип агрумента функции", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    noValue(?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Это разве все параметры функции?")
+
+    print("========")
+    print("Скобка закрывается, а параметры еще есть")
+    print("========")
+    print("")
+    print("")
 ]
 
 
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
 
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem3)
-    (?lexem3 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem3 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem4)
-    (?lexem3 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value2)
-    equal(?value, ?value2)
-    ->
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCopy ?lexem3)
-    print(?value, " is used twice")
-]
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
 
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCopy)
-    strConcat("Молодец, после типа параметра должно быть его имя ",?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    noValue(?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
     ->
-    print("Correct answer, parameter ",?value)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
 
+    print("========")
+    print("Закрывается скобка, но параметров нет")
+    print("========")
+    print("")
+    print("")
 ]
+
+
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCopy ?lexem3)
-    strConcat("Параметр ",?value, " уже был в прототипе функции", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    noValue(?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
     ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве есть еще параметры?")
 
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCopy)
-    strConcat("Молодец, после типа параметра должно быть его имя ",?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
-    ->
-    print("Correct answer, parameter ",?value)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-
-]
-
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Вы уверены, что должно быть ",?value, " ?", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    noValue(?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, параметры надо разделять запятыми", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted 1)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, список параметров завершен", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#closeBracketIsCompleted 1)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Чем разделяются параметры функции? Подсказка: они разделяются не ", ?value, ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Разве ", ?value, " это имя структуры?", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, имя структуры есть", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, имя структуры есть", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PointerLexem)
-    noValue(?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    noValue(?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PointerLexem)
-    noValue(?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem)
-    noValue(?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Это указатель на какой тип?" ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    noValue(?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    noValue(?lexem2 rdf:type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Is \"", ?value, "\" a type of function parameter?", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#TypeLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, здесь должен быть тип параметра", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
-]
-
-[
-    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
-    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#containsLexem ?lexem)
-    (?lexem1 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
-    (?lexem1 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem2)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem)
-    (?lexem2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#StructNameLexem)
-    (?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
-    strConcat("Молодец, здесь должен быть тип параметра", ?message)
-    noValue(?lexem2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
-    ->
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?message)
-    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    print("========")
+    print("Запятая, когда параметров уже нет")
+    print("========")
+    print("")
+    print("")
 ]

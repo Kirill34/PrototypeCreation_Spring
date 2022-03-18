@@ -66,12 +66,12 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
-equal(?lba, ?lb)
+ge(?lba, ?lb)
 lessThan(?rba, ?rb)
 ->
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "The phrase you selected is too short. It describes the data element partly.")
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделена слишком короткая фраза. Она описывает элемент частично.")
 ]
 
 [
@@ -88,8 +88,52 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
-equal(?lba, ?lb)
+greaterThan(?lba, ?lb)
+le(?rba, ?rb)
+->
+
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделена слишком короткая фраза. Она описывает элемент частично.")
+]
+
+[
+DataElementBorders_Correct:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
+(?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?element)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+(?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
+le(?lba, ?lb)
 greaterThan(?rba, ?rb)
+->
+
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделнено слишком много... Думайте еще...")
+]
+
+[
+DataElementBorders_Correct:
+(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+(?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
+(?p http://www.semanticweb.org/problem-ontology#hasData ?element)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?element)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
+(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
+(?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
+lessThan(?lba, ?lb)
+ge(?rba, ?rb)
 ->
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
@@ -118,24 +162,7 @@ greaterThan(?rba, ?rb)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
 ]
 
-[
-    (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
-    (?p http://www.semanticweb.org/problem-ontology#hasData ?element)
-    (?phrase http://www.semanticweb.org/problem-ontology#describe ?element)
-    (?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
-    (?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
-    (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
-    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
-    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
-    (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
-    (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
-    noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer)
-    ->
-    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверно выделен элемент данных... Думайте еще...")
 
-]
 
 [
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount '0'^^http://www.w3.org/2001/XMLSchema#int)

@@ -689,6 +689,8 @@ public class ProblemClass {
             }
         }
 
+        student.removeAll(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"));
+
         return result;
     }
 
@@ -915,6 +917,10 @@ public class ProblemClass {
             QuerySolution qs = rs.next();
             int s = qs.get("?correct").asLiteral().getInt();
             answ.put("correct", (s == 1) ? "true" : "false");
+            if (s==1)
+            {
+                setParameterType(studentID, parameterName, typeName);
+            }
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             answ.put("message", qs.get("?message").asLiteral().getString());
 
@@ -922,6 +928,38 @@ public class ProblemClass {
         infModel.toString();
 
         return answ;
+    }
+
+    private void setParameterType(String studentID, String parameterName, String typeName)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?param WHERE"+
+                "{"+
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?param a po:ParameterChoose ."+
+                "?param so:ofStudent ?student ."+
+                "?param po:name \""+parameterName+"\"."+
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+
+        if (rs.hasNext())
+        {
+            QuerySolution qs = rs.next();
+            Resource param = qs.get("?param").asResource();
+            param.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDataType"), inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName));
+
+            Resource lexemType = createLexemByTypeAndName("IntLexem","int");
+            lexemType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum"),inf.createTypedLiteral(1));
+            Resource lexemParamName = createLexemByTypeAndName("ParameterNameLexem",parameterName);
+            lexemType.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem"),lexemParamName);
+            lexemParamName.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum"),inf.createTypedLiteral(2));
+            param.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"),lexemType);
+
+        }
     }
 
     public HashMap<String, String> chooseReturnValuetype(String studentID, String typeName)
@@ -961,6 +999,10 @@ public class ProblemClass {
             QuerySolution qs = rs.next();
             int s = qs.get("?correct").asLiteral().getInt();
             answ.put("correct", (s == 1) ? "true" : "false");
+            if (s==1)
+            {
+                setReturnValueType(studentID, typeName);
+            }
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             answ.put("message", qs.get("?message").asLiteral().getString());
 
@@ -968,6 +1010,203 @@ public class ProblemClass {
         infModel.toString();
 
         return answ;
+    }
+
+    private void setReturnValueType(String studentID, String typeName)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                            "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?rv WHERE "+
+                "{"+
+                "?rv a po:ReturnValueChoose ."+
+                "?rv so:ofStudent ?student ." +
+                "?student a so:Student ."+
+                "?student so:hasID \""+studentID+"\"."+
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+
+        if (rs.hasNext())
+        {
+            QuerySolution qs = rs.next();
+            Resource rv = qs.get("?rv").asResource();
+            rv.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDataType"), inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName));
+        }
+
+
+    }
+
+    private void generateDatatypeLexemes(Resource datatype)
+    {
+        RDFNode datatypeClass = getDatatypeClass(datatype);
+        datatype.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"), createLexemByTypeAndName("Int", "int"));
+    }
+
+    private void generateLexemesForAlldatatypes(String studentID)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT DISTINCT ?dt WHERE"+
+                "{"+
+                "{"+
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                //"?param a po:ParameterChoose ."+
+                "?param so:ofStudent ?student ."+
+                "?param po:hasDataType ?dt"+
+                "}"+
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        while (rs.hasNext())
+        {
+            QuerySolution qs = rs.next();
+            Resource dt = qs.get("?dt").asResource();
+            generateDatatypeLexemes(dt);
+            break;
+        }
+    }
+
+    private void generateParameterSequence(String studentID)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT  DISTINCT ?param ?problem WHERE"+
+                "{"+
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?param a po:ParameterChoose ."+
+                "?param so:ofStudent ?student ."+
+                "?student so:solves ?problem ." +
+                "?problem po:hasData ?el ."+
+                "?presChoose po:chosenPresentation ?pres ."+
+                "?presChoose so:ofStudent ?student ."+
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+
+        List<Resource> paramList = new ArrayList<>();
+        Resource problemResource = null;
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            Resource param = qs.get("?param").asResource();
+            problemResource = qs.get("?problem").asResource();
+            paramList.add(param);
+        }
+        int len = paramList.size();
+        problemResource.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstParameter"),paramList.get(0));
+        //paramList.get(0).addProperty(inf.getObjectProperty(""));
+        for (int i=1; i<len; i++)
+        {
+            paramList.get(i-1).addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasNextParameter"), paramList.get(i));
+        }
+
+        for (int i=0; i<len; i++)
+        {
+            paramList.get(i).addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasNumber"), inf.createTypedLiteral(i+1));
+        }
+    }
+
+    public List<HashMap<String,String>> getLexemesForPrototype(String studentID)
+    {
+        generateParameterSequence(studentID);
+        generateLexemesForAlldatatypes(studentID);
+        List<HashMap<String,String>> lexemes = new ArrayList<>();
+
+        //Function name lexeme
+        HashMap<String,String> funcNameLexem = new HashMap<>();
+        funcNameLexem.put("type","FunctionNameLexem");
+        funcNameLexem.put("value","funcName");
+        lexemes.add(funcNameLexem);
+
+        //Parameter name lexemes
+        List<HashMap<String,String>> paramList = getParamList(studentID);
+        for (HashMap<String,String> map: paramList)
+        {
+            HashMap<String,String> paramLexem = new HashMap<>();
+            paramLexem.put("type","ParameterNameLexem");
+            paramLexem.put("value",map.get("name"));
+            lexemes.add(paramLexem);
+        }
+
+        //Brackets
+        HashMap<String,String> openBracket = new HashMap<>();
+        openBracket.put("type","OpenBracketLexem");
+        openBracket.put("value","(");
+
+        HashMap<String,String> closeBracket = new HashMap<>();
+        closeBracket.put("type","CloseBracketLexem");
+        closeBracket.put("value",")");
+
+        lexemes.add(openBracket);
+        lexemes.add(closeBracket);
+
+        //Semicolon
+        HashMap<String,String> semicolon = new HashMap<>();
+        semicolon.put("type","SemicolonLexem");
+        semicolon.put("value",";");
+
+        lexemes.add(semicolon);
+
+        //Comma
+        HashMap<String,String> comma = new HashMap<>();
+        comma.put("type","CommaLexem");
+        comma.put("value",",");
+
+        lexemes.add(comma);
+
+        //Type (int)
+        HashMap<String,String> intLexem = new HashMap<>();
+        intLexem.put("type","");
+        intLexem.put("value","int");
+
+        lexemes.add(intLexem);
+
+
+
+
+        return lexemes;
+    }
+
+    public List<HashMap<String,String>> getParamList(String studentID)
+    {
+        List<HashMap<String,String>> paramList = new ArrayList<>();
+        String queryString = "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"+
+                "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>"+
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "PREFIX lo: <http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#>" +
+                "SELECT ?name ?subclass WHERE"+
+                "{" +
+                    "?param a po:ParameterChoose ."+
+                    "?param a ?subclass ."+
+                    "?subclass rdfs:subClassOf* po:ParameterChoose."+
+                    "?param po:name ?name ."+
+                    "?param so:ofStudent ?student ."+
+                    "?student so:hasID \""+studentID+"\" ."+
+                    "FILTER (?subclass != po:ParameterChoose) " +
+
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
+        ResultSet rs = qExec.execSelect();
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            HashMap<String,String> paramDescription = new HashMap<>();
+            paramDescription.put("name",qs.get("?name").toString());
+
+            HashMap<String,String> classDirections = new HashMap<>();
+            classDirections.put("http://www.semanticweb.org/problem-ontology#InputParameterChoose","input");
+            classDirections.put("http://www.semanticweb.org/problem-ontology#OutputParameterChoose","output");
+            classDirections.put("http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose","updatable");
+
+            paramDescription.put("direction", classDirections.get(qs.get("?subclass").toString()));
+            paramList.add(paramDescription);
+        }
+        return paramList;
     }
 
     public HashMap<String, String> removeLastLexemFromPrototypeCode(String studentID)
@@ -1047,24 +1286,22 @@ public class ProblemClass {
             answ.put("message", qs.get("?message").asLiteral().getString());
             answ.put("correct", (qs.get("?correct").asLiteral().getInt()==1) ? "true" : "false" );
 
-            ArrayList<String> propertyURIs = new ArrayList<>();
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted");
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted");
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramTypeIsCompleted");
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#paramNameIsCompleted");
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#openBracketIsCompleted");
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#closeBracketIsCompleted");
-            propertyURIs.add("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#functionNameIsCompleted");
-            Resource modifiedCode = qs.get("?code").asResource();
+            Resource newCode = qs.get("?code").asResource();
+            Resource newCodeLastLexem = getLastLexemOfPrototypeCode(newCode);
 
-            for (String property:
-                    propertyURIs) {
-                if (modifiedCode.hasProperty(infModel.getProperty(property))) {
-                    DatatypeProperty hasReturnType = inf.getDatatypeProperty(property);
-                    code.addProperty(hasReturnType, inf.createTypedLiteral(1));
-                    //System.out.println("Code has return value: " + code.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#returnTypeIsCompleted")).getLiteral().getInt());
+            ArrayList<String> properties = new ArrayList<>();
+            properties.add("hasCurrentParamNum");
+            properties.add("hasCurrentLexemNum");
+
+            for (String propertyName: properties)
+            {
+                if (newCodeLastLexem.hasProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+propertyName)))
+                {
+                    int paramNum = newCodeLastLexem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+propertyName)).getInt();
+                    lexem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+propertyName), inf.createTypedLiteral(paramNum));
                 }
             }
+
 
 
 
@@ -1352,6 +1589,21 @@ public class ProblemClass {
             }
         }
         return classes;
+    }
+
+    private RDFNode getDatatypeClass(Resource datatype)
+    {
+        //HashSet<RDFNode> classes = new HashSet<>();
+            //Resource error = answer.getPropertyResourceValue(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError"));
+        StmtIterator stmtit = datatype.listProperties();
+
+        while (stmtit.hasNext()) {
+            Statement stmt = stmtit.next();
+            if (stmt.getPredicate().getURI().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
+                return (stmt.getObject());
+            }
+        }
+        return null;
     }
 
 }

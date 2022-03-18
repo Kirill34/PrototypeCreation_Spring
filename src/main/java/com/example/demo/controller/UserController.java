@@ -116,10 +116,22 @@ public class UserController {
         return problem.getStudentParameters(student);
     }
 
+    @GetMapping("/parametersWithDescription")
+    public List<HashMap<String,String>> getStudentParameterList(String student)
+    {
+        return problem.getParamList(student);
+    }
+
     @GetMapping("/presentations")
     public HashMap<String,String> getElementPresentations(String student, String elementName)
     {
         return problem.getPresentationsForDataElement(student, elementName);
+    }
+
+    @GetMapping("/lexemsForPrototype")
+    public List<HashMap<String,String>> getLexemesForPrototype(String student)
+    {
+        return problem.getLexemesForPrototype(student);
     }
 
 

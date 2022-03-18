@@ -78,6 +78,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasDataType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasDataType"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasDomainType -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasDomainType"/>
@@ -111,6 +117,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasFirstField -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstField"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstParameter"/>
     
 
 
@@ -153,6 +165,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasNextField -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextField"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNextParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextParameter"/>
     
 
 
@@ -278,6 +296,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasLeftBorder -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasLeftBorder"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNumber"/>
     
 
 
