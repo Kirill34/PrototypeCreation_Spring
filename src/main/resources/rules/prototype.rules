@@ -377,3 +377,110 @@
     print("")
     print("")
 ]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?prevParamNum)
+
+    (?prevParam rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?prevParam http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?prevParam http://www.semanticweb.org/problem-ontology#hasNumber ?prevParamNum)
+    (?prevParam http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+    (?nextParameter http://www.semanticweb.org/problem-ontology#hasNumber ?nextParamNum)
+    (?nextParameter http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    ->
+    print("===============")
+    print("Начало работает")
+    print("===============")
+    print("")
+    print("")
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem)
+
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?prevParamNum)
+
+    (?prevParam rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?prevParam http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?prevParam http://www.semanticweb.org/problem-ontology#hasNumber ?prevParamNum)
+    (?prevParam http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+    (?nextParameter http://www.semanticweb.org/problem-ontology#hasNumber ?nextParamNum)
+    (?nextParameter http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type1)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type2)
+    equal(?type1,?type2)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?nextParamNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum 1)
+
+    print("type 1 = ",?type1)
+    print("type 2 = ",?type2)
+    print("========")
+    print("Начало следующего параметра")
+    print("========")
+    print("")
+    print("")
+]
+
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexem)
+
+    (?prevParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?prevParamNum)
+
+    (?prevParam rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?prevParam http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?prevParam http://www.semanticweb.org/problem-ontology#hasNumber ?prevParamNum)
+    (?prevParam http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+    (?nextParameter http://www.semanticweb.org/problem-ontology#hasNumber ?nextParamNum)
+    (?nextParameter http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type1)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type2)
+    notEqual(?type1,?type2)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверное начало типа параметра")
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?nextParamNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum 1)
+
+    print("type 1 = ",?type1)
+    print("type 2 = ",?type2)
+    print("========")
+    print("Неверное начало следующего параметра")
+    print("========")
+    print("")
+    print("")
+]
