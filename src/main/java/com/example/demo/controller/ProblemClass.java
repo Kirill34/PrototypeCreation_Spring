@@ -77,12 +77,17 @@ public class ProblemClass {
         problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasFullText"), "вычисляет сумму доходов за январь и доходов за февраль");
         problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasID"), inf.createTypedLiteral(2));
 
+        //Domain type: money count
         Individual domainTypeMoney = inf.createIndividual(inf.createResource());
         domainTypeMoney.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#IntegerNumber"));
         domainTypeMoney.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"),"Количество денег");
         domainTypeMoney.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#minValue"), inf.createTypedLiteral((long) 0));
         domainTypeMoney.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#maxValue"), inf.createTypedLiteral((long) 100000));
 
+        //Domain type: array
+        Individual domainTypeArray = inf.createIndividual(inf.createResource());
+        domainTypeArray.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#List"));
+        domainTypeArray.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"),"Количество денег");
 
         Individual data_element_sum = inf.createIndividual(inf.createResource());
         data_element_sum.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
@@ -124,10 +129,12 @@ public class ProblemClass {
         phraseFeb.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasLeftBorder"), inf.createTypedLiteral(7));
         phraseFeb.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasRightBorder"), inf.createTypedLiteral(9));
 
+        //Presentation number
         Individual presentation = inf.createIndividual(inf.createResource());
         presentation.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElementPresentation"));
         presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"),"number");
         presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"),"Число");
+
 
         Individual moneyCount = inf.createIndividual(inf.createResource());
         moneyCount.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
@@ -137,9 +144,29 @@ public class ProblemClass {
 
         presentation.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstComponent"), moneyCount);
 
+        //Presentation array
+        Individual presentationArray = inf.createIndividual(inf.createResource());
+        presentationArray.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElementPresentation"));
+        presentationArray.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"),"array");
+        presentationArray.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"),"Массив из 3 чисел");
+
+        Individual arrayDataElement = inf.createIndividual(inf.createResource());
+        arrayDataElement.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
+        arrayDataElement.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"), domainTypeArray);
+        arrayDataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), "array");
+        arrayDataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), "Количество денег");
+
+        presentationArray.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstComponent"), arrayDataElement);
+
+
+
         data_element_sum.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentation);
         data_element_feb.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentation);
         data_element_jan.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentation);
+
+        data_element_sum.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentationArray);
+        data_element_feb.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentationArray);
+        data_element_jan.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentationArray);
 
     }
 
@@ -1032,6 +1059,9 @@ public class ProblemClass {
             QuerySolution qs = rs.next();
             Resource rv = qs.get("?rv").asResource();
             rv.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDataType"), inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName));
+            Resource intLexem = createLexemByTypeAndName("IntLexem","int");
+            intLexem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum"), inf.createTypedLiteral(1));
+            rv.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"), intLexem);
         }
 
 
@@ -1160,10 +1190,16 @@ public class ProblemClass {
 
         //Type (int)
         HashMap<String,String> intLexem = new HashMap<>();
-        intLexem.put("type","");
+        intLexem.put("type","IntLexem");
         intLexem.put("value","int");
 
+        //Void
+        HashMap<String,String> voidLexem = new HashMap<>();
+        voidLexem.put("type","VoidLexem");
+        voidLexem.put("value","void");
+
         lexemes.add(intLexem);
+        lexemes.add(voidLexem);
 
 
 
