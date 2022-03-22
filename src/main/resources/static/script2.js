@@ -10,6 +10,7 @@ let componentTables = {}
 let componentsTableRows = {}
 
 let componentsWithTransferMethods = {}
+let componentsWithDataType = {}
 
 let componentParameters = {}
 let returnComponent = null
@@ -33,6 +34,9 @@ function nextInteraction()
             break
         case 4:
             addComponentsDataTypes()
+            break
+        case 5:
+            addCodeBlock()
             break
     }
     interaction++
@@ -206,7 +210,7 @@ function addComponentsDataTypes()
         {
             let tr = componentsTableRows[dataElementName][componentName]
             let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char"}
-            let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype")
+            let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype",5)
             let td = document.createElement("td")
             td.appendChild(block)
             tr.appendChild(td)
@@ -216,11 +220,120 @@ function addComponentsDataTypes()
     {
         let tr = componentsTableRows[returnComponent.element][returnComponent.component]
         let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char"}
-        let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':'return'}, "datatype")
+        let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':'return'}, "datatype",5)
         let td = document.createElement("td")
         td.appendChild(block)
         tr.appendChild(td)
     }
+}
+
+function addCodeBlock()
+{
+    let sequenceParam = document.createElement("p")
+    sequenceParam.innerText="Порядок параметров: "
+
+    let xhrp = new XMLHttpRequest()
+    xhrp.open("GET","/answer/parametersWithDescription?student="+studentID)
+    xhrp.responseType="json"
+    xhrp.send()
+    xhrp.onload = () => {
+        let obj = xhrp.response
+        console.log("Порядок параметров")
+        console.log(obj)
+        for (let key in obj)
+        {
+            sequenceParam.innerText+=obj[key].name+","
+        }
+    }
+
+
+    let block = document.createElement("div")
+    block.classList.add("card")
+    block.style.margin="20px"
+    block.style.padding="20px"
+    document.getElementsByTagName("body").item(0).appendChild(block)
+    let title = document.createElement("p")
+    title.classList.add("card-title")
+    title.innerText = "Составьте прототип функции"
+    block.appendChild(title)
+    block.appendChild(sequenceParam)
+    let cardBody = document.createElement("div")
+    cardBody.classList.add("card-body")
+    block.appendChild(cardBody)
+
+    let codeAlert = document.createElement("div")
+    codeAlert.classList.add("alert","alert-primary")
+
+    let errorAlert = document.createElement("div")
+    errorAlert.classList.add("alert", "alert-danger")
+    errorAlert.hidden=true
+
+
+    cardBody.appendChild(codeAlert)
+    cardBody.appendChild(errorAlert)
+
+    let btnBlock = document.createElement("div")
+    cardBody.appendChild(btnBlock)
+
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET","/answer/lexemsForPrototype?student="+studentID)
+    xhr.responseType="json"
+    xhr.send()
+    xhr.onload = ()=>{
+        let arr = xhr.response
+        for (let key in arr)
+        {
+            let obj = arr[key]
+            let type = obj["type"]
+            let value=obj.value
+            let btn = document.createElement("button")
+            btn.classList.add("btn","btn-primary")
+            btn.innerText = value
+            btn.style.margin="20px"
+            btnBlock.appendChild(btn)
+            btn.onclick = ()=>{
+                let xhr2 = new XMLHttpRequest()
+                xhr2.open("POST", "/answer/6/addLexem?student="+studentID+"&lexemType="+type+"&lexemValue="+value)
+                xhr2.responseType="json"
+                xhr2.send()
+
+                xhr2.onload = ()=>{
+                    let respObj = xhr2.response
+                    if (respObj.correct === "true")
+                    {
+                        errorAlert.hidden=true
+                        btnBlock.childNodes.forEach((child)=>{child.disabled=false})
+                    }
+                    else
+                    {
+                        btnBlock.childNodes.forEach((child)=>{child.disabled=true})
+                        errorAlert.innerText=respObj.message
+                        errorAlert.hidden=false
+                    }
+                    codeAlert.innerText = respObj.code
+                }
+
+            }
+        }
+
+        let removeLastLexem = document.createElement("div")
+        removeLastLexem.classList.add("btn","btn-danger")
+        removeLastLexem.innerText="Удалить последнюю лексему"
+        removeLastLexem.onclick = () => {
+            let xhr2 = new XMLHttpRequest()
+            xhr2.open("POST","/answer/6/removeLexem?student="+studentID)
+            xhr2.responseType="json"
+            xhr2.send()
+            xhr2.onload = () => {
+                let respObj = xhr2.response
+                codeAlert.innerText = respObj.code
+                btnBlock.childNodes.forEach((child)=>{child.disabled=false})
+                errorAlert.hidden=true
+            }
+        }
+        cardBody.appendChild(removeLastLexem)
+    }
+
 }
 
 function createSelectBlock(options, url, paramDict, thisParamName, interactionNum)
@@ -324,7 +437,6 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
             }
             break
         case 4:
-            alert("Selected value:"+selectedValue)
             if (!componentsWithTransferMethods.hasOwnProperty(specificDict.elementName))
             {
                 componentsWithTransferMethods[specificDict.elementName]=[]
@@ -352,7 +464,49 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
             }
 
             break
+        case 5:
+            //alert("param name: "+specificDict.parameterName)
+            if (specificDict.parameterName === "return")
+            {
+                if (!componentsWithDataType.hasOwnProperty(returnComponent.element))
+                    componentsWithDataType[returnComponent.element] = []
+                componentsWithDataType[returnComponent.element].push(returnComponent.component)
+            }
+            else
+            {
+                for (let elName in componentParameters)
+                {
+                    for (let compName in componentParameters[elName])
+                    {
+                        if (componentParameters[elName][compName] === specificDict.parameterName)
+                        {
+                            if (!componentsWithDataType.hasOwnProperty(elName))
+                                componentsWithDataType[elName] = []
+                            componentsWithDataType[elName].push(compName)
+                        }
+                    }
+                }
+            }
+            if (allComponentsHaveDataTypes())
+            {
+                alert("Вы корректно выбрали все типы данных. Для перехода к следующему позаданию нажмите \"Далее\"")
+                let nextInteractionButton = document.getElementById("next-interaction")
+                nextInteractionButton.hidden=false
+            }
+            break
     }
+}
+
+function allComponentsHaveDataTypes()
+{
+    for (let elementName in components)
+    {
+        if (!componentsWithDataType.hasOwnProperty(elementName))
+            return false
+        if (componentsWithDataType[elementName].length < components[elementName].length)
+            return false
+    }
+    return true
 }
 
 function allComponentsHaveTransferMethods()
