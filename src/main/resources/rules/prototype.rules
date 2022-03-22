@@ -16,7 +16,7 @@
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
-    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
+    noValue(?student http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
@@ -30,7 +30,70 @@
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
-    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
+    (?rv http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?rv rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
+    noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?rv http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstRVLexem)
+
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val1)
+    (?firstRVLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
+    equal(?val1, ?val2)
+    ->
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum 0)
+    (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?rv http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?rv rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum 0)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?rv http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?rvLexem)
+    (?rvLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    noValue(?rvLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+]
+
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?rv http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?rv rdf:type http://www.semanticweb.org/problem-ontology#ReturnValueChoose)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum 0)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?rv http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?rvLexem)
+    (?rvLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    noValue(?rvLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    ->
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Здесь должно быть имя функции")
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    noValue(?student http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     noValue(?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
@@ -44,7 +107,7 @@
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
-    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
+    noValue(?student http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?secondLexem)
@@ -59,7 +122,7 @@
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
-    noValue(?problem http://www.semanticweb.org/problem-ontology#hasReturnValue)
+    noValue(?student http://www.semanticweb.org/problem-ontology#hasReturnValue)
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     (?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?secondLexem)
