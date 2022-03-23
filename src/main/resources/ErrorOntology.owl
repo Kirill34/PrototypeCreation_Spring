@@ -52,6 +52,30 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CollectionForEntity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CollectionForEntity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CollectionForScalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CollectionForScalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ComponentSequenceForOneScalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ComponentSequenceForOneScalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInput">
@@ -76,9 +100,49 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ElementAlreadyDefined -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ElementAlreadyDefined">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#EntityForCollection -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#EntityForCollection">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#EntityForScalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#EntityForScalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessCharacteristic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessCharacteristic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
     
 
 
@@ -86,6 +150,46 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FewReturnValues">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FunctionNameExpected -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FunctionNameExpected">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#HasntCharacteristic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#HasntCharacteristic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationCollectionForScalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationCollectionForScalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationEntityForScalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationEntityForScalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error"/>
     </owl:Class>
     
 
@@ -98,10 +202,66 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfParamList -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfParamList">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfPrototype -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfPrototype">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectInput -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectInput">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemOfReturnType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemOfReturnType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemParamType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemParamType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectNameOfParam -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectNameOfParam">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
     </owl:Class>
     
 
@@ -122,10 +282,50 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#Error"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfParamList -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfParamList">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfReturnType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfReturnType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartParamType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartParamType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemSequence"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectUpdatable -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectUpdatable">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterByPointer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterByPointer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
     </owl:Class>
     
 
@@ -146,6 +346,46 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotImplementationOfScalar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotImplementationOfScalar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectImplementation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterByValue -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterByValue">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForInputComponent -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForInputComponent">
@@ -158,6 +398,54 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForUpdatableComponent">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectOrganization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntContainElements -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntContainElements">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ReturnPointer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ReturnPointer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ScalarForCollection -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ScalarForCollection">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ScalarForEntity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ScalarForEntity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
     </owl:Class>
     
 

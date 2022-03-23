@@ -26,7 +26,10 @@
     (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
     (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterByPointer)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать указатель для входного параметра?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -40,7 +43,10 @@
     (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать вещественный тип для целочисленного параметра?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -54,7 +60,10 @@
     (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#FloatNumber)
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как можно представить вещественное число целочисленным типом?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -71,7 +80,10 @@
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     greaterThan(?max,127)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве char позволяет вместить весь диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -87,7 +99,10 @@
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     greaterThan(-128,?min)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве char позволяет вместить весь диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -135,7 +150,10 @@
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     greaterThan(?max,2147483647)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве int позволяет вместить весь диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -151,7 +169,10 @@
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     greaterThan(-2147483648,?min)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве int позволяет вместить весь диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -182,7 +203,10 @@
     (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
     (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterByValue)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как вы собирается изменять компонент, если передаете его по значению?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -194,7 +218,10 @@
     (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
     (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterByValue)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как вы собирается изменять компонент, если передаете его по значению?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -235,7 +262,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     greaterThan(?max,2147483647)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве int позволяет уместить весь необходимый диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -254,7 +284,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     lessThan(?min,-2147483648)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве int позволяет уместить весь необходимый диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -293,7 +326,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     greaterThan(?max,127)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве char позволяет уместить весь необходимый диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -312,7 +348,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     lessThan(?min,-128)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве char позволяет уместить весь необходимый диапазон?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -328,7 +367,10 @@
     (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber)
     (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать вещественный тип для целочисленного параметра?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -344,7 +386,10 @@
     (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
     (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#FloatNumber)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве можно использовать целочисленный тип для вещественного параметра?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -369,7 +414,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
      le(?max,2147483647)
      ge(?min,-2147483648)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать вещественный тип для целого числа?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -406,7 +454,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     greaterThan(?max,2147483647)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве возможно весь диапазон уместить в int?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -424,7 +475,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     lessThan(?min,-2147483648)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве возможно весь диапазон уместить в int?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -462,7 +516,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     greaterThan(?max,127)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве возможно уместить диапазон в char?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]
@@ -480,7 +537,10 @@
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
     lessThan(?min,128)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве возможно уместить диапазон в char?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 ]

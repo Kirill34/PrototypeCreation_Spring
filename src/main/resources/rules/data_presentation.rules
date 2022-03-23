@@ -17,7 +17,10 @@
 
     (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
     (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#List)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationCollectionForScalar)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Использование массива для представления скаляра")
 ]
@@ -65,7 +68,10 @@
 
     (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
     (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ComponentSequenceForOneScalar)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Использование нескольких компонентов для представления одного скаляра")
 ]
@@ -88,7 +94,10 @@
 
     (?elementDomainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
     (?presDomainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationEntityForScalar)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Использование сущности для скалярного значения")
 ]
@@ -243,7 +252,10 @@
     noValue(?elementDomainType http://www.semanticweb.org/problem-ontology#hasEntityField ?nextField)
 
     strConcat("Не представлена характеристика ",?fieldName, ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#HasntCharacteristic)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
 
@@ -272,7 +284,10 @@
     noValue(?presentation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComp)
 
     strConcat("Представлена избыточная характеристика ",?compName, ?errorMsg)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessCharacteristic)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMsg)
 

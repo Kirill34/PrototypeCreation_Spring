@@ -45,8 +45,10 @@ strConcat("Data element \"", ?mission, "\" is already defined", ?errorMessage)
 equal(?lba, ?lb)
 equal(?rba, ?rb)
 noValue(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+makeSkolem(?error, ?answ, ?student)
 ->
-
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ElementAlreadyDefined)
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMessage)
 ]
@@ -68,7 +70,10 @@ DataElementBorders_Correct:
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 ge(?lba, ?lb)
 lessThan(?rba, ?rb)
+makeSkolem(?error, ?answ, ?student)
 ->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement)
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделена слишком короткая фраза. Она описывает элемент частично.")
@@ -90,7 +95,10 @@ DataElementBorders_Correct:
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 greaterThan(?lba, ?lb)
 le(?rba, ?rb)
+makeSkolem(?error, ?answ, ?student)
 ->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement)
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделена слишком короткая фраза. Она описывает элемент частично.")
@@ -112,7 +120,10 @@ DataElementBorders_Correct:
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 le(?lba, ?lb)
 greaterThan(?rba, ?rb)
+makeSkolem(?error, ?answ, ?student)
 ->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase)
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделнено слишком много... Думайте еще...")
@@ -134,7 +145,10 @@ DataElementBorders_Correct:
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 lessThan(?lba, ?lb)
 ge(?rba, ?rb)
+makeSkolem(?error, ?answ, ?student)
 ->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase)
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделнено слишком много... Думайте еще...")
@@ -156,7 +170,10 @@ DataElementBorders_Correct:
 noValue(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 lessThan(?lba, ?lb)
 greaterThan(?rba, ?rb)
+makeSkolem(?error, ?answ, ?student)
 ->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase)
+(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
