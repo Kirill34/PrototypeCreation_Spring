@@ -84,7 +84,10 @@
     noValue(?rvLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
 
     noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FunctionNameExpected)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Здесь должно быть имя функции")
 ]
@@ -97,7 +100,10 @@
     (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?firstLexem)
     noValue(?firstLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
     noValue(?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfReturnType)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве эта функция имеет тип возвращаемого значения?")
 ]
@@ -128,7 +134,10 @@
     (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?secondLexem)
     noValue(?secondLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
     noValue(?secondLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FunctionNameExpected)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве это имя функции?")
 ]
@@ -156,7 +165,10 @@
     (?funcNameLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
     noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
     noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfParamList)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве это скобка?")
 ]
@@ -198,7 +210,10 @@
     (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type1)
     (?ethalonLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type2)
     notEqual(?type1, ?type2)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartParamType)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     print("type1=",?type1)
     print("type2=",?type2)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
@@ -269,7 +284,10 @@
     notEqual(?val1,?val2)
 
     addOne(?lexemNum,?newLexemNum)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemParamType)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
     (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?newLexemNum)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
@@ -331,7 +349,10 @@
 
     noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
     noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectParamSeparator)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Не обнаружен разделитель параметров")
     print("========")
@@ -362,7 +383,10 @@
     (?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
 
     (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotAllParameters)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Это разве все параметры функции?")
 
@@ -430,12 +454,52 @@
     noValue(?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
 
     (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CommaAfterAllParameters)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве есть еще параметры?")
 
     print("========")
     print("Запятая, когда параметров уже нет")
+    print("========")
+    print("")
+    print("")
+]
+
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    noValue(?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    noValue(?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
+
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfParamList)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве есть еще параметры?")
+
+    print("========")
+    print("Параметров уже нет, но дальше ни скобка, ни запятая")
     print("========")
     print("")
     print("")
@@ -533,7 +597,10 @@
     (?firstLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type1)
     (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?type2)
     notEqual(?type1,?type2)
+    makeSkolem(?error, ?answ, ?student)
     ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartParamType)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверное начало типа параметра")
     (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?nextParamNum)
