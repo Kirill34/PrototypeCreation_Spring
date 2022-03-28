@@ -17,9 +17,9 @@
         <div class="card-body">
             <h5 class="card-title">Напишите прототип функции, которая...</h5>
             <div class="card-text alert alert-primary" id="problem-text">вычисляет сумму доходов за январь и доходов за февраль</div>
-            <p class="card-text" >Выделите фрагменты текста из формулировки задания, которые соответствуют элементам данных решаемой задачи. После каждого выделения нажмите на кнопку "Отметить"</p>
+            <p class="card-text" id="interaction-text" >Выделите фрагменты текста из формулировки задания, которые соответствуют элементам данных решаемой задачи. После каждого выделения нажмите на кнопку "Отметить"</p>
+            <div class="alert alert-danger" id="element-selection-error" hidden=hidden></div>
             <button class="btn btn-primary" onclick="checkDataElementBorders();">Отметить</button>
-            <button class="btn btn-primary" onclick="nextInteraction()"  id="next-interaction">Далее >></button>
         </div>
     </div>
 

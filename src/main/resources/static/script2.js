@@ -15,27 +15,50 @@ let componentsWithDataType = {}
 let componentParameters = {}
 let returnComponent = null
 
-document.onload = ()=>{
-    document.getElementById("next-interaction").hidden=true
-}
+
+//document.getElementById("next-interaction").onload = () =>{this.hidden=true}
+
 
 function nextInteraction()
 {
+    let thead = table.getElementsByTagName("thead")[0]
+    let th = document.createElement("th")
+    let interactionText = document.getElementById("interaction-text")
     switch (interaction)
     {
         case 1:
+            thead.appendChild(th)
+            th.innerText="Направление данных"
+            interactionText.innerText="Каждый элемент данных имеет направление: входные данные, выходные данные или обновляемые данные. Вам необходимо для каждого элемента данных определить его направление."
             addDataElementDirections()
             break
         case 2:
+            thead.appendChild(th)
+            th.innerText="Представление данных"
+            interactionText.innerText="Каждый элемент данных может быть представлен каким-либо образом. Вам необходимо выбрать представление для каждого элемента данных."
             addDataElementPresentations()
             break
         case 3:
+            let table45 = document.createElement("table")
+            let thead45 = document.createElement("thead")
+            table45.appendChild(thead45)
+            let th2 = document.createElement("th")
+            thead45.appendChild(th2)
+            th.appendChild(table45)
+            thead.appendChild(th)
+            interactionText.innerText="Каждый компонент данных может быть передан в функцию как входной, выходной или обновляемый параметр или быть возвращаемым значением функции. Вам необходимо для каждого компонента данных выбрать метод передачи в функцию."
+            th2.innerText="Метод передачи в функцию"
             addComponents()
             break
         case 4:
+            let thead_45 = thead.getElementsByTagName("th")[3].getElementsByTagName("thead")[0]
+            thead_45.appendChild(th)
+            interactionText.innerText="Каждый параметр и возвращаемое значение (при его наличии) имеет тип данных. Вам необходимо выбрать типы данных для всех параметров функции и возвращаемого значения."
+            th.innerText="Тип данных на языке Си"
             addComponentsDataTypes()
             break
         case 5:
+            interactionText.innerText="Вам необходимо составить прототип функции на языке Си, используя предоставленные Вам лексемы."
             addCodeBlock()
             break
     }
@@ -93,9 +116,23 @@ function checkDataElementBorders()
                     table.style.padding = "20px"
                     table.classList.add("table")
                     table.classList.add("table-striped")
+                    let thead = document.createElement("thead")
                     let tbody = document.createElement("tbody")
+                    table.appendChild(thead)
                     table.appendChild(tbody)
                     document.getElementsByTagName("body").item(0).appendChild(table)
+                    let th = document.createElement("th")
+                    th.innerText="Элемент данных"
+                    thead.appendChild(th)
+
+                    let nextBtn = document.createElement("button")
+                    nextBtn.innerText="Далее >>"
+                    nextBtn.classList.add("btn","btn-primary")
+                    nextBtn.onclick = () => {nextInteraction()}
+                    nextBtn.id = "next-interaction"
+                    nextBtn.hidden=true
+                    nextBtn.style.margin="20px"
+                    document.getElementsByTagName("body").item(0).appendChild(nextBtn)
                 }
                 dataElements.push(new Object({name:obj.name, mission:obj.mission}))
                 let tr = document.createElement("tr")
@@ -104,11 +141,14 @@ function checkDataElementBorders()
                 tr.appendChild(td)
                 table.getElementsByTagName("tbody").item(0).appendChild(tr)
                 dataElementTableRows[obj.name]=tr
-                alert("Добавлен новый элемент")
+                //alert("Добавлен новый элемент")
             }
             else
             {
-                alert(obj.message)
+                //alert(obj.message)
+                document.getElementById("element-selection-error").innerText=obj.message
+                document.getElementById("element-selection-error").hidden=false
+                setTimeout(()=>{document.getElementById("element-selection-error").hidden=true;}, 3000)
             }
             if (obj.hasOwnProperty("interaction"))
             {
@@ -343,6 +383,7 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
     let div = document.createElement("div")
     div.classList.add("alert")
     div.style.fontSize = "12px"
+    div.style.width = "320px"
 
     block.appendChild(select)
     block.appendChild(div)
