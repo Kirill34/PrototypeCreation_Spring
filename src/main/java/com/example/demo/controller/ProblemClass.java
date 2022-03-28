@@ -14,6 +14,7 @@ import org.apache.jena.reasoner.Reasoner;
 import org.apache.jena.reasoner.rulesys.GenericRuleReasoner;
 import org.apache.jena.reasoner.rulesys.Rule;
 import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.vocabulary.RDF;
 import org.springframework.data.util.Pair;
 
 //import javax.jws.WebParam;
@@ -1209,6 +1210,20 @@ public class ProblemClass {
         return lexemes;
     }
 
+    public List<Resource> getLexemesForDataType(Resource datatype)
+    {
+        ArrayList<Resource> lexemes = new ArrayList<>();
+        if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int")))
+        {
+            lexemes.add(createLexemByTypeAndName("Int","int"));
+        }
+        if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char")))
+        {
+            lexemes.add(createLexemByTypeAndName("Char","char"));
+        }
+        return lexemes;
+    }
+
     public List<HashMap<String,String>> getParamList(String studentID)
     {
         List<HashMap<String,String>> paramList = new ArrayList<>();
@@ -1321,15 +1336,21 @@ public class ProblemClass {
         ResultSet rs = qExec.execSelect();
         if (rs.hasNext()) {
             QuerySolution qs = rs.next();
-            answ.put("message", qs.get("?message").asLiteral().getString());
             answ.put("correct", (qs.get("?correct").asLiteral().getInt()==1) ? "true" : "false" );
 
             Resource newCode = qs.get("?code").asResource();
             Resource newCodeLastLexem = getLastLexemOfPrototypeCode(newCode);
 
+            if (newCode.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError")))
+            {
+                answ.put("message",getErrorString(newCode,studentID).get(Language.RU));
+            }
+
             ArrayList<String> properties = new ArrayList<>();
             properties.add("hasCurrentParamNum");
             properties.add("hasCurrentLexemNum");
+
+
 
             for (String propertyName: properties)
             {
@@ -1486,7 +1507,8 @@ public class ProblemClass {
         String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable",
                 "CantReturn", "FewReturnValues", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent",
                 "ElementAlreadyDefined", "LongPhrase", "PhraseDoesntContainElements", "PhrasePartlyDescribesElement",
-                "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity"};
+                "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity",
+                "CommaAfterAllParameters","FunctionNameExpected","IncorrectFinishOfParamList","IncorrectFinishOfPrototype","IncorrectLexemOfReturnType","IncorrectLexemParamType","IncorrectNameOfParam","IncorrectParamSeparator","IncorrectStartOfParamList","IncorrectStartOfReturnType","IncorrectStartParamType","NotAllParameters"};
 
         for (String name: classNames)
         {
@@ -1513,6 +1535,33 @@ public class ProblemClass {
             if (component != null)
                 componentMission = component.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission")).getLiteral().getString();
         }
+
+        String lastLexemValue = "";
+        if (answer.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem")))
+        {
+            Resource lastLexem = getLastLexemOfPrototypeCode(answer);
+            lastLexemValue = lastLexem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getLiteral().getString();
+        }
+
+        String parameterName = "";
+        if (answer.hasProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#ofParameterWithName")))
+        {
+            parameterName = answer.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#ofParameterWithName")).getLiteral().getString();
+        }
+
+        Resource dataType = null;
+        String dataTypeString = "";
+        if (answer.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasType")))
+        {
+            dataType = answer.getProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasType")).getResource();
+            List<Resource> lexemes = getLexemesForDataType(dataType);
+
+            for (Resource lexeme: lexemes)
+            {
+                dataTypeString += lexeme.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getString()+" ";
+            }
+        }
+
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
             messages.put(Language.RU, "Разве \""+ mission +"\" вычисляется?");
@@ -1599,7 +1648,7 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("LongPhrase")))
         {
-            messages.put(Language.RU,"Выделена слишком короткая фраза - она описывает один элемент данных частично");
+            messages.put(Language.RU,"Выделена слишком длинная фраза");
         }
 
         if (classes.contains(ontClasses.get("PhraseDoesntContainElements")))
@@ -1609,7 +1658,7 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("PhrasePartlyDescribesElement")))
         {
-            messages.put(Language.RU,"Выделена слишком длинная фраза");
+            messages.put(Language.RU,"Выделена слишком короткая фраза - она описывает один элемент данных частично");
         }
 
         if (classes.contains(ontClasses.get("CollectionForScalar")))
@@ -1624,12 +1673,12 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("ExcessType")))
         {
-            messages.put(Language.RU,"Разве тип данных <тип данных stud_ldt(cj)> не избыточен для представления <описание концептуального типа данных cdt(cj)>?");
+            messages.put(Language.RU,"Разве тип данных "+dataTypeString+" не избыточен для представления <описание концептуального типа данных cdt(cj)>?");
         }
 
         if (classes.contains(ontClasses.get("InputParameterByPointer")))
         {
-            messages.put(Language.RU,"Разве вы хотите изменять <имя элемента данных ei>.<имя компонента cj>, используя указатель на него?");
+            messages.put(Language.RU,"Разве вы хотите изменять параметр "+parameterName+", используя указатель на него?");
         }
 
         if (classes.contains(ontClasses.get("IntegerTypeForRealNumber")))
@@ -1639,12 +1688,12 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("NotEnoughtType")))
         {
-            messages.put(Language.RU,"Разве для представления <описание концептуального типа данных cdt(cj)> достаточно использовать тип данных  <тип данных stud_ldt(cj)>?");
+            messages.put(Language.RU,"Разве для представления <описание концептуального типа данных cdt(cj)> достаточно использовать тип данных  "+dataTypeString+"?");
         }
 
         if (classes.contains(ontClasses.get("OutputParameterByValue")))
         {
-            messages.put(Language.RU,"Как будете изменять <имя элемента данных ei>.<имя компонента cj>, если в функцию передается его копия?");
+            messages.put(Language.RU,"Как будете изменять параметр \""+parameterName+"\", если в функцию передается его копия?");
         }
 
         if (classes.contains(ontClasses.get("RealTypeForInteger")))
@@ -1665,6 +1714,67 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("ScalarForEntity")))
         {
             messages.put(Language.RU,"Разве можно представить сущность со множеством характеристик одним скалярным значением?");
+        }
+
+        //Interaction 6
+        if (classes.contains(ontClasses.get("CommaAfterAllParameters")))
+        {
+            messages.put(Language.RU,"Разве у этой функции есть еще параметры?");
+        }
+
+        if (classes.contains(ontClasses.get("FunctionNameExpected")))
+        {
+            messages.put(Language.RU,"Разве лексема \""+lastLexemValue+"\" является именем функции?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectFinishOfParamList")))
+        {
+            messages.put(Language.RU,"Разве  лексема \""+lastLexemValue+"\" предваряет список параметров функции?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectFinishOfPrototype")))
+        {
+            messages.put(Language.RU,"Разве прототип функции завершается лексемой \""+lastLexemValue+"\" ?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectLexemOfReturnType")))
+        {
+            messages.put(Language.RU,"Разве лексема \""+lastLexemValue+"\" является типом возвращаемого значения у функции?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectLexemParamType")))
+        {
+            messages.put(Language.RU,"Разве тип <n-го> параметра начинается с лексемы \""+lastLexemValue+"\"?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectNameOfParam")))
+        {
+            messages.put(Language.RU,"Разве лексема \""+lastLexemValue+"\" является именем функции?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectParamSeparator")))
+        {
+            messages.put(Language.RU,"Разве параметры функции разделяются лесемой "+lastLexemValue+" ?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectStartOfParamList")))
+        {
+            messages.put(Language.RU,"Разве  лексема \""+lastLexemValue+"\" предваряет список параметров функции?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectStartOfReturnType")))
+        {
+            messages.put(Language.RU,"Разве тип возвращаемого значения у функции начинается с лексемы \""+lastLexemValue+"\"?");
+        }
+
+        if (classes.contains(ontClasses.get("IncorrectStartParamType")))
+        {
+            messages.put(Language.RU,"Разве тип <n-го> параметра начинается с лексемы \""+lastLexemValue+"\"?");
+        }
+
+        if (classes.contains(ontClasses.get("NotAllParameters")))
+        {
+            messages.put(Language.RU,"Разве у этой функции n параметров?");
         }
 
         return messages;
