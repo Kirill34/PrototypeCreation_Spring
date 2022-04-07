@@ -5,6 +5,10 @@ package com.example.demo.controller;
 //import com.sun.xml.internal.ws.api.ha.StickyFeature;
 //import jdk.nashorn.internal.objects.annotations.Where;
 //import com.github.andrewoma.dexx.collection.Pair;
+import model.DataComponent;
+import model.DataElement;
+import model.DomainType;
+import model.EntityField;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
@@ -71,6 +75,11 @@ public class ProblemClass {
         calcModel();
     }
 
+    public String getAllModel()
+    {
+        return inf.toString();
+    }
+
     private void addProblem()
     {
         Individual problem = inf.createIndividual(inf.createResource());
@@ -134,14 +143,14 @@ public class ProblemClass {
         Individual presentation = inf.createIndividual(inf.createResource());
         presentation.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElementPresentation"));
         presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"),"number");
-        presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"),"Число");
+        presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"),"Целое число [0; 10 000]");
 
 
         Individual moneyCount = inf.createIndividual(inf.createResource());
         moneyCount.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
         moneyCount.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"), domainTypeMoney);
         moneyCount.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), "money");
-        moneyCount.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), "Количество денег");
+        moneyCount.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), "Сумма доходов");
 
         presentation.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstComponent"), moneyCount);
 
@@ -155,7 +164,7 @@ public class ProblemClass {
         arrayDataElement.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
         arrayDataElement.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"), domainTypeArray);
         arrayDataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), "array");
-        arrayDataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), "Количество денег");
+        arrayDataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), "Сумма доходов");
 
         presentationArray.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstComponent"), arrayDataElement);
 
@@ -168,6 +177,231 @@ public class ProblemClass {
         data_element_sum.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentationArray);
         data_element_feb.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentationArray);
         data_element_jan.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentationArray);
+
+    }
+
+    public void addNewProblem(int id, String text, String notice)
+    {
+        Individual problem = inf.createIndividual(inf.createResource());
+        problem.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#Problem"));
+        problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasFullText"), text);
+        problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasNotice"), notice);
+        problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasID"), inf.createTypedLiteral(id));
+    }
+
+    public void addProblemDataElement(int problemId, int dataElementId, String name, String mission, DataElement.DataElementDirection direction, int leftBorder, int rightBorder)
+    {
+        Individual dataElement = inf.createIndividual(inf.createResource());
+        dataElement.addOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
+        dataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"),name);
+        dataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"),mission);
+        dataElement.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasID"), inf.createTypedLiteral(dataElementId));
+        Resource problem = findProblemByID(String.valueOf(problemId));
+        String directionEdge = "";
+        switch (direction)
+        {
+            case INPUT_DATA:
+                directionEdge = "http://www.semanticweb.org/problem-ontology#hasInputData";
+                break;
+            case OUTPUT_DATA:
+                directionEdge = "http://www.semanticweb.org/problem-ontology#hasOutputData";
+                break;
+            case CHANGED_DATA:
+                directionEdge = "http://www.semanticweb.org/problem-ontology#hasChangedData";
+                break;
+        }
+        problem.addProperty(inf.getObjectProperty(directionEdge), dataElement);
+
+        Individual phrase = inf.createIndividual(inf.createResource());
+        phrase.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasLeftBorder"),inf.createTypedLiteral(leftBorder));
+        phrase.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasRightBorder"),inf.createTypedLiteral(rightBorder));
+        phrase.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#Phrase"));
+        phrase.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#describe"),dataElement);
+    }
+
+    public Resource findDataElementById(int id)
+    {
+        String queryString = "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?de " +
+                " WHERE { "+
+                "?de a po:DataElement ." +
+                "?de po:hasID " + id +" ." +
+                " }";
+
+        //String queryString = "SELECT ?problem ?parameter WHERE {?problem <http://www.semanticweb.org/problem-ontology#hasParameter> ?parameter }";
+        Query query = QueryFactory.create(queryString);
+        //InfModel infModel = ModelFactory.createInfModel(reasoner, inf);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if ( (rs.hasNext()) ) {
+            return rs.next().get("?de").asResource();
+        }
+        return null;
+    }
+
+    public Resource findPresentationById(int id)
+    {
+        String queryString = "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?de " +
+                " WHERE { "+
+                "?de a po:DataElementPresentation ." +
+                "?de po:hasID " + id +" ." +
+                " }";
+
+        //String queryString = "SELECT ?problem ?parameter WHERE {?problem <http://www.semanticweb.org/problem-ontology#hasParameter> ?parameter }";
+        Query query = QueryFactory.create(queryString);
+        //InfModel infModel = ModelFactory.createInfModel(reasoner, inf);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if ( (rs.hasNext()) ) {
+            return rs.next().get("?de").asResource();
+        }
+        return null;
+    }
+
+    public Resource findDomainTypeById(int id)
+    {
+        String queryString = "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?de " +
+                " WHERE { "+
+                "?de a po:DomainType ." +
+                "?de po:hasID " + id +" ." +
+                " }";
+
+        //String queryString = "SELECT ?problem ?parameter WHERE {?problem <http://www.semanticweb.org/problem-ontology#hasParameter> ?parameter }";
+        Query query = QueryFactory.create(queryString);
+        //InfModel infModel = ModelFactory.createInfModel(reasoner, inf);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if ( (rs.hasNext()) ) {
+            return rs.next().get("?de").asResource();
+        }
+        return null;
+    }
+
+    public void addDomainType(int id, String name, String mission, DomainType.HighlyLevelTypes type)
+    {
+        Individual domainType = inf.createIndividual(inf.createResource());
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasID"), inf.createTypedLiteral(id));
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), name);
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), mission);
+
+        HashMap<DomainType.HighlyLevelTypes, String> typeClasses = new HashMap<>();
+        typeClasses.put(DomainType.HighlyLevelTypes.INTEGER_NUMBER, "http://www.semanticweb.org/problem-ontology#IntegerNumber");
+        typeClasses.put(DomainType.HighlyLevelTypes.REAL_NUMBER, "http://www.semanticweb.org/problem-ontology#FloatNumber");
+        typeClasses.put(DomainType.HighlyLevelTypes.ENTITY, "http://www.semanticweb.org/problem-ontology#Entity");
+
+        domainType.addOntClass(inf.getOntClass(typeClasses.get(type)));
+    }
+
+    public void setDomainTypeMinAndMax(int domainTypeId, int min, int max)
+    {
+        Resource domainType = findDomainTypeById(domainTypeId);
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#minValue"),inf.createTypedLiteral(min));
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#maxValue"),inf.createTypedLiteral(max));
+    }
+
+    public void setDomainTypeForDataElement(int dataElementId, int domainTypeId)
+    {
+        Resource dataElement = findDataElementById(dataElementId);
+        Resource domainType = findDomainTypeById(domainTypeId);
+        dataElement.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"),domainType);
+    }
+
+    public void addPresentationOfDataElement(int dataElementId, int presentationID, String name, String mission)
+    {
+        Resource dataElement = findDataElementById(dataElementId);
+
+        Individual presentation = inf.createIndividual(inf.createResource());
+        presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasID"), inf.createTypedLiteral(presentationID));
+        presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), name);
+        presentation.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"),mission);
+        presentation.addOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElementPresentation"));
+
+        dataElement.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasPresentation"), presentation);
+    }
+
+    public void setComponentsForPresentation(int presentationID, List<DataComponent> components)
+    {
+        Resource presentation = findPresentationById(presentationID);
+
+        ArrayList<Resource> componentResources = new ArrayList<>();
+        for (DataComponent component: components)
+        {
+            Individual comp = inf.createIndividual(inf.createResource());
+            comp.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), component.getName());
+            comp.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), component.getMission());
+            comp.addOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
+            Resource domainType = findDomainTypeById(component.getDomainType().getId().intValue());
+            if (domainType == null) {
+                addDomainType(component.getDomainType().getId().intValue(), component.getDomainType().getName(), component.getDomainType().getMission(), component.getDomainType().getType());
+                if (component.getDomainType().getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER)
+                {
+                    setDomainTypeMinAndMax(component.getDomainType().getId().intValue(), (int)component.getDomainType().getMinValue(), (int)component.getDomainType().getMaxValue());
+                }
+            }
+            domainType = findDomainTypeById(component.getDomainType().getId().intValue());
+            comp.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"), domainType);
+            componentResources.add(comp);
+        }
+
+        if (!componentResources.isEmpty())
+        {
+            presentation.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstComponent"), componentResources.get(0));
+
+            for (int i=1; i<componentResources.size(); i++)
+            {
+                componentResources.get(i-1).addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasNextComponent"), componentResources.get(i));
+            }
+        }
+
+    }
+
+    public void addDomainType(String name, String mission, DomainType.HighlyLevelTypes type)
+    {
+        Individual domainType = inf.createIndividual(inf.createResource());
+        String ontClassIRI = "";
+        switch (type)
+        {
+            case INTEGER_NUMBER:
+                ontClassIRI = "http://www.semanticweb.org/problem-ontology#IntegerNumber";
+                break;
+            case REAL_NUMBER:
+                ontClassIRI = "http://www.semanticweb.org/problem-ontology#FloatNumber";
+                break;
+        }
+        domainType.addOntClass(inf.getOntClass(ontClassIRI));
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), name);
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), mission);
+    }
+
+    public void addEntityFields(int domainTypeId, List<EntityField> fields)
+    {
+        Resource domainType = findDomainTypeById(domainTypeId);
+        ArrayList<Resource> fieldResources = new ArrayList<>();
+        for (EntityField field: fields)
+        {
+            Individual fieldIndividual = inf.createIndividual(inf.createResource());
+            fieldIndividual.addOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#DataElement"));
+            fieldIndividual.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#name"), field.getName());
+            fieldIndividual.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#mission"), field.getMission());
+
+            DomainType dt = field.getOwnDomainType();
+            Resource ownDomainType = findDomainTypeById(dt.getId().intValue());
+            if (ownDomainType == null)
+            {
+                addDomainType(dt.getId().intValue(),dt.getName(), dt.getMission(),dt.getType());
+                ownDomainType = findDomainTypeById(dt.getId().intValue());
+            }
+            fieldIndividual.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"),ownDomainType);
+
+            fieldResources.add(fieldIndividual);
+        }
+        domainType.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstField"), fieldResources.get(0));
+        for (int i=1; i<fieldResources.size(); i++)
+        {
+            fieldResources.get(i-1).addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasNextField"), fieldResources.get(i));
+        }
 
     }
 
@@ -252,7 +486,7 @@ public class ProblemClass {
         infModel = ModelFactory.createInfModel(reasoner, (infModel == null) ? inf : infModel);
     }
 
-    public Resource addStudent(String id)
+    public Resource addStudent(String id, String problemID)
     {
 
 
@@ -275,7 +509,7 @@ public class ProblemClass {
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount"), inf.createTypedLiteral(3));
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction"), inf.createTypedLiteral(0));
 
-            student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves"), findProblemByID("2"));
+            student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves"), findProblemByID(problemID));
         }
 
         while (rs.hasNext())
@@ -291,6 +525,7 @@ public class ProblemClass {
         String queryString = "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
                 "SELECT ?problem " +
                 " WHERE { "+
+                "?problem a po:Problem ." +
                 "?problem po:hasID " + id +" ." +
                 " }";
 
@@ -307,7 +542,7 @@ public class ProblemClass {
 
     private void setPresenatitionForStudent(String studentID, String dataElementName, String presentationName)
     {
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Resource dataElement = findDataElementByName(dataElementName);
         Resource presentation = findDataElementPresentationByName(dataElementName, presentationName);
 
@@ -327,7 +562,7 @@ public class ProblemClass {
         classesForDirections.put("read-write","http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose");
         classesForDirections.put("write-only","http://www.semanticweb.org/problem-ontology#OutputParameterChoose");
 
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Resource component = findComponentByName(studentID, elementName, componentName);
         String paramName =
                 (getStudentComponentsOfDataElement(studentID, elementName).size()>1) ?
@@ -342,7 +577,7 @@ public class ProblemClass {
 
     private void addReturnValueForStudent(String studentID, String elementName, String componentName)
     {
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Resource component = findComponentByName(studentID, elementName, componentName);
 
         Individual returnValueChoose = inf.createIndividual(inf.createResource());
@@ -586,12 +821,12 @@ public class ProblemClass {
         String queryString =
                 "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                         "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                "SELECT ?problem ?text WHERE { "+
+                "SELECT ?problem WHERE { "+
                         "?student a so:Student . " +
                         "?student so:hasID \"" + studentID + "\" ." +
                         "?student so:solves ?problem ." +
-                        "?problem a po:Problem ." +
-                        "?problem  po:hasFullText  ?text ." +
+                        //"?problem a po:Problem ." +
+                        //"?problem  po:hasFullText  ?text ." +
                 "}";
 
         Query query = QueryFactory.create(queryString);
@@ -605,7 +840,7 @@ public class ProblemClass {
         {
             System.out.println("+");
             QuerySolution qs = rs.next();
-            System.out.println(qs.get("?text").toString());
+            //System.out.println(qs.get("?text").toString());
             Resource problem = qs.get("?problem").asResource();
             String fullText = problem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasFullText")).getLiteral().getString();
             return fullText;
@@ -641,7 +876,7 @@ public class ProblemClass {
 
         HashMap<String, String> result = new HashMap<String,String>();
 
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Individual answer = inf.createIndividual(inf.createResource());
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#Phrase"));
@@ -726,7 +961,7 @@ public class ProblemClass {
     public HashMap<String, String> chooseElementDirection(String studentID, String elementName, String direction)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Individual answer = inf.createIndividual(inf.createResource());
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
         answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasDirection"), direction);
@@ -794,7 +1029,7 @@ public class ProblemClass {
     public HashMap<String, String> choosePresentationForDataElement(String studentID, String elementName, String presentationName)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Individual answer = inf.createIndividual(inf.createResource());
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
@@ -857,7 +1092,7 @@ public class ProblemClass {
     public HashMap<String, String> chooseParameterOrReturnValue(String studentID, String elementName, String componentName, String parameterOrReturn)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Individual answer = inf.createIndividual(inf.createResource());
         answer.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"));
         student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"), answer);
@@ -912,7 +1147,7 @@ public class ProblemClass {
     public HashMap<String, String> chooseParameterType(String studentID, String parameterName, String typeName)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Individual type = inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName);
 
         Individual answer = inf.createIndividual(inf.createResource());
@@ -995,7 +1230,7 @@ public class ProblemClass {
     public HashMap<String, String> chooseReturnValuetype(String studentID, String typeName)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Individual type = inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName);
 
         Individual answer = inf.createIndividual(inf.createResource());
@@ -1265,7 +1500,7 @@ public class ProblemClass {
     public HashMap<String, String> removeLastLexemFromPrototypeCode(String studentID)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Resource code = getStudentsPrototypeCode(studentID);
         removeLastLexem(code);
 
@@ -1302,7 +1537,7 @@ public class ProblemClass {
     public HashMap<String, String> addLexemToPrototypeCode(String studentID, String lexemType, String lexemValue)
     {
         HashMap<String, String> answ = new HashMap<String, String>();
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         Resource code = getStudentsPrototypeCode(studentID);
         Resource lexem = createLexemByTypeAndName(lexemType, lexemValue);
         Resource firstLexem = getFirstLexemOfPrototypeCode(code);
@@ -1493,7 +1728,7 @@ public class ProblemClass {
     private Resource createPrototypeCodeForStudent(String studentID)
     {
         Individual code = inf.createIndividual(inf.createResource());
-        Resource student = addStudent(studentID);
+        Resource student = addStudent(studentID,null);
         code.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent"), student);
         code.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode"));
         return code;
@@ -1564,32 +1799,32 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
-            messages.put(Language.RU, "Разве \""+ mission +"\" вычисляется?");
+            messages.put(Language.RU, "Разве элемент данных \""+ mission +"\" вычисляется функцией?");
             messages.put(Language.EN, "Should \"" + mission + "\" be calculated by the function?");
         }
         if (classes.contains(ontClasses.get("CorrectInput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
         {
-            messages.put(Language.RU, "Разве \""+ mission +"\" вычисляется?");
+            messages.put(Language.RU, "Разве элемент данных \""+ mission +"\" вычисляется функцией?");
             messages.put(Language.EN, "Should \"" + mission + "\" be calculated by the function?");
         }
         if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectUpdatable")))
         {
-            messages.put(Language.RU, "Разве \""+ mission +"\" изначально известен?");
+            messages.put(Language.RU, "Разве функция использует исходное значение элемента данных \""+ mission +"\" ?");
             messages.put(Language.EN, "Is \"" + mission + "\" initialized?");
         }
         if (classes.contains(ontClasses.get("CorrectOutput")) && classes.contains(ontClasses.get("IncorrectInput")))
         {
-            messages.put(Language.RU, "Разве \""+ mission +"\" изначально известен?");
+            messages.put(Language.RU, "Разве функция использует исходное значение у элемента данных \""+ mission +"\" ?");
             messages.put(Language.EN, "Is \"" + mission + "\" initialized?");
         }
         if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectInput")))
         {
-            messages.put(Language.RU, "Разве \""+ mission +"\" не вычисляется заново?");
+            messages.put(Language.RU, "Разве элемент данных \""+ mission +"\" не вычисляется функцией заново?");
             messages.put(Language.EN, "Should the \""+mission+"\" be calculated by the function?");
         }
         if (classes.contains(ontClasses.get("CorrectUpdatable")) && classes.contains(ontClasses.get("IncorrectOutput")))
         {
-            messages.put(Language.RU, "Разве \""+ mission +"\" не вычисляется заново?");
+            messages.put(Language.RU, "Разве функция не использует исходное значение у элемента данных \""+ mission +"\" ?");
             messages.put(Language.EN, "Is \"" + mission + "\" not calculated?");
         }
 
