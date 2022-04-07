@@ -11,12 +11,35 @@
     <script src="fixIERangeObject.js"></script>
     <script src="script2.js"></script>
 </head>
-<body onload="studentID = window.prompt('Your ID');">
+<body onload="studentID = window.prompt('Your ID'); loadFullText();">
 
-    <div class="card" style="padding: 20px; margin: 20px;">
+    <div class="card">
+        <form id="student-form">
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm1">Фамилия</span>
+            </div>
+            <input type="text" class="form-control" name="firstName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm1">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Имя</span>
+            </div>
+            <input type="text" class="form-control" name="lastName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+            <select id="problem-select" name="problemID"></select>
+            <script>
+                getAllProblems()
+            </script>
+        <button type="button" class="btn btn-primary" onclick="alert($('#student-form').serialize()); $.post('/answer/initStudent', $('#student-form').serialize(), (data)=>{ studentID=data; loadFullText(); loadNotice(); document.getElementById('student-form').hidden=true; document.getElementById('problem-card').hidden=false}); ">Начать</button>
+        </form>
+    </div>
+
+    <div id="problem-card" hidden=hidden class="card" style="padding: 20px; margin: 20px;">
         <div class="card-body">
             <h5 class="card-title">Напишите прототип функции, которая...</h5>
             <div class="card-text alert alert-primary" id="problem-text">вычисляет сумму доходов за январь и доходов за февраль</div>
+            <p style="font-style: italic" id="notice"></p>
             <p class="card-text" id="interaction-text" >Выделите фрагменты текста из формулировки задания, которые соответствуют элементам данных решаемой задачи. После каждого выделения нажмите на кнопку "Отметить"</p>
             <div class="alert alert-danger" id="element-selection-error" hidden=hidden></div>
             <button class="btn btn-primary" onclick="checkDataElementBorders();">Отметить</button>

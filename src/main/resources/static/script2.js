@@ -18,6 +18,52 @@ let returnComponent = null
 
 //document.getElementById("next-interaction").onload = () =>{this.hidden=true}
 
+function getAllProblems()
+{
+    let select = document.getElementById('problem-select')
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET","/answer/problems")
+    xhr.send()
+    xhr.responseType="json"
+    xhr.onload = () => {
+        let obj = xhr.response
+        for (let ind in obj)
+        {
+            if (ind>=0)
+            {
+                let problem = obj[ind]
+                console.log(problem)
+                let option = document.createElement("option")
+                option.value = problem.id
+                option.text = problem.text
+                select.add(option)
+            }
+
+        }
+        //document.getElementById('element-selection-error').parentElement.appendChild(select)
+        //alert(xhr.responseText)
+    }
+}
+
+function loadFullText()
+{
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET","/answer/fullText?studentID="+studentID)
+    xhr.send()
+    xhr.onload = () => {
+        document.getElementById("problem-text").innerText = xhr.responseText
+    }
+}
+
+function loadNotice()
+{
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET","/answer/notice?studentID="+studentID)
+    xhr.send()
+    xhr.onload = () => {
+        document.getElementById("notice").innerText = "Примечание:"+xhr.responseText
+    }
+}
 
 function nextInteraction()
 {
@@ -137,6 +183,7 @@ function checkDataElementBorders()
                 dataElements.push(new Object({name:obj.name, mission:obj.mission}))
                 let tr = document.createElement("tr")
                 let td = document.createElement("td")
+                td.classList.add("align-middle")
                 td.innerText = obj.mission
                 tr.appendChild(td)
                 table.getElementsByTagName("tbody").item(0).appendChild(tr)
@@ -169,6 +216,7 @@ function addDataElementDirections()
     for (let el in dataElementTableRows)
     {
         let td = document.createElement("td")
+        td.classList.add("align-middle")
         td.appendChild(createSelectBlock({"input":"Входные данные","output":"Выходные данные","updatable":"Обновляемые данные"}, "answer/2", {"student":studentID,"elementName":el}, "elementDirection",2))
         //td.appendChild(createSelect({"input":"Входные данные","output":"Выходные данные","updatable":"Обновляемые данные"}))
         dataElementTableRows[el].appendChild(td)
@@ -189,6 +237,8 @@ function addDataElementPresentations()
             dataElementPresentations[currElement] = obj
 
             let td = document.createElement("td")
+            td.style.width="320px"
+            td.classList.add("align-middle")
             td.appendChild(createSelectBlock(obj,"/answer/3",{"student":studentID,"elementName":currElement}, "elementPresentation",3))
             dataElementTableRows[currElement].appendChild(td)
         }
@@ -206,17 +256,21 @@ function addComponents()
         for (let key in components)
         {
             let td = document.createElement("td")
+            td.classList.add("align-middle")
             //td.innerText = components[key]
             let componentsTable = document.createElement("table")
+            componentsTable.classList.add("table")
             componentsTableRows[key] = {}
             for (let compName in components[key])
             {
                 let tr = document.createElement("tr")
                 let currTd = document.createElement("td")
+                currTd.classList.add("align-middle")
                 componentsTable.appendChild(tr)
                 tr.appendChild(currTd)
                 currTd.innerText = (components[key].length === 1) ? " " : components[key][compName].mission
                 componentsTableRows[key][components[key][compName].name] = tr
+                currTd.style.width = "200px"
             }
             td.appendChild(componentsTable)
             dataElementTableRows[key].appendChild(td)
@@ -252,6 +306,7 @@ function addComponentsDataTypes()
             let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char"}
             let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype",5)
             let td = document.createElement("td")
+            td.classList.add("align-middle")
             td.appendChild(block)
             tr.appendChild(td)
         }
@@ -262,6 +317,7 @@ function addComponentsDataTypes()
         let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char"}
         let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':'return'}, "datatype",5)
         let td = document.createElement("td")
+        td.classList.add("align-middle")
         td.appendChild(block)
         tr.appendChild(td)
     }
