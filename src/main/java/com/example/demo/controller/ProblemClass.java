@@ -71,7 +71,7 @@ public class ProblemClass {
     public ProblemClass()
     {
         createModel(DATA_DIRECTION_RULES);
-        addProblem();
+        //addProblem();
         calcModel();
     }
 
@@ -180,13 +180,48 @@ public class ProblemClass {
 
     }
 
-    public void addNewProblem(int id, String text, String notice)
+    public void addNewProblem(int id, String text, String notice, String funcName)
     {
         Individual problem = inf.createIndividual(inf.createResource());
         problem.setOntClass(inf.getOntClass("http://www.semanticweb.org/problem-ontology#Problem"));
         problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasFullText"), text);
         problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasNotice"), notice);
+        problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasFuncName"),funcName);
         problem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasID"), inf.createTypedLiteral(id));
+    }
+
+    public void setPhraseOrder(int problemId)
+    {
+        Resource problem = findProblemByID(String.valueOf(problemId));
+        String queryString = "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT ?lb ?phrase" +
+                " WHERE { "+
+                "?p a po:Problem ." +
+                "?p po:hasID " + problemId +" ." +
+                "?p po:hasData ?de . "+
+                "?phrase po:describe ?de ."+
+                "?phrase po:hasLeftBorder ?lb ."+
+                " } ORDER BY ASC(?lb)";
+
+        //String queryString = "SELECT ?problem ?parameter WHERE {?problem <http://www.semanticweb.org/problem-ontology#hasParameter> ?parameter }";
+        Query query = QueryFactory.create(queryString);
+        //InfModel infModel = ModelFactory.createInfModel(reasoner, inf);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+
+        List<Resource> phrases = new ArrayList<>();
+
+        while ( (rs.hasNext()) ) {
+            phrases.add(rs.next().get("?phrase").asResource());
+        }
+        if (!phrases.isEmpty())
+        {
+            problem.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasFirstPhrase"),phrases.get(0));
+            for (int i=1; i<phrases.size(); i++)
+            {
+                phrases.get(i-1).addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasRighterPhrase"),phrases.get(i));
+            }
+        }
     }
 
     public void addProblemDataElement(int problemId, int dataElementId, String name, String mission, DataElement.DataElementDirection direction, int leftBorder, int rightBorder)
@@ -368,6 +403,9 @@ public class ProblemClass {
                 break;
             case REAL_NUMBER:
                 ontClassIRI = "http://www.semanticweb.org/problem-ontology#FloatNumber";
+                break;
+            case ENTITY:
+                ontClassIRI = "http://www.semanticweb.org/problem-ontology#Entity";
                 break;
         }
         domainType.addOntClass(inf.getOntClass(ontClassIRI));
@@ -718,12 +756,13 @@ public class ProblemClass {
 
         String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                "SELECT ?name WHERE " +
+                "SELECT ?name ?dt WHERE " +
                 "{" +
                 "?student a so:Student . " +
                 " ?student so:hasID \""+studentID+"\" . " +
                 "?choose a po:ParameterChoose . " +
                 "?choose po:name ?name . " +
+                //"?choose po:hasDataType ?dt"+
                 "} ";
         Query query = QueryFactory.create(queryString);
         QueryExecution qExec = QueryExecutionFactory.create(query, inf);
@@ -1378,8 +1417,41 @@ public class ProblemClass {
         }
     }
 
+    private String getFuncName(String studentID)
+    {
+        String queryString =
+                "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                        "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                        "SELECT ?problem WHERE { "+
+                        "?student a so:Student . " +
+                        "?student so:hasID \"" + studentID + "\" ." +
+                        "?student so:solves ?problem ." +
+                        //"?problem a po:Problem ." +
+                        //"?problem  po:hasFullText  ?text ." +
+                        "}";
+
+        Query query = QueryFactory.create(queryString);
+        //InfModel infModel = ModelFactory.createInfModel(reasoners[0], inf);
+        //inf.write(System.out);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        //System.out.println(rs.getRowNumber());
+
+        if ( rs.hasNext())
+        {
+            System.out.println("+");
+            QuerySolution qs = rs.next();
+            //System.out.println(qs.get("?text").toString());
+            Resource problem = qs.get("?problem").asResource();
+            String fullText = problem.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#hasFuncName")).getLiteral().getString();
+            return fullText;
+        }
+        return "No value";
+    }
+
     public List<HashMap<String,String>> getLexemesForPrototype(String studentID)
     {
+
         generateParameterSequence(studentID);
         generateLexemesForAlldatatypes(studentID);
         List<HashMap<String,String>> lexemes = new ArrayList<>();
@@ -1387,7 +1459,7 @@ public class ProblemClass {
         //Function name lexeme
         HashMap<String,String> funcNameLexem = new HashMap<>();
         funcNameLexem.put("type","FunctionNameLexem");
-        funcNameLexem.put("value","funcName");
+        funcNameLexem.put("value", getFuncName(studentID));
         lexemes.add(funcNameLexem);
 
         //Parameter name lexemes
@@ -1456,6 +1528,13 @@ public class ProblemClass {
         {
             lexemes.add(createLexemByTypeAndName("Char","char"));
         }
+        if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer")))
+        {
+            Resource pointedType = datatype.getPropertyResourceValue(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo"));
+            List<Resource> pointedTypeLexemes = getLexemesForDataType(pointedType);
+            lexemes.addAll(pointedTypeLexemes);
+            lexemes.add(createLexemByTypeAndName("Pointer","*"));
+        }
         return lexemes;
     }
 
@@ -1467,13 +1546,14 @@ public class ProblemClass {
                 "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
                 "PREFIX lo: <http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#>" +
-                "SELECT ?name ?subclass WHERE"+
+                "SELECT ?name ?subclass ?dt WHERE"+
                 "{" +
                     "?param a po:ParameterChoose ."+
                     "?param a ?subclass ."+
                     "?subclass rdfs:subClassOf* po:ParameterChoose."+
                     "?param po:name ?name ."+
                     "?param so:ofStudent ?student ."+
+                    "?param po:hasDataType ?dt ." +
                     "?student so:hasID \""+studentID+"\" ."+
                     "FILTER (?subclass != po:ParameterChoose) " +
 
@@ -1492,6 +1572,17 @@ public class ProblemClass {
             classDirections.put("http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose","updatable");
 
             paramDescription.put("direction", classDirections.get(qs.get("?subclass").toString()));
+
+            Resource datatype = qs.get("?dt").asResource();
+
+            List<Resource> lexemes = getLexemesForDataType(datatype);
+            StringBuilder datatypeLexemes = new StringBuilder();
+            for (Resource lexeme: lexemes)
+            {
+                datatypeLexemes.append(lexeme.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value")).getLiteral().getString()+" ");
+            }
+            paramDescription.put("type",datatypeLexemes.toString());
+
             paramList.add(paramDescription);
         }
         return paramList;
@@ -1741,7 +1832,7 @@ public class ProblemClass {
         HashMap<Language,String> messages = new HashMap<>();
         String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable",
                 "CantReturn", "FewReturnValues", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent",
-                "ElementAlreadyDefined", "LongPhrase", "PhraseDoesntContainElements", "PhrasePartlyDescribesElement",
+                "ElementAlreadyDefined", "LongPhrase", "PhraseDoesntContainElements", "PhrasePartlyDescribesElement","PhraseDoesntDescribeElement",
                 "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity",
                 "CommaAfterAllParameters","FunctionNameExpected","IncorrectFinishOfParamList","IncorrectFinishOfPrototype","IncorrectLexemOfReturnType","IncorrectLexemParamType","IncorrectNameOfParam","IncorrectParamSeparator","IncorrectStartOfParamList","IncorrectStartOfReturnType","IncorrectStartParamType","NotAllParameters"};
 
@@ -1894,6 +1985,11 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("PhrasePartlyDescribesElement")))
         {
             messages.put(Language.RU,"Выделена слишком короткая фраза - она описывает один элемент данных частично");
+        }
+
+        if (classes.contains(ontClasses.get("PhraseDoesntDescribeElement")))
+        {
+            messages.put(Language.RU,"Выделенная фраза не описывает ни один из элементов данных");
         }
 
         if (classes.contains(ontClasses.get("CollectionForScalar")))

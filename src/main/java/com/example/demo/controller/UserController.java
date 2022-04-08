@@ -76,7 +76,7 @@ public class UserController {
         Student student = new Student(firstName, lastName, p );
         Long id = studentRepository.save(student).getId();
 
-        problem.addNewProblem(p.getId().intValue(), p.getText(), p.getNotice());
+        problem.addNewProblem(p.getId().intValue(), p.getText(), p.getNotice(), p.getFuncName());
         List<DataElement> elements = dataElementRepositiory.findAllByProblem(p);
         for (DataElement el: elements)
         {
@@ -115,6 +115,7 @@ public class UserController {
                 problem.setComponentsForPresentation(implementation.getId().intValue(), components);
             }
         }
+        problem.setPhraseOrder(problemID.intValue());
         problem.addStudent(String.valueOf(id), String.valueOf(problemID));
         return id;
     }
@@ -129,6 +130,12 @@ public class UserController {
     public String getFullText(Long studentID)
     {
         return studentRepository.findById(studentID).get().getProblem().getText();//problem.getFullText(studentID);
+    }
+
+    @GetMapping("/funcName")
+    public String getFuncName(Long studentID)
+    {
+        return studentRepository.findById(studentID).get().getProblem().getFuncName();
     }
 
     @GetMapping("/notice")

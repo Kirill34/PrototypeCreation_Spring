@@ -167,7 +167,7 @@ noValue(?cp http://www.semanticweb.org/problem-ontology#next ?nextPhrase)
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
@@ -183,7 +183,7 @@ noValue(?cp http://www.semanticweb.org/problem-ontology#next ?nextPhrase)
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
@@ -205,7 +205,7 @@ noValue(?cp http://www.semanticweb.org/problem-ontology#next ?nextPhrase)
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)

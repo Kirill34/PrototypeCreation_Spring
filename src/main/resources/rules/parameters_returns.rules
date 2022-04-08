@@ -101,7 +101,7 @@
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
@@ -300,7 +300,7 @@
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
@@ -327,7 +327,7 @@
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)
@@ -351,7 +351,7 @@
 
 [
     (?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-    (?p http://www.semanticweb.org/problem-ontology#hasUpdatableData ?element)
+    (?p http://www.semanticweb.org/problem-ontology#hasChangedData ?element)
     (?element http://www.semanticweb.org/problem-ontology#name ?elementName)
     (?student rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer ?answ)

@@ -227,6 +227,179 @@
 ]
 
 
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
+    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
+    le(?max,2147483647)
+    ge(?min,-2147483648)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
+    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
+    greaterThan(?max,2147483647)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве int позволяет уместить весь необходимый диапазон?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
+    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
+    lessThan(?min,-2147483648)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве int позволяет уместить весь необходимый диапазон?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
+    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
+    le(?max,127)
+    ge(?min,-128)
+    ->
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
+    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
+    greaterThan(?max,127)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве char позволяет уместить весь необходимый диапазон?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
+    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
+    lessThan(?min,-128)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве char позволяет уместить весь необходимый диапазон?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем использовать вещественный тип для целочисленного параметра?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+[
+    (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
+    (?answ http://www.semanticweb.org/problem-ontology#ofParameterWithName ?paramName)
+    (?paramChoise rdf:type http://www.semanticweb.org/problem-ontology#UpdatableParameterChoose)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#name ?paramName)
+    (?paramChoise http://www.semanticweb.org/problem-ontology#chosenComponent ?comp)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
+    (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
+    (?dt rdf:type http://www.semanticweb.org/problem-ontology#FloatNumber)
+    makeSkolem(?error, ?answ, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве можно использовать целочисленный тип для вещественного параметра?")
+    (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+]
+
+
+
+
+
+
+
+
 
 [
     (?answ http://www.semanticweb.org/problem-ontology#hasType ?type)
@@ -410,10 +583,6 @@
     (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber)
     (?comp http://www.semanticweb.org/problem-ontology#hasDomainType ?dt)
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
-    (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
-    (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
-     le(?max,2147483647)
-     ge(?min,-2147483648)
     makeSkolem(?error, ?answ, ?student)
     ->
     (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger)
@@ -536,7 +705,7 @@
     (?dt rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
     (?dt http://www.semanticweb.org/problem-ontology#maxValue ?max)
     (?dt http://www.semanticweb.org/problem-ontology#minValue ?min)
-    lessThan(?min,128)
+    lessThan(?min,-128)
     makeSkolem(?error, ?answ, ?student)
     ->
     (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)

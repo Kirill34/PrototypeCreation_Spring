@@ -134,6 +134,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstPhrase -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstPhrase"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasFormulation -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFormulation"/>
@@ -222,6 +228,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasRighterPhrase -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasRighterPhrase"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasStructElement -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasStructElement"/>
@@ -292,6 +304,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasFullText -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFullText"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFuncName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFuncName"/>
     
 
 

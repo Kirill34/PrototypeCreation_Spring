@@ -28,6 +28,10 @@ public class Problem {
         return notice;
     }
 
+    public String getFuncName() {
+        return funcName;
+    }
+
     public Problem(String text, String funcName, String notice)
     {
         this.text = text;
