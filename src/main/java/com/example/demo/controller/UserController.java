@@ -272,6 +272,12 @@ public class UserController {
         return problem.getParamList(student);
     }
 
+    @GetMapping("/returnWithDescription")
+    public HashMap<String,String> getStudentReturnValue(String student)
+    {
+        return problem.getReturnValue(student);
+    }
+
     @GetMapping("/presentations")
     public HashMap<String,String> getElementPresentations(String student, String elementName)
     {
