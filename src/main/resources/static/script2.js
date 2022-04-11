@@ -15,6 +15,8 @@ let componentsWithDataType = {}
 let componentParameters = {}
 let returnComponent = null
 
+let funcName = ""
+
 
 //document.getElementById("next-interaction").onload = () =>{this.hidden=true}
 
@@ -35,7 +37,7 @@ function getAllProblems()
                 console.log(problem)
                 let option = document.createElement("option")
                 option.value = problem.id
-                option.text = problem.text
+                option.text = "Напишите прототип функции, которая "+problem.text
                 select.add(option)
             }
 
@@ -65,6 +67,17 @@ function loadNotice()
     }
 }
 
+function loadFuncName()
+{
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET","/answer/funcName?studentID="+studentID)
+    xhr.send()
+    xhr.onload = () => {
+        document.getElementById("exercise").innerText = "Напишите прототип функции "+xhr.responseText+", которая ..."
+        funcName = xhr.responseText
+    }
+}
+
 function nextInteraction()
 {
     let thead = table.getElementsByTagName("thead")[0]
@@ -73,6 +86,7 @@ function nextInteraction()
     switch (interaction)
     {
         case 1:
+            document.getElementById('button-select-element').hidden = true
             thead.appendChild(th)
             th.innerText="Направление данных"
             interactionText.innerText="Каждый элемент данных имеет направление: входные данные, выходные данные или обновляемые данные. Вам необходимо для каждого элемента данных определить его направление."
@@ -303,7 +317,7 @@ function addComponentsDataTypes()
         for (let componentName in componentParameters[dataElementName])
         {
             let tr = componentsTableRows[dataElementName][componentName]
-            let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char"}
+            let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *"}
             let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype",5)
             let td = document.createElement("td")
             td.classList.add("align-middle")
@@ -314,7 +328,7 @@ function addComponentsDataTypes()
     if (returnComponent != null)
     {
         let tr = componentsTableRows[returnComponent.element][returnComponent.component]
-        let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char"}
+        let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *"}
         let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':'return'}, "datatype",5)
         let td = document.createElement("td")
         td.classList.add("align-middle")
@@ -325,110 +339,140 @@ function addComponentsDataTypes()
 
 function addCodeBlock()
 {
-    let sequenceParam = document.createElement("p")
+    let div = document.createElement("div")
+    let sequenceParam = document.createElement("pre")
+    div.appendChild(sequenceParam)
     sequenceParam.innerText="Порядок параметров: "
 
     let xhrp = new XMLHttpRequest()
     xhrp.open("GET","/answer/parametersWithDescription?student="+studentID)
     xhrp.responseType="json"
     xhrp.send()
-    xhrp.onload = () => {
-        let obj = xhrp.response
-        console.log("Порядок параметров")
-        console.log(obj)
-        for (let key in obj)
-        {
-            sequenceParam.innerText+=obj[key].name+","
-        }
+    xhrp.onerror = () => {
+        xhr.send()
     }
+    xhrp.onload = () => {
+        if (xhrp.status == 200) {
+            let obj = xhrp.response
+            console.log("Порядок параметров")
+            console.log(obj)
+            sequenceParam.innerText += "\n/*!\n"
+            for (let key in obj) {
+                let directionLabel = {"input": "in", "output": "out", "updatable": "in|out"}
+                sequenceParam.innerText += "\\ param [" + directionLabel[obj[key].direction] + "] " + obj[key].name + " " + obj[key].mission + "Тип: " + obj[key].type + "\n"
+            }
+
+            let xhrRV = new XMLHttpRequest()
+            xhrRV.open("GET", "/answer/returnWithDescription?student=" + studentID)
+            xhrRV.responseType = "json"
+            xhrRV.send()
+            xhrRV.onload = () => {
+                console.log(xhrRV.response)
+                sequenceParam.innerText += "\\ return " + xhrRV.response.mission + " Тип: " + xhrRV.response.type + "\n"
+                sequenceParam.innerText += "*/"
 
 
-    let block = document.createElement("div")
-    block.classList.add("card")
-    block.style.margin="20px"
-    block.style.padding="20px"
-    document.getElementsByTagName("body").item(0).appendChild(block)
-    let title = document.createElement("p")
-    title.classList.add("card-title")
-    title.innerText = "Составьте прототип функции"
-    block.appendChild(title)
-    block.appendChild(sequenceParam)
-    let cardBody = document.createElement("div")
-    cardBody.classList.add("card-body")
-    block.appendChild(cardBody)
+                /////////////////////////////////////
 
-    let codeAlert = document.createElement("div")
-    codeAlert.classList.add("alert","alert-primary")
+                let block = document.createElement("div")
+                block.classList.add("card")
+                block.style.margin = "20px"
+                block.style.padding = "20px"
+                document.getElementsByTagName("body").item(0).appendChild(block)
+                let title = document.createElement("p")
+                title.classList.add("card-title")
+                title.innerText = "Составьте прототип функции " + funcName
+                block.appendChild(title)
+                block.appendChild(div)
+                let cardBody = document.createElement("div")
+                cardBody.classList.add("card-body")
+                block.appendChild(cardBody)
 
-    let errorAlert = document.createElement("div")
-    errorAlert.classList.add("alert", "alert-danger")
-    errorAlert.hidden=true
+                let codeAlert = document.createElement("div")
+                codeAlert.classList.add("alert", "alert-primary")
+
+                let errorAlert = document.createElement("div")
+                errorAlert.classList.add("alert", "alert-danger")
+                errorAlert.hidden = true
 
 
-    cardBody.appendChild(codeAlert)
-    cardBody.appendChild(errorAlert)
+                cardBody.appendChild(codeAlert)
+                cardBody.appendChild(errorAlert)
 
-    let btnBlock = document.createElement("div")
-    cardBody.appendChild(btnBlock)
+                let btnBlock = document.createElement("div")
+                cardBody.appendChild(btnBlock)
 
-    let xhr = new XMLHttpRequest()
-    xhr.open("GET","/answer/lexemsForPrototype?student="+studentID)
-    xhr.responseType="json"
-    xhr.send()
-    xhr.onload = ()=>{
-        let arr = xhr.response
-        for (let key in arr)
-        {
-            let obj = arr[key]
-            let type = obj["type"]
-            let value=obj.value
-            let btn = document.createElement("button")
-            btn.classList.add("btn","btn-primary")
-            btn.innerText = value
-            btn.style.margin="20px"
-            btnBlock.appendChild(btn)
-            btn.onclick = ()=>{
-                let xhr2 = new XMLHttpRequest()
-                xhr2.open("POST", "/answer/6/addLexem?student="+studentID+"&lexemType="+type+"&lexemValue="+value)
-                xhr2.responseType="json"
-                xhr2.send()
+                let xhr = new XMLHttpRequest()
+                xhr.open("GET", "/answer/lexemsForPrototype?student=" + studentID)
+                xhr.responseType = "json"
+                xhr.send()
+                xhr.onload = () => {
+                    let arr = xhr.response
+                    for (let key in arr) {
+                        let obj = arr[key]
+                        let type = obj["type"]
+                        let value = obj.value
+                        let btn = document.createElement("button")
+                        btn.classList.add("btn", "btn-primary")
+                        btn.innerText = value
+                        btn.style.margin = "20px"
+                        btnBlock.appendChild(btn)
+                        btn.onclick = () => {
+                            let xhr2 = new XMLHttpRequest()
+                            xhr2.open("POST", "/answer/6/addLexem?student=" + studentID + "&lexemType=" + type + "&lexemValue=" + value)
+                            xhr2.responseType = "json"
+                            xhr2.send()
 
-                xhr2.onload = ()=>{
-                    let respObj = xhr2.response
-                    if (respObj.correct === "true")
-                    {
-                        errorAlert.hidden=true
-                        btnBlock.childNodes.forEach((child)=>{child.disabled=false})
+                            xhr2.onload = () => {
+                                let respObj = xhr2.response
+                                if (respObj.correct === "true") {
+                                    errorAlert.hidden = true
+                                    btnBlock.childNodes.forEach((child) => {
+                                        child.disabled = false
+                                    })
+                                } else {
+                                    btnBlock.childNodes.forEach((child) => {
+                                        child.disabled = true
+                                    })
+                                    errorAlert.innerText = respObj.message
+                                    errorAlert.hidden = false
+                                }
+                                codeAlert.innerText = respObj.code
+                            }
+
+                        }
                     }
-                    else
-                    {
-                        btnBlock.childNodes.forEach((child)=>{child.disabled=true})
-                        errorAlert.innerText=respObj.message
-                        errorAlert.hidden=false
+
+                    let removeLastLexem = document.createElement("div")
+                    removeLastLexem.classList.add("btn", "btn-danger")
+                    removeLastLexem.innerText = "Удалить последнюю лексему"
+                    removeLastLexem.onclick = () => {
+                        let xhr2 = new XMLHttpRequest()
+                        xhr2.open("POST", "/answer/6/removeLexem?student=" + studentID)
+                        xhr2.responseType = "json"
+                        xhr2.send()
+                        xhr2.onload = () => {
+                            let respObj = xhr2.response
+                            codeAlert.innerText = respObj.code
+                            btnBlock.childNodes.forEach((child) => {
+                                child.disabled = false
+                            })
+                            errorAlert.hidden = true
+                        }
                     }
-                    codeAlert.innerText = respObj.code
+                    cardBody.appendChild(removeLastLexem)
                 }
 
             }
         }
-
-        let removeLastLexem = document.createElement("div")
-        removeLastLexem.classList.add("btn","btn-danger")
-        removeLastLexem.innerText="Удалить последнюю лексему"
-        removeLastLexem.onclick = () => {
-            let xhr2 = new XMLHttpRequest()
-            xhr2.open("POST","/answer/6/removeLexem?student="+studentID)
-            xhr2.responseType="json"
-            xhr2.send()
-            xhr2.onload = () => {
-                let respObj = xhr2.response
-                codeAlert.innerText = respObj.code
-                btnBlock.childNodes.forEach((child)=>{child.disabled=false})
-                errorAlert.hidden=true
-            }
+        else
+        {
+            xhrp.send()
         }
-        cardBody.appendChild(removeLastLexem)
     }
+
+
+
 
 }
 
@@ -437,11 +481,14 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
     let block = document.createElement("div")
     let select = createSelect(options)
     let div = document.createElement("div")
+    let additionalInfo = document.createElement("p")
     div.classList.add("alert")
     div.style.fontSize = "12px"
     div.style.width = "320px"
+    select.style.width = "320px"
 
     block.appendChild(select)
+    block.appendChild(additionalInfo)
     block.appendChild(div)
 
     let paramString = ""
@@ -472,7 +519,7 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
                 div.innerText="Верно"
                 select.disabled=true
                 setTimeout(()=>{div.hidden=true}, 500)
-                operationOfInteraction(interactionNum, paramDict, ev.srcElement.value)
+                operationOfInteraction(interactionNum, paramDict, ev.srcElement.value, additionalInfo)
             }
             else
             {
@@ -511,7 +558,7 @@ function createSelect(options)
 let elementsWithDirections = []
 let elementsWithPresentations = []
 
-function operationOfInteraction(interactionNum, specificDict, selectedValue)
+function operationOfInteraction(interactionNum, specificDict, selectedValue, additionalInfo)
 {
     switch (interactionNum)
     {
@@ -519,7 +566,7 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
             elementsWithDirections.push(specificDict.elementName)
             if (elementsWithDirections.length === dataElements.length)
             {
-                alert("Вы корректно выбрали направления для всех элементов данных. Для перехода к следующему позаданию нажмите \"Далее\"")
+                //alert("Вы корректно выбрали направления для всех элементов данных. Для перехода к следующему позаданию нажмите \"Далее\"")
                 let nextInteractionButton = document.getElementById("next-interaction")
                 nextInteractionButton.hidden=false
             }
@@ -528,7 +575,7 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
             elementsWithPresentations.push(specificDict.elementName)
             if (elementsWithPresentations.length === dataElements.length)
             {
-                alert("Вы корректно выбрали представления для всех элементов данных. Для перехода к следующему позаданию нажмите \"Далее\"")
+                //alert("Вы корректно выбрали представления для всех элементов данных. Для перехода к следующему позаданию нажмите \"Далее\"")
                 let nextInteractionButton = document.getElementById("next-interaction")
                 nextInteractionButton.hidden=false
             }
@@ -540,8 +587,10 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
             }
             componentsWithTransferMethods[specificDict.elementName].push(specificDict.componentName)
 
-            if (selectedValue === "return")
-                returnComponent = {"element": specificDict.elementName, "component" : specificDict.componentName}
+            if (selectedValue === "return") {
+                returnComponent = {"element": specificDict.elementName, "component": specificDict.componentName}
+                additionalInfo.innerText = "Возвращаемое значение"
+            }
             else
             {
                 if (!componentParameters.hasOwnProperty(specificDict.elementName))
@@ -550,12 +599,13 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
                     componentParameters[specificDict.elementName][specificDict.componentName] = specificDict.elementName + "_" + specificDict.componentName
                 else
                     componentParameters[specificDict.elementName][specificDict.componentName] = specificDict.elementName
+                additionalInfo.innerText = "Имя параметра: "+componentParameters[specificDict.elementName][specificDict.componentName]
             }
 
 
             if (allComponentsHaveTransferMethods())
             {
-                alert("Вы корректно выбрали способ передачи в функцию для всех компонентов. Для перехода к следующему позаданию нажмите \"Далее\"")
+                //alert("Вы корректно выбрали способ передачи в функцию для всех компонентов. Для перехода к следующему позаданию нажмите \"Далее\"")
                 let nextInteractionButton = document.getElementById("next-interaction")
                 nextInteractionButton.hidden=false
             }
@@ -586,7 +636,7 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue)
             }
             if (allComponentsHaveDataTypes())
             {
-                alert("Вы корректно выбрали все типы данных. Для перехода к следующему позаданию нажмите \"Далее\"")
+                //alert("Вы корректно выбрали все типы данных. Для перехода к следующему позаданию нажмите \"Далее\"")
                 let nextInteractionButton = document.getElementById("next-interaction")
                 nextInteractionButton.hidden=false
             }
