@@ -135,6 +135,7 @@ public class UserController {
         problemRepository.save(p);
 
         DomainType domainTypeCourse = DomainType.createIntegerDomainType("course","Курс студента",1,6);
+        domainTypeRepository.save(domainTypeCourse);
 
         DataElement dataElementCourse = new DataElement(p,"course","Курс студента",domainTypeCourse, DataElement.DataElementDirection.CHANGED_DATA);
         dataElementRepositiory.save(dataElementCourse);
