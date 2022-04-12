@@ -69,4 +69,9 @@ public class DataElement {
         this.domainType = domainType;
         this.direction = direction;
     }
+
+    public DataElement()
+    {
+
+    }
 }
