@@ -81,56 +81,118 @@ public class UserController {
         return  problem;
     }
 
+    private void addProblem3()
+    {
+        Problem p = new Problem("Изменить заряд батарейки в соответствии с запрашиваемым количеством заряда. Дополнительно вычислить количество реально отданного заряда","get_charge",": Заряд батарейки не более 100 единиц. Запрашиваться может до 1000 единиц.");
+        problemRepository.save(p);
+
+        DomainType domainTypeCharge = DomainType.createIntegerDomainType("charge", "Заряд батареи", 0, 100);
+        domainTypeRepository.save(domainTypeCharge);
+
+        DomainType domainTypeEnquiredCharge = DomainType.createIntegerDomainType("enquired_charge","ЗАпрашиваемый заряд батареи",0,1000);
+        domainTypeRepository.save(domainTypeEnquiredCharge);
+
+        DataElement dataElementCurrentCharge = new DataElement(p, "current_charge", "Количество заряда батарейки", domainTypeCharge, DataElement.DataElementDirection.CHANGED_DATA);
+        dataElementRepositiory.save(dataElementCurrentCharge);
+
+        Phrase phraseCurrentCharge = new Phrase(dataElementCurrentCharge, 2,3);
+        phraseRepository.save(phraseCurrentCharge);
+
+        DataElement dataElementEnquiredCharge = new DataElement(p, "enquired_charge", "Количество запрашиваемого заряда", domainTypeEnquiredCharge, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementEnquiredCharge);
+
+        Phrase phraseEnquiredCharge = new Phrase(dataElementEnquiredCharge, 7,9);
+        phraseRepository.save(phraseEnquiredCharge);
+
+        DataElement dataElementGivenCharge = new DataElement(p, "given_charge", "Количество отданного заряда",domainTypeCharge, DataElement.DataElementDirection.OUTPUT_DATA);
+        dataElementRepositiory.save(dataElementGivenCharge);
+
+        Phrase phraseGivenCharge = new Phrase(dataElementGivenCharge, 12,15);
+        phraseRepository.save(phraseGivenCharge);
+
+        DataElementImplementation dataElementImplementationCurrentCharge = new DataElementImplementation("battery_charge_number","Заряд батарейки - целое число [0;100]", dataElementCurrentCharge);
+        dataElementImplementationRepository.save(dataElementImplementationCurrentCharge);
+
+        DataElementImplementation dataElementImplementationEnquiredCharge = new DataElementImplementation("equired_charge_number","Запрашиваемый заряд батарейки - целое число [0;1000]",dataElementEnquiredCharge);
+        dataElementImplementationRepository.save(dataElementImplementationEnquiredCharge);
+
+        DataElementImplementation dataElementImplementationGivenCharge = new DataElementImplementation("given_charge_number","Отданный заряд - целое число [0;100]",dataElementGivenCharge);
+        dataElementImplementationRepository.save(dataElementImplementationGivenCharge);
+
+        DataComponent dataComponentCurrentCharge = new DataComponent("battery_charge","Заряд батарейки - целое число [0;100]",dataElementImplementationCurrentCharge,domainTypeCharge);
+        dataComponentRepository.save(dataComponentCurrentCharge);
+
+        DataComponent dataComponentEnquiredCharge =new DataComponent("enquired_battery_charge","Запрашиваемый заряд батарейки - целое число [0;1000]",dataElementImplementationEnquiredCharge,domainTypeEnquiredCharge);
+        dataComponentRepository.save(dataComponentEnquiredCharge);
+
+        DataComponent dataComponentGivenCharge = new DataComponent("given_battery_charge","Отданный заряд - целое число [0;100]",dataElementImplementationGivenCharge,domainTypeCharge);
+        dataComponentRepository.save(dataComponentGivenCharge);
+    }
+
+    private void addProblem2()
+    {
+        Problem p =new Problem("Дан курс студента, на котором он учится. Перевести студента на следующий курс","upgrade_course","");
+        problemRepository.save(p);
+
+        DomainType domainTypeCourse = DomainType.createIntegerDomainType("course","Курс студента",1,6);
+
+        DataElement dataElementCourse = new DataElement(p,"course","Курс студента",domainTypeCourse, DataElement.DataElementDirection.CHANGED_DATA);
+        dataElementRepositiory.save(dataElementCourse);
+
+        Phrase phraseCourse = new Phrase(dataElementCourse,2,3);
+        phraseRepository.save(phraseCourse);
+
+        DataElementImplementation implementation = new DataElementImplementation("coursenumber","Номер курса - целое число [1;6]",dataElementCourse);
+        dataElementImplementationRepository.save(implementation);
+
+        DataComponent component = new DataComponent("courseNumber","Номер курса",implementation,domainTypeCourse);
+        dataComponentRepository.save(component);
+    }
+
+    private void addProblem5()
+    {
+        Problem p = new Problem("Увеличить дату на заданное количество дней ","increase_date","Дата увеличивается не более, чем на 1 год. Дата принадлежит текущему столетию.");
+        problemRepository.save(p);
+
+        DomainType domainTypeDate = DomainType.createEntityDomainType("date","Дата");
+        domainTypeRepository.save(domainTypeDate);
+
+        DataElement dataElementDate = new DataElement(p,"date","Дата",domainTypeDate, DataElement.DataElementDirection.CHANGED_DATA);
+        dataElementRepositiory.save(dataElementDate);
+
+        DomainType domainTypeInterval = DomainType.createIntegerDomainType("daysInterval","Интервал в днях", 1,365);
+        domainTypeRepository.save(domainTypeInterval);
+
+        DataElement dataElementInterval = new DataElement(p,"interval_days","Количество дней",domainTypeInterval, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementInterval);
+
+        DomainType domainTypeYearNumber = DomainType.createIntegerDomainType("year","Номер года",2000,2100);
+        domainTypeRepository.save(domainTypeYearNumber);
+
+        DomainType domainTypeMonthNumber = DomainType.createIntegerDomainType("month","Номер месяца",1,12);
+        domainTypeRepository.save(domainTypeMonthNumber);
+
+        DomainType domainTypeDayNumber = DomainType.createIntegerDomainType("day","Номер дня",1,31);
+        domainTypeRepository.save(domainTypeDayNumber);
+
+        EntityField entityFieldDay = new EntityField("day","Номер дня",domainTypeDate,domainTypeDayNumber);
+        entityFieldRepository.save(entityFieldDay);
+
+        EntityField entityFieldMonth = new EntityField("month","Номер месяца",domainTypeDate,domainTypeMonthNumber);
+        entityFieldRepository.save(entityFieldMonth);
+
+        EntityField entityFieldYear = new EntityField("year","Номер года", domainTypeDate,domainTypeYearNumber);
+        entityFieldRepository.save(entityFieldYear);
+    }
+
     @GetMapping("/initDB")
     private void initDB()
     {
         if (problemRepository.count() == 0)
         {
-            Problem p = new Problem("Изменить заряд батарейки в соответствии с запрашиваемым количеством заряда. Дополнительно вычислить количество реально отданного заряда","get_charge",": Заряд батарейки не более 100 единиц. Запрашиваться может до 1000 единиц.");
-            problemRepository.save(p);
-
-            DomainType domainTypeCharge = DomainType.createIntegerDomainType("charge", "Заряд батареи", 0, 100);
-            domainTypeRepository.save(domainTypeCharge);
-
-            DomainType domainTypeEnquiredCharge = DomainType.createIntegerDomainType("enquired_charge","ЗАпрашиваемый заряд батареи",0,1000);
-            domainTypeRepository.save(domainTypeEnquiredCharge);
-
-            DataElement dataElementCurrentCharge = new DataElement(p, "current_charge", "Количество заряда батарейки", domainTypeCharge, DataElement.DataElementDirection.CHANGED_DATA);
-            dataElementRepositiory.save(dataElementCurrentCharge);
-
-            Phrase phraseCurrentCharge = new Phrase(dataElementCurrentCharge, 2,3);
-            phraseRepository.save(phraseCurrentCharge);
-
-            DataElement dataElementEnquiredCharge = new DataElement(p, "enquired_charge", "Количество запрашиваемого заряда", domainTypeEnquiredCharge, DataElement.DataElementDirection.INPUT_DATA);
-            dataElementRepositiory.save(dataElementEnquiredCharge);
-
-            Phrase phraseEnquiredCharge = new Phrase(dataElementEnquiredCharge, 7,9);
-            phraseRepository.save(phraseEnquiredCharge);
-
-            DataElement dataElementGivenCharge = new DataElement(p, "given_charge", "Количество отданного заряда",domainTypeCharge, DataElement.DataElementDirection.OUTPUT_DATA);
-            dataElementRepositiory.save(dataElementGivenCharge);
-
-            Phrase phraseGivenCharge = new Phrase(dataElementGivenCharge, 12,15);
-            phraseRepository.save(phraseGivenCharge);
-
-            DataElementImplementation dataElementImplementationCurrentCharge = new DataElementImplementation("battery_charge_number","Заряд батарейки - целое число [0;100]", dataElementCurrentCharge);
-            dataElementImplementationRepository.save(dataElementImplementationCurrentCharge);
-
-            DataElementImplementation dataElementImplementationEnquiredCharge = new DataElementImplementation("equired_charge_number","Запрашиваемый заряд батарейки - целое число [0;1000]",dataElementEnquiredCharge);
-            dataElementImplementationRepository.save(dataElementImplementationEnquiredCharge);
-
-            DataElementImplementation dataElementImplementationGivenCharge = new DataElementImplementation("given_charge_number","Отданный заряд - целое число [0;100]",dataElementGivenCharge);
-            dataElementImplementationRepository.save(dataElementImplementationGivenCharge);
-
-            DataComponent dataComponentCurrentCharge = new DataComponent("battery_charge","Заряд батарейки - целое число [0;100]",dataElementImplementationCurrentCharge,domainTypeCharge);
-            dataComponentRepository.save(dataComponentCurrentCharge);
-
-            DataComponent dataComponentEnquiredCharge =new DataComponent("enquired_battery_charge","Запрашиваемый заряд батарейки - целое число [0;1000]",dataElementImplementationEnquiredCharge,domainTypeEnquiredCharge);
-            dataComponentRepository.save(dataComponentEnquiredCharge);
-
-            DataComponent dataComponentGivenCharge = new DataComponent("given_battery_charge","Отданный заряд - целое число [0;100]",dataElementImplementationGivenCharge,domainTypeCharge);
-            dataComponentRepository.save(dataComponentGivenCharge);
-
+            addProblem2();
+            addProblem3();
+            addProblem5();
         }
     }
 
