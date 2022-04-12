@@ -560,6 +560,11 @@ public class ProblemClass {
         return null;
     }
 
+    public boolean problemExistsById(String id)
+    {
+        return (findProblemByID(id) != null);
+    }
+
     private Resource findProblemByID(String id)
     {
         String queryString = "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
@@ -969,6 +974,8 @@ public class ProblemClass {
                         "?element po:name ?name . " +
                         "?student a so:Student . " +
                         " ?student so:hasID \""+studentID+"\" . " +
+                        "?student so:solves ?p ."+
+                        "?p po:hasData ?element ."+
                         "?student so:notFoundElementsCount ?notfound . " +
                         "?student so:currentInteraction ?interaction . " +
                         "} ";
