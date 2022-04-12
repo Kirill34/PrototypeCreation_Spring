@@ -45,4 +45,17 @@ public class EntityField {
         return id;
     }
 
+    public EntityField()
+    {
+
+    }
+
+    public EntityField(String name, String mission, DomainType ofDomainType, DomainType ownDomainType)
+    {
+        this.name=name;
+        this.mission=mission;
+        this.domainType=ofDomainType;
+        this.ownDomainType=ownDomainType;
+    }
+
 }

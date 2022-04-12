@@ -72,6 +72,17 @@ public class DomainType {
         return domainType;
     }
 
+    public static DomainType createEntityDomainType(String name, String mission)
+    {
+        DomainType domainType = new DomainType();
+        domainType.name=name;
+        domainType.mission=mission;
+        domainType.type=HighlyLevelTypes.ENTITY;
+        domainType.minValue=0;
+        domainType.maxValue=0;
+        return domainType;
+    }
+
     public DomainType()
     {
 
