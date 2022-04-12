@@ -175,7 +175,7 @@
     equal(?trMethod, "read-write")
     makeSkolem(?error, ?answ, ?student)
     ->
-    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForUpdatableComponent)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UpdatableParameterForInputComponent)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> изменяется в данной функции?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
@@ -262,7 +262,7 @@
     equal(?trMethod, "read-write")
     makeSkolem(?error, ?answ, ?student)
     ->
-    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterForUpdatableComponent)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UpdatableParameterForOutputComponent)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Разве <> изменяется в данной функции?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)

@@ -596,7 +596,7 @@
     noValue(?param http://www.semanticweb.org/problem-ontology#hasNextParameter ?nextParameter)
 
     noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
-    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem)
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
     makeSkolem(?error, ?code, ?student)
     ->
     (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfParamList)
@@ -719,4 +719,34 @@
     print("========")
     print("")
     print("")
+]
+
+[
+   (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+   (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+   (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+   (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+   noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+   (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SemicolonLexem)
+   ->
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
+   (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isCompleted 1)
+]
+
+[
+   (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+   (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+   (?lexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+   (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+   noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+   noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#SemicolonLexem)
+   makeSkolem(?error, ?code, ?student)
+   ->
+   (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectFinishOfPrototype)
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+   (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Верно")
 ]
