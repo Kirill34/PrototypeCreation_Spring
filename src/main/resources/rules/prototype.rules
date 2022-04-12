@@ -358,6 +358,48 @@
     print("")
 ]
 
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextParamLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val1)
+    (?nextParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
+    notEqual(?val1,?val2)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    noValue(?nextParamLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+
+    addOne(?lexemNum,?newLexemNum)
+    makeSkolem(?error, ?code, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemParamType)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?newLexemNum)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверная лексема")
+
+    print("val1=",?val1)
+        print("val2=",?val2)
+        print("Неверное продолжение типа параметра")
+        print("")
+        print("")
+]
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
@@ -382,6 +424,9 @@
     (?nextParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
     notEqual(?val1,?val2)
 
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    noValue(?nextParamLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+
     addOne(?lexemNum,?newLexemNum)
     makeSkolem(?error, ?code, ?student)
     ->
@@ -399,6 +444,91 @@
         print("")
 ]
 
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextParamLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val1)
+    (?nextParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
+    notEqual(?val1,?val2)
+
+    (?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    (?nextParamLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+
+    addOne(?lexemNum,?newLexemNum)
+    makeSkolem(?error, ?code, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectNameOfParam)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?newLexemNum)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверная лексема")
+
+    print("val1=",?val1)
+        print("val2=",?val2)
+        print("Неверное имя параметра")
+        print("")
+        print("")
+]
+
+[
+    (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?problem)
+    (?code http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexem)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+    (?lexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexem)
+    noValue(?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    (?param rdf:type http://www.semanticweb.org/problem-ontology#ParameterChoose)
+    (?param http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+    (?param http://www.semanticweb.org/problem-ontology#hasNumber ?paramNum)
+
+    (?param http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?paramLexem)
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?lexemNum)
+
+    (?paramLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextParamLexem)
+
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val1)
+    (?nextParamLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?val2)
+    notEqual(?val1,?val2)
+
+    noValue(?nextLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    (?nextParamLexem rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+
+    addOne(?lexemNum,?newLexemNum)
+    makeSkolem(?error, ?code, ?student)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectNameOfParam)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentParamNum ?paramNum)
+    (?nextLexem http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum ?newLexemNum)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
+    (?code http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Неверная лексема")
+
+    print("val1=",?val1)
+        print("val2=",?val2)
+        print("Неверное имя параметра")
+        print("")
+        print("")
+]
 
 [
     (?code rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PrototypeCode)

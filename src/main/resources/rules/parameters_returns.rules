@@ -40,7 +40,7 @@
     equal(?trMethod, "return")
     makeSkolem(?error, ?answ, ?student)
     ->
-    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturn)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturnInputComponent)
     (?error http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ofDataComponent ?component)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Зачем возвращать <> ? Его же функция принимает на вход ")
@@ -120,7 +120,7 @@
     equal(?trMethod, "return")
     makeSkolem(?error, ?answ, ?student)
     ->
-    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturn)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturnUpdatableComponent)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Как вы собираетесь обновлять <>, если это возвращаемое значение?")
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)

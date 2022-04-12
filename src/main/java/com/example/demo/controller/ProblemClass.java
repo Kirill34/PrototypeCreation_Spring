@@ -2019,7 +2019,7 @@ public class ProblemClass {
         HashMap<String, RDFNode> ontClasses = new HashMap<>();
         HashMap<Language,String> messages = new HashMap<>();
         String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable",
-                "CantReturn", "FewReturnValues", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent",
+                "CantReturn", "FewReturnValues", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent","CantReturnInputComponent","CantReturnUpdatableComponent",
                 "ElementAlreadyDefined", "LongPhrase", "PhraseDoesntContainElements", "PhrasePartlyDescribesElement","PhraseDoesntDescribeElement",
                 "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity","ReturnPointer",
                 "CommaAfterAllParameters","FunctionNameExpected","IncorrectFinishOfParamList","IncorrectFinishOfPrototype","IncorrectLexemOfReturnType","IncorrectLexemParamType","IncorrectNameOfParam","IncorrectParamSeparator","IncorrectStartOfParamList","IncorrectStartOfReturnType","IncorrectStartParamType","NotAllParameters"};
@@ -2130,10 +2130,17 @@ public class ProblemClass {
             messages.put(Language.EN, "Is \"" + mission + "\" not calculated?");
         }
 
-        if (classes.contains(ontClasses.get("CantReturn")))
+        if (classes.contains(ontClasses.get("CantReturnInputComponent")))
         {
             messages.put(Language.RU, "Разве \""+ mission + "(" + componentMission + ")" +"\" вычисляется?");
             messages.put(Language.EN, "Should \""+mission+"\".\""+componentMission+"\" be calculated by the function?");
+            System.out.println("Разве ... вычисляется???");
+        }
+
+        if (classes.contains(ontClasses.get("CantReturnUpdatableComponent")))
+        {
+            messages.put(Language.RU,"Разве \""+ mission + "(" + componentMission + ")" +"\" не используется для вычисления?");
+            System.out.println("Разве ... не используется для вычисления???");
         }
 
         if (classes.contains(ontClasses.get("FewReturnValues")))
@@ -2301,7 +2308,7 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("IncorrectNameOfParam")))
         {
-            messages.put(Language.RU,"Разве лексема \""+lastLexemValue+"\" является именем функции?");
+            messages.put(Language.RU,"Разве лексема \""+lastLexemValue+"\" является именем "+String.valueOf(lastLexemParamNumber)+" параметра?");
         }
 
         if (classes.contains(ontClasses.get("IncorrectParamSeparator")))
