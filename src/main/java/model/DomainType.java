@@ -71,4 +71,9 @@ public class DomainType {
         domainType.type = HighlyLevelTypes.INTEGER_NUMBER;
         return domainType;
     }
+
+    public DomainType()
+    {
+
+    }
 }

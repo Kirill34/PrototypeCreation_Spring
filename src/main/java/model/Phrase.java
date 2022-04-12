@@ -42,4 +42,9 @@ public class Phrase {
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
     }
+
+    public Phrase()
+    {
+
+    }
 }
