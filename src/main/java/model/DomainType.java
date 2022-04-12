@@ -61,4 +61,14 @@ public class DomainType {
     public float getMaxValue() {
         return maxValue;
     }
+
+    public static DomainType createIntegerDomainType(String name, String mission, int minValue, int maxValue) {
+        DomainType domainType = new DomainType();
+        domainType.name = name;
+        domainType.mission = mission;
+        domainType.minValue = minValue;
+        domainType.maxValue = maxValue;
+        domainType.type = HighlyLevelTypes.INTEGER_NUMBER;
+        return domainType;
+    }
 }

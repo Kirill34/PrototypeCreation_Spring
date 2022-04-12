@@ -50,6 +50,9 @@ public class UserController {
     @org.springframework.beans.factory.annotation.Autowired(required=true)
     private AnswerElementPresentationRepository answerElementPresentationRepository;
 
+    @org.springframework.beans.factory.annotation.Autowired(required=true)
+    private DomainTypeRepository domainTypeRepository;
+
     private static ProblemClass problem = new ProblemClass();
 
     @GetMapping
@@ -68,6 +71,43 @@ public class UserController {
         Problem problem = problemRepository.findById(id);
         return  problem;
     }
+
+    @GetMapping("/initDB")
+    private void initDB()
+    {
+        if (problemRepository.count() == 0)
+        {
+            Problem p = new Problem("Изменить заряд батарейки в соответствии с запрашиваемым количеством заряда. Дополнительно вычислить количество реально отданного заряда","get_charge",": Заряд батарейки не более 100 единиц. Запрашиваться может до 1000 единиц.");
+            problemRepository.save(p);
+
+            DomainType domainTypeCharge = DomainType.createIntegerDomainType("charge", "Заряд батареи", 0, 100);
+            domainTypeRepository.save(domainTypeCharge);
+
+            DomainType domainTypeEnquiredCharge = DomainType.createIntegerDomainType("enquired_charge","ЗАпрашиваемый заряд батареи",0,1000);
+            domainTypeRepository.save(domainTypeEnquiredCharge);
+
+            DataElement dataElementCurrentCharge = new DataElement(p, "current_charge", "Количество заряда батарейки", domainTypeCharge, DataElement.DataElementDirection.CHANGED_DATA);
+            dataElementRepositiory.save(dataElementCurrentCharge);
+
+            Phrase phraseCurrentCharge = new Phrase(dataElementCurrentCharge, 2,3);
+            phraseRepository.save(phraseCurrentCharge);
+
+            DataElement dataElementEnquiredCharge = new DataElement(p, "enquired_charge", "Количество запрашиваемого заряда", domainTypeEnquiredCharge, DataElement.DataElementDirection.INPUT_DATA);
+            dataElementRepositiory.save(dataElementEnquiredCharge);
+
+            Phrase phraseEnquiredCharge = new Phrase(dataElementEnquiredCharge, 7,9);
+            phraseRepository.save(phraseEnquiredCharge);
+
+            DataElement dataElementGivenCharge = new DataElement(p, "given_charge", "Количество отданного заряда",domainTypeCharge, DataElement.DataElementDirection.OUTPUT_DATA);
+            dataElementRepositiory.save(dataElementGivenCharge);
+
+            Phrase phraseGivenCharge = new Phrase(dataElementGivenCharge, 12,15);
+            phraseRepository.save(phraseGivenCharge);
+
+        }
+    }
+
+
 
     @PostMapping("/initStudent")
     public Long initStudent(String firstName, String lastName, Long problemID)

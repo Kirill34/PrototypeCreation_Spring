@@ -35,4 +35,11 @@ public class Phrase {
     public DataElement getDataElement() {
         return dataElement;
     }
+
+    public Phrase(DataElement dataElement, int leftBorder, int rightBorder)
+    {
+        this.dataElement = dataElement;
+        this.leftBorder = leftBorder;
+        this.rightBorder = rightBorder;
+    }
 }

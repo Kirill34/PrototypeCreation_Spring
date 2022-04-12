@@ -60,4 +60,13 @@ public class DataElement {
     public DataElementDirection getDirection() {
         return direction;
     }
+
+    public DataElement(Problem problem, String name, String mission, DomainType domainType, DataElementDirection direction)
+    {
+        this.problem = problem;
+        this.name = name;
+        this.mission = mission;
+        this.domainType = domainType;
+        this.direction = direction;
+    }
 }

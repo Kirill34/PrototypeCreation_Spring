@@ -430,6 +430,7 @@ public class ProblemClass {
             if (ownDomainType == null)
             {
                 addDomainType(dt.getId().intValue(),dt.getName(), dt.getMission(),dt.getType());
+                setDomainTypeMinAndMax(dt.getId().intValue(), (int)dt.getMinValue(), (int)dt.getMaxValue());
                 ownDomainType = findDomainTypeById(dt.getId().intValue());
             }
             fieldIndividual.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"),ownDomainType);
@@ -1426,17 +1427,18 @@ public class ProblemClass {
     {
         String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
                 "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
-                "SELECT  DISTINCT ?param ?problem WHERE"+
+                "SELECT  DISTINCT ?param ?problem ?name WHERE"+
                 "{"+
                 "?student a so:Student . " +
                 " ?student so:hasID \""+studentID+"\" . " +
                 "?param a po:ParameterChoose ."+
+                "?param po:name ?name ."+
                 "?param so:ofStudent ?student ."+
                 "?student so:solves ?problem ." +
                 "?problem po:hasData ?el ."+
                 "?presChoose po:chosenPresentation ?pres ."+
                 "?presChoose so:ofStudent ?student ."+
-                "}";
+                "} ORDER BY (?name)";
         Query query = QueryFactory.create(queryString);
         QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
         ResultSet rs = qExec.execSelect();
@@ -1657,8 +1659,7 @@ public class ProblemClass {
                     "?comp po:mission ?compMission ." +
                     "?student so:hasID \""+studentID+"\" ."+
                     "FILTER (?subclass != po:ParameterChoose) " +
-
-                "}";
+                "} ORDER BY (?name)";
         Query query = QueryFactory.create(queryString);
         QueryExecution qExec = QueryExecutionFactory.create(query, infModel);
         ResultSet rs = qExec.execSelect();
@@ -1773,6 +1774,11 @@ public class ProblemClass {
 
             Resource newCode = qs.get("?code").asResource();
             Resource newCodeLastLexem = getLastLexemOfPrototypeCode(newCode);
+
+            if (newCode.hasProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isCompleted")))
+            {
+                answ.put("completed","true");
+            }
 
             if (newCode.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError")))
             {
@@ -2137,7 +2143,7 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))
         {
-            messages.put(Language.RU, "Разве \""+ mission + "(" + componentMission + ")" +"\" вычисляется?");
+            messages.put(Language.RU, "Разве \""+ mission + "(" + componentMission + ")" +"\" не вычисляется заново?");
             messages.put(Language.EN, "Should \""+mission+"\".\""+componentMission+"\" be calculated by the function?");
         }
 
@@ -2155,7 +2161,7 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("InputParameterForUpdatableComponent")))
         {
-            messages.put(Language.RU, "Разве \""+ mission + "(" + componentMission + ")" +"\" не используется для вычислений?");
+            messages.put(Language.RU, "Разве \""+ mission + "(" + componentMission + ")" +"\" не вычисляется заново?");
             messages.put(Language.EN, "Is \""+mission+"\".\""+componentMission+"\" not used for calculations?");
         }
 
@@ -2163,6 +2169,16 @@ public class ProblemClass {
         {
             messages.put(Language.RU, "Разве \""+ mission + "(" + componentMission + ")" +"\" известен?");
             messages.put(Language.EN, "Is \""+mission+"\".\""+componentMission+"\" initialized?");
+        }
+
+        if (classes.contains(ontClasses.get("UpdatableParameterForInputComponent")))
+        {
+            messages.put(Language.RU, "Разве \""+mission+"("+componentMission+")\""+" вычисляется?");
+        }
+
+        if (classes.contains(ontClasses.get("UpdatableParameterForOutputComponent")))
+        {
+            messages.put(Language.RU,"Разве \""+mission+"("+componentMission+")\""+" известен?");
         }
 
         if (classes.contains(ontClasses.get("ElementAlreadyDefined")))
@@ -2258,7 +2274,7 @@ public class ProblemClass {
 
         if (classes.contains(ontClasses.get("IncorrectFinishOfParamList")))
         {
-            messages.put(Language.RU,"Разве  лексема \""+lastLexemValue+"\" предваряет список параметров функции?");
+            messages.put(Language.RU,"Разве  лексема \""+lastLexemValue+"\" завершает список параметров функции?");
         }
 
         if (classes.contains(ontClasses.get("IncorrectFinishOfPrototype")))
