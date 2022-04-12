@@ -206,46 +206,44 @@ public class UserController {
         Student student = new Student(firstName, lastName, p );
         Long id = studentRepository.save(student).getId();
 
-        problem.addNewProblem(p.getId().intValue(), p.getText(), p.getNotice(), p.getFuncName());
-        List<DataElement> elements = dataElementRepositiory.findAllByProblem(p);
-        for (DataElement el: elements)
-        {
-            System.out.println("Data element: "+el.getId());
-            String elName = el.getName();
-            String elMission = el.getMission();
-            DataElement.DataElementDirection direction = el.getDirection();
-            DomainType domainType = el.getDomainType();
+        if (!problem.problemExistsById(String.valueOf(problemID))) {
+
+            problem.addNewProblem(p.getId().intValue(), p.getText(), p.getNotice(), p.getFuncName());
+            List<DataElement> elements = dataElementRepositiory.findAllByProblem(p);
+            for (DataElement el : elements) {
+                System.out.println("Data element: " + el.getId());
+                String elName = el.getName();
+                String elMission = el.getMission();
+                DataElement.DataElementDirection direction = el.getDirection();
+                DomainType domainType = el.getDomainType();
 
 
+                Phrase phrase = phraseRepository.findByDataElement(el);
+                problem.addProblemDataElement(Math.toIntExact(el.getProblem().getId()), el.getId().intValue(), elName, elMission, direction, phrase.getLeftBorder(), phrase.getRightBorder());
 
-            Phrase phrase = phraseRepository.findByDataElement(el);
-            problem.addProblemDataElement(Math.toIntExact(el.getProblem().getId()), el.getId().intValue(), elName, elMission, direction, phrase.getLeftBorder(), phrase.getRightBorder());
+                problem.addDomainType(domainType.getId().intValue(), domainType.getName(), domainType.getMission(), domainType.getType());
 
-            problem.addDomainType(domainType.getId().intValue(), domainType.getName(), domainType.getMission(), domainType.getType());
+                if (domainType.getType() == DomainType.HighlyLevelTypes.ENTITY) {
 
-            if (domainType.getType() == DomainType.HighlyLevelTypes.ENTITY)
-            {
+                    problem.addEntityFields(domainType.getId().intValue(), entityFieldRepository.findAllByDomainType(domainType));
+                }
 
-                problem.addEntityFields(domainType.getId().intValue(), entityFieldRepository.findAllByDomainType(domainType));
+                if (domainType.getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER) {
+                    //Set min and max of domain type
+                    problem.setDomainTypeMinAndMax(domainType.getId().intValue(), (int) domainType.getMinValue(), (int) domainType.getMaxValue());
+                }
+
+                problem.setDomainTypeForDataElement(el.getId().intValue(), domainType.getId().intValue());
+
+                List<DataElementImplementation> implementations = dataElementImplementationRepository.findAllByDataElement(el);
+                for (DataElementImplementation implementation : implementations) {
+                    problem.addPresentationOfDataElement(el.getId().intValue(), implementation.getId().intValue(), implementation.getName(), implementation.getMission());
+                    List<DataComponent> components = dataComponentRepository.findAllByImplementation(implementation);
+                    problem.setComponentsForPresentation(implementation.getId().intValue(), components);
+                }
             }
-
-            if (domainType.getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER)
-            {
-                //Set min and max of domain type
-                problem.setDomainTypeMinAndMax(domainType.getId().intValue(), (int)domainType.getMinValue(), (int)domainType.getMaxValue());
-            }
-
-            problem.setDomainTypeForDataElement(el.getId().intValue(), domainType.getId().intValue());
-
-            List<DataElementImplementation> implementations = dataElementImplementationRepository.findAllByDataElement(el);
-            for (DataElementImplementation implementation: implementations)
-            {
-                problem.addPresentationOfDataElement(el.getId().intValue(), implementation.getId().intValue(), implementation.getName(), implementation.getMission());
-                List<DataComponent> components = dataComponentRepository.findAllByImplementation(implementation);
-                problem.setComponentsForPresentation(implementation.getId().intValue(), components);
-            }
+            problem.setPhraseOrder(problemID.intValue());
         }
-        problem.setPhraseOrder(problemID.intValue());
         problem.addStudent(String.valueOf(id), String.valueOf(problemID));
         return id;
     }
