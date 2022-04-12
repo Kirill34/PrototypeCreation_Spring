@@ -104,6 +104,24 @@ public class UserController {
             Phrase phraseGivenCharge = new Phrase(dataElementGivenCharge, 12,15);
             phraseRepository.save(phraseGivenCharge);
 
+            DataElementImplementation dataElementImplementationCurrentCharge = new DataElementImplementation("battery_charge_number","Заряд батарейки - целое число [0;100]", dataElementCurrentCharge);
+            dataElementImplementationRepository.save(dataElementImplementationCurrentCharge);
+
+            DataElementImplementation dataElementImplementationEnquiredCharge = new DataElementImplementation("equired_charge_number","Запрашиваемый заряд батарейки - целое число [0;1000]",dataElementEnquiredCharge);
+            dataElementImplementationRepository.save(dataElementImplementationEnquiredCharge);
+
+            DataElementImplementation dataElementImplementationGivenCharge = new DataElementImplementation("given_charge_number","Отданный заряд - целое число [0;100]",dataElementGivenCharge);
+            dataElementImplementationRepository.save(dataElementImplementationGivenCharge);
+
+            DataComponent dataComponentCurrentCharge = new DataComponent("battery_charge","Заряд батарейки - целое число [0;100]",dataElementImplementationCurrentCharge,domainTypeCharge);
+            dataComponentRepository.save(dataComponentCurrentCharge);
+
+            DataComponent dataComponentEnquiredCharge =new DataComponent("enquired_battery_charge","Запрашиваемый заряд батарейки - целое число [0;1000]",dataElementImplementationEnquiredCharge,domainTypeEnquiredCharge);
+            dataComponentRepository.save(dataComponentEnquiredCharge);
+
+            DataComponent dataComponentGivenCharge = new DataComponent("given_battery_charge","Отданный заряд - целое число [0;100]",dataElementImplementationGivenCharge,domainTypeCharge);
+            dataComponentRepository.save(dataComponentGivenCharge);
+
         }
     }
 
