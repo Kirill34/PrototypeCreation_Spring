@@ -36,4 +36,16 @@ public class DataElementImplementation {
     public String getName() {
         return name;
     }
+
+    public DataElementImplementation()
+    {
+
+    }
+
+    public DataElementImplementation(String name, String mission, DataElement dataElement)
+    {
+        this.name = name;
+        this.mission=mission;
+        this.dataElement=dataElement;
+    }
 }

@@ -44,4 +44,17 @@ public class DataComponent {
     public String getMission() {
         return mission;
     }
+
+    public DataComponent()
+    {
+
+    }
+
+    public DataComponent(String name, String mission, DataElementImplementation implementation, DomainType domainType)
+    {
+        this.name=name;
+        this.mission=mission;
+        this.implementation=implementation;
+        this.domainType=domainType;
+    }
 }
