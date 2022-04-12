@@ -51,7 +51,16 @@ public class UserController {
     private AnswerElementPresentationRepository answerElementPresentationRepository;
 
     @org.springframework.beans.factory.annotation.Autowired(required=true)
+    private AnswerComponentTransferMethodRepository answerComponentTransferMethodRepository;
+
+    @org.springframework.beans.factory.annotation.Autowired(required=true)
     private DomainTypeRepository domainTypeRepository;
+
+    @org.springframework.beans.factory.annotation.Autowired(required=true)
+    private AnswerDatatypeRepository answerDatatypeRepository;
+
+    @org.springframework.beans.factory.annotation.Autowired(required=true)
+    private AnswerPrototypeCodeRepository answerPrototypeCodeRepository;
 
     private static ProblemClass problem = new ProblemClass();
 
@@ -276,38 +285,49 @@ public class UserController {
     }
 
     @PostMapping("/4")
-    public HashMap<String, String> chooseTransferMethod(String student, String elementName, String componentName, String transferMethod)
+    public HashMap<String, String> chooseTransferMethod(Long student, String elementName, String componentName, String transferMethod)
     {
         //problem.addStudent(student);
-        return problem.chooseParameterOrReturnValue(student, elementName, componentName, transferMethod);
-        //return "";
+
+        HashMap<String,String> transferMethodAnswer = problem.chooseParameterOrReturnValue(String.valueOf(student), elementName, componentName, transferMethod);
+        AnswerComponentTransferMethod answer = new AnswerComponentTransferMethod(studentRepository.findById(student).get(), elementName, componentName, transferMethodAnswer.get("correct").equals("true"), transferMethodAnswer.get("message"), transferMethod);
+        answerComponentTransferMethodRepository.save(answer);
+
+        return transferMethodAnswer;
     }
 
     @PostMapping("/5")
-    public HashMap<String, String> chooseDataType(String student, String parameterName, String datatype)
+    public HashMap<String, String> chooseDataType(Long student, String parameterName, String datatype)
     {
         //problem.addStudent(student);
+        HashMap<String,String> answer = new HashMap<>();
         if (parameterName.equals("return"))
-            return problem.chooseReturnValuetype(student, datatype);
+            answer = problem.chooseReturnValuetype(String.valueOf(student), datatype);
         else
-            return problem.chooseParameterType(student, parameterName, datatype);
-        //return "";
+            answer = problem.chooseParameterType(String.valueOf(student), parameterName, datatype);
+        AnswerDatatype answerDatatype = new AnswerDatatype(studentRepository.findById(student).get(), datatype, parameterName, answer.get("correct").equals("true"), answer.get("message"));
+        answerDatatypeRepository.save(answerDatatype);
+        return answer;
     }
 
     @PostMapping("/6/addLexem")
-    public HashMap<String, String> addLexemToPrototype(String student, String lexemType, String lexemValue)
+    public HashMap<String, String> addLexemToPrototype(Long student, String lexemType, String lexemValue)
     {
         //problem.addStudent(student);
-        return problem.addLexemToPrototypeCode(student, lexemType, lexemValue);
-        //return "";
+        HashMap<String,String> answer = problem.addLexemToPrototypeCode(String.valueOf(student), lexemType, lexemValue);
+        AnswerPrototypeCode answerPrototypeCode = new AnswerPrototypeCode(studentRepository.findById(student).get(), answer.get("code"), answer.get("correct").equals("true"), answer.get("message"), answer.containsKey("completed"));
+        answerPrototypeCodeRepository.save(answerPrototypeCode);
+        return answer;
     }
 
     @PostMapping("/6/removeLexem")
-    public HashMap<String, String> removeLexem(String student)
+    public HashMap<String, String> removeLexem(Long student)
     {
         //problem.addStudent(student);
-        return problem.removeLastLexemFromPrototypeCode(student);
-        //return "";
+        HashMap<String,String> answer = problem.removeLastLexemFromPrototypeCode(String.valueOf(student));
+        AnswerPrototypeCode answerPrototypeCode = new AnswerPrototypeCode(studentRepository.findById(student).get(), answer.get("code"), true, "",answer.containsKey("completed"));
+        answerPrototypeCodeRepository.save(answerPrototypeCode);
+        return answer;
     }
 
     @GetMapping("/problemLexems")

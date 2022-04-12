@@ -3,6 +3,7 @@ package model;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public class Student {
 
     @Nullable
     private String lastName;
+
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "problem_id")
@@ -49,6 +52,7 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.problem = problem;
+        this.dateTime=LocalDateTime.now();
     }
 
 
