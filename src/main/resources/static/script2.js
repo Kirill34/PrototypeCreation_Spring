@@ -37,7 +37,7 @@ function getAllProblems()
                 console.log(problem)
                 let option = document.createElement("option")
                 option.value = problem.id
-                option.text = "Напишите прототип функции, которая "+problem.text
+                option.text = problem.id + ") " + "Напишите прототип функции, которая "+problem.text
                 select.add(option)
             }
 
@@ -118,6 +118,7 @@ function nextInteraction()
             addComponentsDataTypes()
             break
         case 5:
+            table.hidden=true
             interactionText.innerText="Вам необходимо составить прототип функции на языке Си, используя предоставленные Вам лексемы."
             addCodeBlock()
             break
@@ -342,7 +343,7 @@ function addCodeBlock()
     let div = document.createElement("div")
     let sequenceParam = document.createElement("pre")
     div.appendChild(sequenceParam)
-    sequenceParam.innerText="Порядок параметров: "
+    sequenceParam.innerText="Doxygen-комментарий: "
 
     let xhrp = new XMLHttpRequest()
     xhrp.open("GET","/answer/parametersWithDescription?student="+studentID)
@@ -356,10 +357,10 @@ function addCodeBlock()
             let obj = xhrp.response
             console.log("Порядок параметров")
             console.log(obj)
-            sequenceParam.innerText += "\n/*!\n"
+            sequenceParam.innerHTML += "\n/*!\n"
             for (let key in obj) {
                 let directionLabel = {"input": "in", "output": "out", "updatable": "in|out"}
-                sequenceParam.innerText += "\\ param [" + directionLabel[obj[key].direction] + "] " + obj[key].name + " " + obj[key].mission + "Тип: " + obj[key].type + "\n"
+                sequenceParam.innerHTML += "\\ param [" + directionLabel[obj[key].direction] + "] " + obj[key].name + " " + obj[key].mission + "Тип: " + obj[key].type + "\n"
             }
 
             let xhrRV = new XMLHttpRequest()
@@ -368,8 +369,9 @@ function addCodeBlock()
             xhrRV.send()
             xhrRV.onload = () => {
                 console.log(xhrRV.response)
-                sequenceParam.innerText += "\\ return " + xhrRV.response.mission + " Тип: " + xhrRV.response.type + "\n"
-                sequenceParam.innerText += "*/"
+                if (xhrRV.response.hasOwnProperty("mission"))
+                    sequenceParam.innerHTML += "\\ return " + xhrRV.response.mission + " Тип: " + xhrRV.response.type + "\n"
+                sequenceParam.innerHTML += "*/"
 
 
                 /////////////////////////////////////
@@ -408,6 +410,11 @@ function addCodeBlock()
                 xhr.send()
                 xhr.onload = () => {
                     let arr = xhr.response
+
+                    let removeLastLexem = document.createElement("div")
+                    removeLastLexem.classList.add("btn", "btn-danger")
+                    removeLastLexem.innerText = "Удалить последнюю лексему"
+
                     for (let key in arr) {
                         let obj = arr[key]
                         let type = obj["type"]
@@ -423,8 +430,26 @@ function addCodeBlock()
                             xhr2.responseType = "json"
                             xhr2.send()
 
+
+
                             xhr2.onload = () => {
                                 let respObj = xhr2.response
+
+                                if (respObj.hasOwnProperty("completed"))
+                                {
+                                    btnBlock.hidden=true
+                                    errorAlert.classList.remove("alert-danger")
+                                    errorAlert.classList.add("alert-success")
+                                    errorAlert.innerText="Поздравляем!!! Вы завершили прототип функции"
+                                    removeLastLexem.hidden=true
+
+                                    let successAlert = document.createElement("div")
+                                    successAlert.classList.add("alert","alert-success")
+                                    successAlert.innerText = "Поздравляем!!! Вы завершили прототип функции"
+                                    cardBody.appendChild(successAlert)
+
+                                }
+
                                 if (respObj.correct === "true") {
                                     errorAlert.hidden = true
                                     btnBlock.childNodes.forEach((child) => {
@@ -443,9 +468,8 @@ function addCodeBlock()
                         }
                     }
 
-                    let removeLastLexem = document.createElement("div")
-                    removeLastLexem.classList.add("btn", "btn-danger")
-                    removeLastLexem.innerText = "Удалить последнюю лексему"
+
+                    cardBody.appendChild(removeLastLexem)
                     removeLastLexem.onclick = () => {
                         let xhr2 = new XMLHttpRequest()
                         xhr2.open("POST", "/answer/6/removeLexem?student=" + studentID)
@@ -460,7 +484,7 @@ function addCodeBlock()
                             errorAlert.hidden = true
                         }
                     }
-                    cardBody.appendChild(removeLastLexem)
+
                 }
 
             }
