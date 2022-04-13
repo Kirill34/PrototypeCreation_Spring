@@ -62,6 +62,17 @@ public class DomainType {
         return maxValue;
     }
 
+    public static DomainType createRealDomainType(String name, String mission, float minValue, float maxValue)
+    {
+        DomainType domainType = new DomainType();
+        domainType.name=name;
+        domainType.mission=mission;
+        domainType.maxValue=maxValue;
+        domainType.minValue=minValue;
+        domainType.type=HighlyLevelTypes.REAL_NUMBER;
+        return domainType;
+    }
+
     public static DomainType createIntegerDomainType(String name, String mission, int minValue, int maxValue) {
         DomainType domainType = new DomainType();
         domainType.name = name;
