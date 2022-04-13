@@ -42,6 +42,7 @@ function getAllProblems()
 
             }
         }
+        xhr.send()
         //document.getElementById('element-selection-error').parentElement.appendChild(select)
         //alert(xhr.responseText)
     }
@@ -53,7 +54,10 @@ function loadFullText()
     xhr.open("GET","/answer/fullText?studentID="+studentID)
     xhr.send()
     xhr.onload = () => {
-        document.getElementById("problem-text").innerText = xhr.responseText
+        if (xhr.status===200)
+            document.getElementById("problem-text").innerText = xhr.responseText
+        else
+            xhr.send()
     }
 }
 
@@ -63,7 +67,10 @@ function loadNotice()
     xhr.open("GET","/answer/notice?studentID="+studentID)
     xhr.send()
     xhr.onload = () => {
-        document.getElementById("notice").innerText = "Примечание:"+xhr.responseText
+        if (xhr.status===200)
+            document.getElementById("notice").innerText = "Примечание:"+xhr.responseText
+        else
+            xhr.send()
     }
 }
 
@@ -73,8 +80,12 @@ function loadFuncName()
     xhr.open("GET","/answer/funcName?studentID="+studentID)
     xhr.send()
     xhr.onload = () => {
-        document.getElementById("exercise").innerText = "Напишите прототип функции "+xhr.responseText+", которая ..."
-        funcName = xhr.responseText
+        if (xhr.status===200) {
+            document.getElementById("exercise").innerText = "Напишите прототип функции " + xhr.responseText + ", которая ..."
+            funcName = xhr.responseText
+        }
+        else
+            xhr.send()
     }
 }
 
@@ -165,59 +176,60 @@ function checkDataElementBorders()
         xhr.send()
 
         xhr.onload = ()=>{
-            let obj = xhr.response
-            console.log(obj)
-            console.log(obj["correct"])
-            if (obj["correct"] === "true")
-            {
-                if (dataElements.length===0)
-                {
-                    table = document.createElement("table")
-                    table.style.margin = "20px"
-                    table.style.padding = "20px"
-                    table.classList.add("table")
-                    table.classList.add("table-striped")
-                    let thead = document.createElement("thead")
-                    let tbody = document.createElement("tbody")
-                    table.appendChild(thead)
-                    table.appendChild(tbody)
-                    document.getElementsByTagName("body").item(0).appendChild(table)
-                    let th = document.createElement("th")
-                    th.innerText="Элемент данных"
-                    thead.appendChild(th)
 
-                    let nextBtn = document.createElement("button")
-                    nextBtn.innerText="Далее >>"
-                    nextBtn.classList.add("btn","btn-primary")
-                    nextBtn.onclick = () => {nextInteraction()}
-                    nextBtn.id = "next-interaction"
-                    nextBtn.hidden=true
-                    nextBtn.style.margin="20px"
-                    document.getElementsByTagName("body").item(0).appendChild(nextBtn)
+            if (xhr.status===200) {
+                let obj = xhr.response
+                console.log(obj)
+                console.log(obj["correct"])
+                if (obj["correct"] === "true") {
+                    if (dataElements.length === 0) {
+                        table = document.createElement("table")
+                        table.style.margin = "20px"
+                        table.style.padding = "20px"
+                        table.classList.add("table")
+                        table.classList.add("table-striped")
+                        let thead = document.createElement("thead")
+                        let tbody = document.createElement("tbody")
+                        table.appendChild(thead)
+                        table.appendChild(tbody)
+                        document.getElementsByTagName("body").item(0).appendChild(table)
+                        let th = document.createElement("th")
+                        th.innerText = "Элемент данных"
+                        thead.appendChild(th)
+
+                        let nextBtn = document.createElement("button")
+                        nextBtn.innerText = "Далее >>"
+                        nextBtn.classList.add("btn", "btn-primary")
+                        nextBtn.onclick = () => {
+                            nextInteraction()
+                        }
+                        nextBtn.id = "next-interaction"
+                        nextBtn.hidden = true
+                        nextBtn.style.margin = "20px"
+                        document.getElementsByTagName("body").item(0).appendChild(nextBtn)
+                    }
+                    dataElements.push(new Object({name: obj.name, mission: obj.mission}))
+                    let tr = document.createElement("tr")
+                    let td = document.createElement("td")
+                    td.classList.add("align-middle")
+                    td.innerText = obj.mission
+                    tr.appendChild(td)
+                    table.getElementsByTagName("tbody").item(0).appendChild(tr)
+                    dataElementTableRows[obj.name] = tr
+                    //alert("Добавлен новый элемент")
+                } else {
+                    //alert(obj.message)
+                    document.getElementById("element-selection-error").innerText = obj.message
+                    document.getElementById("element-selection-error").hidden = false
+                    setTimeout(() => {
+                        document.getElementById("element-selection-error").hidden = true;
+                    }, 3000)
                 }
-                dataElements.push(new Object({name:obj.name, mission:obj.mission}))
-                let tr = document.createElement("tr")
-                let td = document.createElement("td")
-                td.classList.add("align-middle")
-                td.innerText = obj.mission
-                tr.appendChild(td)
-                table.getElementsByTagName("tbody").item(0).appendChild(tr)
-                dataElementTableRows[obj.name]=tr
-                //alert("Добавлен новый элемент")
-            }
-            else
-            {
-                //alert(obj.message)
-                document.getElementById("element-selection-error").innerText=obj.message
-                document.getElementById("element-selection-error").hidden=false
-                setTimeout(()=>{document.getElementById("element-selection-error").hidden=true;}, 3000)
-            }
-            if (obj.hasOwnProperty("interaction"))
-            {
-                if (obj.interaction === "1")
-                {
-                    let nextInteractionButton = document.getElementById("next-interaction")
-                    nextInteractionButton.hidden=false
+                if (obj.hasOwnProperty("interaction")) {
+                    if (obj.interaction === "1") {
+                        let nextInteractionButton = document.getElementById("next-interaction")
+                        nextInteractionButton.hidden = false
+                    }
                 }
             }
         }
@@ -248,14 +260,21 @@ function addDataElementPresentations()
         xhr.responseType="json"
         xhr.send()
         xhr.onload = () => {
-            let obj = xhr.response
-            dataElementPresentations[currElement] = obj
+            if (xhr.status===200) {
+                let obj = xhr.response
+                dataElementPresentations[currElement] = obj
 
-            let td = document.createElement("td")
-            td.style.width="320px"
-            td.classList.add("align-middle")
-            td.appendChild(createSelectBlock(obj,"/answer/3",{"student":studentID,"elementName":currElement}, "elementPresentation",3))
-            dataElementTableRows[currElement].appendChild(td)
+                let td = document.createElement("td")
+                td.style.width = "320px"
+                td.classList.add("align-middle")
+                td.appendChild(createSelectBlock(obj, "/answer/3", {
+                    "student": studentID,
+                    "elementName": currElement
+                }, "elementPresentation", 3))
+                dataElementTableRows[currElement].appendChild(td)
+            }
+            else
+                xhr.send()
         }
     }
 }
@@ -267,31 +286,31 @@ function addComponents()
     xhr.responseType="json"
     xhr.send()
     xhr.onload = () => {
-        components = xhr.response
-        for (let key in components)
-        {
-            let td = document.createElement("td")
-            td.classList.add("align-middle")
-            //td.innerText = components[key]
-            let componentsTable = document.createElement("table")
-            componentsTable.classList.add("table")
-            componentsTableRows[key] = {}
-            for (let compName in components[key])
-            {
-                let tr = document.createElement("tr")
-                let currTd = document.createElement("td")
-                currTd.classList.add("align-middle")
-                componentsTable.appendChild(tr)
-                tr.appendChild(currTd)
-                currTd.innerText = (components[key].length === 1) ? " " : components[key][compName].mission
-                componentsTableRows[key][components[key][compName].name] = tr
-                currTd.style.width = "200px"
+        if (xhr.status===200) {
+            components = xhr.response
+            for (let key in components) {
+                let td = document.createElement("td")
+                td.classList.add("align-middle")
+                //td.innerText = components[key]
+                let componentsTable = document.createElement("table")
+                componentsTable.classList.add("table")
+                componentsTableRows[key] = {}
+                for (let compName in components[key]) {
+                    let tr = document.createElement("tr")
+                    let currTd = document.createElement("td")
+                    currTd.classList.add("align-middle")
+                    componentsTable.appendChild(tr)
+                    tr.appendChild(currTd)
+                    currTd.innerText = (components[key].length === 1) ? " " : components[key][compName].mission
+                    componentsTableRows[key][components[key][compName].name] = tr
+                    currTd.style.width = "200px"
+                }
+                td.appendChild(componentsTable)
+                dataElementTableRows[key].appendChild(td)
+                componentTables[key] = componentsTable
             }
-            td.appendChild(componentsTable)
-            dataElementTableRows[key].appendChild(td)
-            componentTables[key]=componentsTable
+            addComponentsTransferMethods()
         }
-        addComponentsTransferMethods()
     }
 }
 
@@ -368,127 +387,138 @@ function addCodeBlock()
             xhrRV.responseType = "json"
             xhrRV.send()
             xhrRV.onload = () => {
-                console.log(xhrRV.response)
-                if (xhrRV.response.hasOwnProperty("mission"))
-                    sequenceParam.innerHTML += "\\ return " + xhrRV.response.mission + " Тип: " + xhrRV.response.type + "\n"
-                sequenceParam.innerHTML += "*/"
+
+                if (xhrRV.status===200) {
+                    console.log(xhrRV.response)
+                    if (xhrRV.response.hasOwnProperty("mission"))
+                        sequenceParam.innerHTML += "\\ return " + xhrRV.response.mission + " Тип: " + xhrRV.response.type + "\n"
+                    sequenceParam.innerHTML += "*/"
 
 
-                /////////////////////////////////////
+                    /////////////////////////////////////
 
-                let block = document.createElement("div")
-                block.classList.add("card")
-                block.style.margin = "20px"
-                block.style.padding = "20px"
-                document.getElementsByTagName("body").item(0).appendChild(block)
-                let title = document.createElement("p")
-                title.classList.add("card-title")
-                title.innerText = "Составьте прототип функции " + funcName
-                block.appendChild(title)
-                block.appendChild(div)
-                let cardBody = document.createElement("div")
-                cardBody.classList.add("card-body")
-                block.appendChild(cardBody)
+                    let block = document.createElement("div")
+                    block.classList.add("card")
+                    block.style.margin = "20px"
+                    block.style.padding = "20px"
+                    document.getElementsByTagName("body").item(0).appendChild(block)
+                    let title = document.createElement("p")
+                    title.classList.add("card-title")
+                    title.innerText = "Составьте прототип функции " + funcName
+                    block.appendChild(title)
+                    block.appendChild(div)
+                    let cardBody = document.createElement("div")
+                    cardBody.classList.add("card-body")
+                    block.appendChild(cardBody)
 
-                let codeAlert = document.createElement("div")
-                codeAlert.classList.add("alert", "alert-primary")
+                    let codeAlert = document.createElement("div")
+                    codeAlert.classList.add("alert", "alert-primary")
 
-                let errorAlert = document.createElement("div")
-                errorAlert.classList.add("alert", "alert-danger")
-                errorAlert.hidden = true
-
-
-                cardBody.appendChild(codeAlert)
-                cardBody.appendChild(errorAlert)
-
-                let btnBlock = document.createElement("div")
-                cardBody.appendChild(btnBlock)
-
-                let xhr = new XMLHttpRequest()
-                xhr.open("GET", "/answer/lexemsForPrototype?student=" + studentID)
-                xhr.responseType = "json"
-                xhr.send()
-                xhr.onload = () => {
-                    let arr = xhr.response
-
-                    let removeLastLexem = document.createElement("div")
-                    removeLastLexem.classList.add("btn", "btn-danger")
-                    removeLastLexem.innerText = "Удалить последнюю лексему"
-
-                    for (let key in arr) {
-                        let obj = arr[key]
-                        let type = obj["type"]
-                        let value = obj.value
-                        let btn = document.createElement("button")
-                        btn.classList.add("btn", "btn-primary")
-                        btn.innerText = value
-                        btn.style.margin = "20px"
-                        btnBlock.appendChild(btn)
-                        btn.onclick = () => {
-                            btnBlock.childNodes.forEach((child) => {
-                                child.disabled = true
-                            })
-                            removeLastLexem.disabled=true
-                            let xhr2 = new XMLHttpRequest()
-                            xhr2.open("POST", "/answer/6/addLexem?student=" + studentID + "&lexemType=" + type + "&lexemValue=" + value)
-                            xhr2.responseType = "json"
-                            xhr2.send()
+                    let errorAlert = document.createElement("div")
+                    errorAlert.classList.add("alert", "alert-danger")
+                    errorAlert.hidden = true
 
 
+                    cardBody.appendChild(codeAlert)
+                    cardBody.appendChild(errorAlert)
 
-                            xhr2.onload = () => {
-                                let respObj = xhr2.response
+                    let btnBlock = document.createElement("div")
+                    cardBody.appendChild(btnBlock)
 
-                                if (respObj.hasOwnProperty("completed"))
-                                {
-                                    btnBlock.hidden=true
-                                    errorAlert.classList.remove("alert-danger")
-                                    errorAlert.classList.add("alert-success")
-                                    errorAlert.innerText="Поздравляем!!! Вы завершили прототип функции"
-                                    removeLastLexem.hidden=true
+                    let xhr = new XMLHttpRequest()
+                    xhr.open("GET", "/answer/lexemsForPrototype?student=" + studentID)
+                    xhr.responseType = "json"
+                    xhr.send()
+                    xhr.onload = () => {
+                        if (xhr.status === 200) {
+                            let arr = xhr.response
 
-                                    let successAlert = document.createElement("div")
-                                    successAlert.classList.add("alert","alert-success")
-                                    successAlert.innerText = "Поздравляем!!! Вы завершили прототип функции"
-                                    cardBody.appendChild(successAlert)
+                            let removeLastLexem = document.createElement("div")
+                            removeLastLexem.classList.add("btn", "btn-danger")
+                            removeLastLexem.innerText = "Удалить последнюю лексему"
 
-                                }
-
-                                if (respObj.correct === "true") {
-                                    errorAlert.hidden = true
-                                    btnBlock.childNodes.forEach((child) => {
-                                        child.disabled = false
-                                    })
-                                } else {
+                            for (let key in arr) {
+                                let obj = arr[key]
+                                let type = obj["type"]
+                                let value = obj.value
+                                let btn = document.createElement("button")
+                                btn.classList.add("btn", "btn-primary")
+                                btn.innerText = value
+                                btn.style.margin = "20px"
+                                btnBlock.appendChild(btn)
+                                btn.onclick = () => {
                                     btnBlock.childNodes.forEach((child) => {
                                         child.disabled = true
                                     })
-                                    errorAlert.innerText = respObj.message
-                                    errorAlert.hidden = false
+                                    removeLastLexem.disabled = true
+                                    let xhr2 = new XMLHttpRequest()
+                                    xhr2.open("POST", "/answer/6/addLexem?student=" + studentID + "&lexemType=" + type + "&lexemValue=" + value)
+                                    xhr2.responseType = "json"
+                                    xhr2.send()
+
+
+                                    xhr2.onload = () => {
+                                        if (xhr2.status === 200) {
+                                            let respObj = xhr2.response
+
+                                            if (respObj.hasOwnProperty("completed")) {
+                                                btnBlock.hidden = true
+                                                errorAlert.classList.remove("alert-danger")
+                                                errorAlert.classList.add("alert-success")
+                                                errorAlert.innerText = "Поздравляем!!! Вы завершили прототип функции"
+                                                removeLastLexem.hidden = true
+
+                                                let successAlert = document.createElement("div")
+                                                successAlert.classList.add("alert", "alert-success")
+                                                successAlert.innerText = "Поздравляем!!! Вы завершили прототип функции"
+                                                cardBody.appendChild(successAlert)
+
+                                            }
+
+                                            if (respObj.correct === "true") {
+                                                errorAlert.hidden = true
+                                                btnBlock.childNodes.forEach((child) => {
+                                                    child.disabled = false
+                                                })
+                                            } else {
+                                                btnBlock.childNodes.forEach((child) => {
+                                                    child.disabled = true
+                                                })
+                                                errorAlert.innerText = respObj.message
+                                                errorAlert.hidden = false
+                                            }
+                                            codeAlert.innerText = respObj.code
+                                        } else
+                                            xhr2.send()
+                                    }
+
                                 }
-                                codeAlert.innerText = respObj.code
                             }
 
+
+                            cardBody.appendChild(removeLastLexem)
+                            removeLastLexem.onclick = () => {
+                                let xhr2 = new XMLHttpRequest()
+                                xhr2.open("POST", "/answer/6/removeLexem?student=" + studentID)
+                                xhr2.responseType = "json"
+                                xhr2.send()
+                                xhr2.onload = () => {
+                                    if (xhr2.status === 200) {
+                                        let respObj = xhr2.response
+                                        codeAlert.innerText = respObj.code
+                                        btnBlock.childNodes.forEach((child) => {
+                                            child.disabled = false
+                                        })
+                                        errorAlert.hidden = true
+                                    }
+                                }
+                            }
+
+                        } else {
+                            xhr.send()
                         }
+
                     }
-
-
-                    cardBody.appendChild(removeLastLexem)
-                    removeLastLexem.onclick = () => {
-                        let xhr2 = new XMLHttpRequest()
-                        xhr2.open("POST", "/answer/6/removeLexem?student=" + studentID)
-                        xhr2.responseType = "json"
-                        xhr2.send()
-                        xhr2.onload = () => {
-                            let respObj = xhr2.response
-                            codeAlert.innerText = respObj.code
-                            btnBlock.childNodes.forEach((child) => {
-                                child.disabled = false
-                            })
-                            errorAlert.hidden = true
-                        }
-                    }
-
                 }
 
             }
