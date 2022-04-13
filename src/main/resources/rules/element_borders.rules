@@ -24,6 +24,11 @@ difference(?foundCount, '1'^^http://www.w3.org/2001/XMLSchema#int, ?newFoundCoun
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement ?element)
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 1)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Корректно выделен элемент данных. Молодец!")
+print("")
+print("")
+print("Сработало правило 1")
+print("")
+print("")
 ]
 
 [
@@ -51,6 +56,11 @@ makeSkolem(?error, ?answ, ?student)
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage ?errorMessage)
+print("")
+print("")
+print("Сработало правило 2")
+print("")
+print("")
 ]
 
 
@@ -77,6 +87,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделена слишком короткая фраза. Она описывает элемент частично.")
+print("")
+print("")
+print("Сработало правило 3")
+print("")
+print("")
 ]
 
 [
@@ -102,6 +117,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделена слишком короткая фраза. Она описывает элемент частично.")
+print("")
+print("")
+print("Сработало правило 4")
+print("")
+print("")
 ]
 
 [
@@ -127,6 +147,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделнено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 5")
+print("")
+print("")
 ]
 
 [
@@ -152,6 +177,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделнено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 6")
+print("")
+print("")
 ]
 
 [
@@ -177,6 +207,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 7")
+print("")
+print("")
 ]
 
 
@@ -202,6 +237,11 @@ makeSkolem(?error, ?answ, ?student)
 
     (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
     (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+    print("")
+    print("")
+    print("Сработало правило 8")
+    print("")
+    print("")
 ]
 
 
@@ -233,6 +273,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 9")
+print("")
+print("")
 ]
 
 [
@@ -262,28 +307,14 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 10")
+print("")
+print("")
 ]
 
-[
-LeftPartDoesntDescribeElement:
-(?p rdf:type http://www.semanticweb.org/problem-ontology#Problem)
-(?p http://www.semanticweb.org/problem-ontology#hasFullText ?fullText)
-(?p http://www.semanticweb.org/problem-ontology#hasData ?element)
-(?phrase1 http://www.semanticweb.org/problem-ontology#describe ?element)
-(?phrase1 http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb1)
-(?phrase1 http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb1)
-(?p http://www.semanticweb.org/problem-ontology#hasFirstPhrase ?phrase1)
-(?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
-(?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
-lessThan(?rba,?rb1)
-makeSkolem(?error, ?answ, ?student)
-->
-(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntDescribeElement)
-(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 
-(?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
-(?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
-]
 
 [
 DataElementBorders_Correct:
@@ -304,7 +335,7 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 greaterThan(?lba, ?rb1)
-lessThan(?lba,?lb)
+lessThan(?lba,?lb2)
 ge(?rba,?lb2)
 lessThan(?rba,?rb2)
 makeSkolem(?error, ?answ, ?student)
@@ -314,6 +345,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 12")
+print("")
+print("")
 ]
 
 
@@ -346,6 +382,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 13")
+print("")
+print("")
 ]
 
 [
@@ -368,6 +409,7 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 greaterThan(?lba,?lb1)
 le(?lba, ?rb1)
+greaterThan(?rba,?rb1)
 lessThan(?rba,?lb2)
 makeSkolem(?error, ?answ, ?student)
 ->
@@ -376,6 +418,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 14")
+print("")
+print("")
 ]
 
 [
@@ -403,6 +450,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 15")
+print("")
+print("")
 ]
 
 [
@@ -425,6 +477,7 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 greaterThan(?lba,?lb1)
 le(?lba,?rb1)
+greaterThan(?rba,?rb1)
 lessThan(?rba,?lb2)
 makeSkolem(?error, ?answ, ?student)
 ->
@@ -433,6 +486,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 16")
+print("")
+print("")
 ]
 
 [
@@ -454,7 +512,7 @@ DataElementBorders_Correct:
 (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
 greaterThan(?lba,?rb1)
-le(?lba,?lb2)
+lessThan(?lba,?lb2)
 lessThan(?rba,?rb2)
 makeSkolem(?error, ?answ, ?student)
 ->
@@ -463,6 +521,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 17")
+print("")
+print("")
 ]
 
 [
@@ -490,6 +553,11 @@ makeSkolem(?error, ?answ, ?student)
 
 (?answ http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer 0)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasMessage "Выделено слишком много... Думайте еще...")
+print("")
+print("")
+print("Сработало правило 18")
+print("")
+print("")
 ]
 
 [
