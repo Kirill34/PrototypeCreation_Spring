@@ -1045,6 +1045,7 @@ public class ProblemClass {
             answ.put("message", getErrorString(answExemplar, studentID).get(Language.RU));
         }
         infModel.toString();
+        student.removeAll(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"));
         //answ.put("correct","true");
         return answ;
     }
