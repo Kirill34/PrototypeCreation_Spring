@@ -28,19 +28,19 @@ function getAllProblems()
     xhr.send()
     xhr.responseType="json"
     xhr.onload = () => {
-        let obj = xhr.response
-        for (let ind in obj)
-        {
-            if (ind>=0)
-            {
-                let problem = obj[ind]
-                console.log(problem)
-                let option = document.createElement("option")
-                option.value = problem.id
-                option.text = problem.id + ") " + "Напишите прототип функции, которая "+problem.text
-                select.add(option)
-            }
+        if (xhr.status===200) {
+            let obj = xhr.response
+            for (let ind in obj) {
+                if (ind >= 0) {
+                    let problem = obj[ind]
+                    console.log(problem)
+                    let option = document.createElement("option")
+                    option.value = problem.id
+                    option.text = problem.id + ") " + "Напишите прототип функции, которая " + problem.text
+                    select.add(option)
+                }
 
+            }
         }
         //document.getElementById('element-selection-error').parentElement.appendChild(select)
         //alert(xhr.responseText)
@@ -425,6 +425,10 @@ function addCodeBlock()
                         btn.style.margin = "20px"
                         btnBlock.appendChild(btn)
                         btn.onclick = () => {
+                            btnBlock.childNodes.forEach((child) => {
+                                child.disabled = true
+                            })
+                            removeLastLexem.disabled=true
                             let xhr2 = new XMLHttpRequest()
                             xhr2.open("POST", "/answer/6/addLexem?student=" + studentID + "&lexemType=" + type + "&lexemValue=" + value)
                             xhr2.responseType = "json"
@@ -534,22 +538,29 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
         xhr.send()
         console.log("Response")
         xhr.onload = () => {
-            div.classList.remove("alert-warning")
-            div.classList.remove("alert-danger")
-            let obj = (xhr.response)
-            if (obj.correct === "true")
-            {
-                div.classList.add("alert-success")
-                div.innerText="Верно"
-                select.disabled=true
-                setTimeout(()=>{div.hidden=true}, 500)
-                operationOfInteraction(interactionNum, paramDict, ev.srcElement.value, additionalInfo)
+
+            if (xhr.status === 200) {
+
+                div.classList.remove("alert-warning")
+                div.classList.remove("alert-danger")
+                let obj = (xhr.response)
+                if (obj.correct === "true") {
+                    div.classList.add("alert-success")
+                    div.innerText = "Верно"
+                    select.disabled = true
+                    setTimeout(() => {
+                        div.hidden = true
+                    }, 500)
+                    operationOfInteraction(interactionNum, paramDict, ev.srcElement.value, additionalInfo)
+                } else {
+                    div.classList.remove("alert-warning")
+                    div.classList.add("alert-danger")
+                    div.innerText = obj.message
+                }
             }
             else
             {
-                div.classList.remove("alert-warning")
-                div.classList.add("alert-danger")
-                div.innerText = obj.message
+                xhr.send()
             }
         }
 
