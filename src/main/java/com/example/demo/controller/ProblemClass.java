@@ -331,6 +331,13 @@ public class ProblemClass {
         domainType.addOntClass(inf.getOntClass(typeClasses.get(type)));
     }
 
+    public void setDomainTypeMinAndMax(int domainTypeId, float min, float max)
+    {
+        Resource domainType = findDomainTypeById(domainTypeId);
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#minValue"),inf.createTypedLiteral(min));
+        domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#maxValue"),inf.createTypedLiteral(max));
+    }
+
     public void setDomainTypeMinAndMax(int domainTypeId, int min, int max)
     {
         Resource domainType = findDomainTypeById(domainTypeId);
@@ -375,6 +382,10 @@ public class ProblemClass {
                 if (component.getDomainType().getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER)
                 {
                     setDomainTypeMinAndMax(component.getDomainType().getId().intValue(), (int)component.getDomainType().getMinValue(), (int)component.getDomainType().getMaxValue());
+                }
+                if (component.getDomainType().getType() == DomainType.HighlyLevelTypes.REAL_NUMBER)
+                {
+                    setDomainTypeMinAndMax(component.getDomainType().getId().intValue(), component.getDomainType().getMinValue(), component.getDomainType().getMaxValue());
                 }
             }
             domainType = findDomainTypeById(component.getDomainType().getId().intValue());
@@ -1608,6 +1619,11 @@ public class ProblemClass {
         charLexem.put("type","CharLexem");
         charLexem.put("value","char");
 
+        //Type (float)
+        HashMap<String,String> floatLexem = new HashMap<>();
+        floatLexem.put("type","FloatLexem");
+        floatLexem.put("value","float");
+
         //Pointer (*)
         HashMap<String,String> pointerLexem = new HashMap<>();
         pointerLexem.put("type","PointerLexem");
@@ -1618,6 +1634,7 @@ public class ProblemClass {
         voidLexem.put("type","VoidLexem");
         voidLexem.put("value","void");
 
+        lexemes.add(floatLexem);
         lexemes.add(intLexem);
         lexemes.add(charLexem);
         lexemes.add(voidLexem);
@@ -1639,6 +1656,10 @@ public class ProblemClass {
         if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char")))
         {
             lexemes.add(createLexemByTypeAndName("Char","char"));
+        }
+        if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Float")))
+        {
+            lexemes.add(createLexemByTypeAndName("Float","float"));
         }
         if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer")))
         {
