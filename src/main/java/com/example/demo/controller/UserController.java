@@ -167,6 +167,12 @@ public class UserController {
         DataElement dataElementInterval = new DataElement(p,"interval_days","Количество дней",domainTypeInterval, DataElement.DataElementDirection.INPUT_DATA);
         dataElementRepositiory.save(dataElementInterval);
 
+        Phrase phraseDate = new Phrase(dataElementDate,2,2);
+        phraseRepository.save(phraseDate);
+
+        Phrase phraseInterval = new Phrase(dataElementInterval, 4,6);
+        phraseRepository.save(phraseInterval);
+
         DomainType domainTypeYearNumber = DomainType.createIntegerDomainType("year","Номер года",2000,2100);
         domainTypeRepository.save(domainTypeYearNumber);
 
