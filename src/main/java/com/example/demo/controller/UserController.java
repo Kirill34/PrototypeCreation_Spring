@@ -190,6 +190,24 @@ public class UserController {
 
         EntityField entityFieldYear = new EntityField("year","Номер года", domainTypeDate,domainTypeYearNumber);
         entityFieldRepository.save(entityFieldYear);
+
+        DataElementImplementation implementationDate = new DataElementImplementation("date3numbers","3 целых числа: день, месяц, год",dataElementDate);
+        dataElementImplementationRepository.save(implementationDate);
+
+        DataComponent dataComponentDay = new DataComponent("day","Номер дня",implementationDate,domainTypeDayNumber);
+        dataComponentRepository.save(dataComponentDay);
+
+        DataComponent dataComponentMonth = new DataComponent("month","Номер месяца",implementationDate,domainTypeMonthNumber);
+        dataComponentRepository.save(dataComponentMonth);
+
+        DataComponent dataComponentYear = new DataComponent("year","Номер года",implementationDate,domainTypeYearNumber);
+        dataComponentRepository.save(dataComponentYear);
+
+        DataElementImplementation implementationInterval = new DataElementImplementation("days_count","Количество дней - целое число [1;365]",dataElementInterval);
+        dataElementImplementationRepository.save(implementationInterval);
+
+        DataComponent dataComponentDaysCount = new DataComponent("days_count","Количество дней",implementationInterval,domainTypeInterval);
+        dataComponentRepository.save(dataComponentDaysCount);
     }
 
     @GetMapping("/initDB")
