@@ -1231,13 +1231,17 @@ public class ProblemClass {
         if (rs.hasNext()) {
             QuerySolution qs = rs.next();
             int s = qs.get("?correct").asLiteral().getInt();
-            answ.put("correct", (s == 1) ? "true" : "false");
-            if (s==1)
+
+            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
+            Resource answExemplar = qs.getResource("?answ").asResource();
+
+            boolean isCorrect = !(answExemplar.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError")));
+            answ.put("correct", (isCorrect) ? "true" : "false");
+            if (isCorrect)
             {
                 setParameterType(studentID, parameterName, typeName);
             }
-            answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
-            Resource answExemplar = qs.getResource("?answ").asResource();
+
             answ.put("message", getErrorString(answExemplar, studentID).get(Language.RU));
 
         }
@@ -1333,11 +1337,8 @@ public class ProblemClass {
         if (rs.hasNext()) {
             QuerySolution qs = rs.next();
             int s = qs.get("?correct").asLiteral().getInt();
-            answ.put("correct", (s == 1) ? "true" : "false");
-            if (s==1)
-            {
-                setReturnValueType(studentID, typeName);
-            }
+            //answ.put("correct", (s == 1) ? "true" : "false");
+
 
             /*
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
@@ -1346,6 +1347,12 @@ public class ProblemClass {
              */
             answer.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"),inf.createTypedLiteral(s));
             Resource answExemplar = qs.getResource("?answ").asResource();
+            boolean isCorrect = !(answExemplar.hasProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError")));
+            answ.put("correct", (isCorrect) ? "true" : "false");
+            if (isCorrect)
+            {
+                setReturnValueType(studentID, typeName);
+            }
             answ.put("message", getErrorString(answExemplar, studentID).get(Language.RU));
 
         }
