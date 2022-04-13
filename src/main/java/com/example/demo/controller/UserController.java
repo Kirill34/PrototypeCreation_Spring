@@ -210,6 +210,55 @@ public class UserController {
         dataComponentRepository.save(dataComponentDaysCount);
     }
 
+    private void addProblem4()
+    {
+        Problem p = new Problem("Привести значение к заданному интервалу значений","value_to_interval","Если значение лежит вне интервала, то оно приводится к ближайшей границе интервала.\n" +
+                " Заданное значение и интервал представлены дробными числами с точностью до 2 знаков после запятой и лежат в диапазоне [-1000;1000] \n");
+        problemRepository.save(p);
+
+        DomainType domainTypeValue = DomainType.createRealDomainType("settedValue","Заданное значение",-1000,1000);
+        domainTypeRepository.save(domainTypeValue);
+
+        DomainType domainTypeIntervalBorder = DomainType.createRealDomainType("intervalBorder","Граница интервала",-1000,1000);
+        domainTypeRepository.save(domainTypeIntervalBorder);
+
+        DataElement dataElementValue = new DataElement(p,"value","Значение",domainTypeValue, DataElement.DataElementDirection.CHANGED_DATA);
+        dataElementRepositiory.save(dataElementValue);
+
+        Phrase phraseValue = new Phrase(dataElementValue,2,2);
+        phraseRepository.save(phraseValue);
+
+        DomainType domainTypeInterval = DomainType.createEntityDomainType("intervalEntity","Интервал значений");
+        domainTypeRepository.save(domainTypeInterval);
+
+        EntityField entityFieldLeftBorder = new EntityField("left_border","Левая граница интервала",domainTypeInterval,domainTypeIntervalBorder);
+        entityFieldRepository.save(entityFieldLeftBorder);
+
+        EntityField entityFieldRightBorder = new EntityField("right_border","",domainTypeInterval,domainTypeIntervalBorder);
+        entityFieldRepository.save(entityFieldRightBorder);
+
+        DataElementImplementation implementationValue = new DataElementImplementation("valueNumber","Значение - вещественное число [-1000;1000]",dataElementValue);
+        dataElementImplementationRepository.save(implementationValue);
+
+        DataComponent dataComponentValue = new DataComponent("valueComponent","Значение",implementationValue,domainTypeValue);
+        dataComponentRepository.save(dataComponentValue);
+
+        DataElement dataElementInterval = new DataElement(p,"interval","Интервал",domainTypeInterval, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementInterval);
+
+        DataElementImplementation implementationInterval = new DataElementImplementation("interval2Numbers","2 вещественных числа: левая граница и правая граница",dataElementInterval);
+        dataElementImplementationRepository.save(implementationInterval);
+
+        DataComponent dataComponentIntervalLeft = new DataComponent("left_border","Левая граница интервала",implementationInterval,domainTypeIntervalBorder);
+        dataComponentRepository.save(dataComponentIntervalLeft);
+
+        DataComponent dataComponentIntervalRight = new DataComponent("right_border","Правая граница интервала",implementationInterval,domainTypeIntervalBorder);
+        dataComponentRepository.save(dataComponentIntervalRight);
+
+        Phrase phraseInterval = new Phrase(dataElementInterval,4,6);
+        phraseRepository.save(phraseInterval);
+    }
+
     @GetMapping("/initDB")
     private void initDB()
     {
@@ -217,6 +266,7 @@ public class UserController {
         {
             addProblem2();
             addProblem3();
+            addProblem4();
             addProblem5();
         }
     }
@@ -255,6 +305,10 @@ public class UserController {
                 if (domainType.getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER) {
                     //Set min and max of domain type
                     problem.setDomainTypeMinAndMax(domainType.getId().intValue(), (int) domainType.getMinValue(), (int) domainType.getMaxValue());
+                }
+
+                if (domainType.getType() == DomainType.HighlyLevelTypes.REAL_NUMBER) {
+                    problem.setDomainTypeMinAndMax(domainType.getId().intValue(), domainType.getMinValue(), domainType.getMaxValue());
                 }
 
                 problem.setDomainTypeForDataElement(el.getId().intValue(), domainType.getId().intValue());
