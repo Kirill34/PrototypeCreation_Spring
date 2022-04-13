@@ -9,6 +9,7 @@ import model.DataComponent;
 import model.DataElement;
 import model.DomainType;
 import model.EntityField;
+import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
@@ -546,10 +547,12 @@ public class ProblemClass {
             Individual student = inf.createIndividual(inf.createResource());
             student.addOntClass(inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student"));
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasID"), id);
-            student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount"), inf.createTypedLiteral(3));
+
             student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction"), inf.createTypedLiteral(0));
 
             student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves"), findProblemByID(problemID));
+
+            student.addProperty(inf.createDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount"), inf.createTypedLiteral( studentElementCount(id) ));
         }
 
         while (rs.hasNext())
@@ -558,6 +561,28 @@ public class ProblemClass {
             return student;
         }
         return null;
+    }
+
+    private int studentElementCount(String studentID)
+    {
+        String queryString = "PREFIX so: <http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#> " +
+                "PREFIX po: <http://www.semanticweb.org/problem-ontology#> " +
+                "SELECT (count(?de) as ?cnt) WHERE " +
+                "{" +
+                "?student a so:Student . " +
+                " ?student so:hasID \""+studentID+"\" . " +
+                "?student so:solves ?p ."+
+                "?p po:hasData ?de ."+
+                "?de a po:DataElement . " +
+                "}";
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qExec = QueryExecutionFactory.create(query, inf);
+        ResultSet rs = qExec.execSelect();
+        if (rs.hasNext())
+        {
+            return rs.next().get("?cnt").asLiteral().getInt();
+        }
+        return 0;
     }
 
     public boolean problemExistsById(String id)
@@ -997,8 +1022,20 @@ public class ProblemClass {
                     student.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#foundElement"), element);
                     int notFound = qsElementName.get("?notfound").asLiteral().getInt();
                     student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#notFoundElementsCount")).changeLiteralObject(notFound);
+
+                    int interactionNum = (notFound==0) ? 1 : 0;
+
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("Not found elements: "+notFound);
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+
                     int interaction_num = qsElementName.get("?interaction").asLiteral().getInt();
-                    student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction")).changeLiteralObject(interaction_num);
+                    student.getProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#currentInteraction")).changeLiteralObject(interactionNum);
                     result.put("interaction", String.valueOf(interaction_num));
                 }
             }
