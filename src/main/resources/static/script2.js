@@ -234,6 +234,14 @@ function checkDataElementBorders()
                     }
                 }
             }
+            else {
+                document.getElementById("element-selection-error").innerText = "Произошла ошибка при подключении к серверу. Попробуйте выделить фразу еще раз"
+                document.getElementById("element-selection-error").hidden = false
+                setTimeout(() => {
+                    document.getElementById("element-selection-error").hidden = true;
+                }, 3000)
+
+            }
         }
 
     }
@@ -517,7 +525,12 @@ function addCodeBlock()
                             }
 
                         } else {
-                            xhr.send()
+                            errorAlert.hidden=false
+                            errorAlert.innerText="Не удалось подключиться к серверу... Выберите лексему еще раз"
+                            btnBlock.childNodes.forEach((child) => {
+                                child.disabled = false
+                            })
+                            //xhr.send()
                         }
 
                     }
@@ -592,7 +605,8 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
             }
             else
             {
-                xhr.send()
+                div.innerText="Не удалось подключиться к серверу... Выберите ответ еще раз"
+                //xhr.send()
             }
         }
 
