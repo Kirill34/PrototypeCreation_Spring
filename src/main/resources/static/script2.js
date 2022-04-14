@@ -83,7 +83,7 @@ function loadFuncName()
     xhr.send()
     xhr.onload = () => {
         if (xhr.status===200) {
-            document.getElementById("exercise").innerText = "Напишите прототип функции " + xhr.responseText + ", которая ..."
+            document.getElementById("exercise").innerText = "Напишите прототип функции " + xhr.responseText + " для решения задачи"
             funcName = xhr.responseText
         }
         else
