@@ -99,7 +99,7 @@ public class UserController {
         DomainType domainTypeLineSegment = DomainType.createEntityDomainType("line_segment","Отрезок на числовой оси");
         domainTypeRepository.save(domainTypeLineSegment);
 
-        DomainType domainTypeLineSegmentBorder = DomainType.createIntegerDomainType("","",-10000000000L,10000000000L);
+        DomainType domainTypeLineSegmentBorder = DomainType.createIntegerDomainType("segmentBorder","Граница отрезка [-10^10;10^10]",-10000000000L,10000000000L);
         domainTypeRepository.save(domainTypeLineSegmentBorder);
 
         EntityField entityFieldLeftBorder = new EntityField("left_border","Левая граница",domainTypeLineSegment,domainTypeLineSegmentBorder);
@@ -108,10 +108,10 @@ public class UserController {
         EntityField entityFieldRightBorder = new EntityField("right_border","Правая граница",domainTypeLineSegment,domainTypeLineSegmentBorder);
         entityFieldRepository.save(entityFieldRightBorder);
 
-        DataElement dataElementFirstLineSegment = new DataElement(p,"first_line_segment","Первый отрезок",domainTypeLineSegment, DataElement.DataElementDirection.INPUT_DATA);
+        DataElement dataElementFirstLineSegment = new DataElement(p,"first_segment","Первый отрезок",domainTypeLineSegment, DataElement.DataElementDirection.INPUT_DATA);
         dataElementRepositiory.save(dataElementFirstLineSegment);
 
-        DataElement dataElementSecondLineSegment = new DataElement(p,"second_line_border","Второй отрезок",domainTypeLineSegment, DataElement.DataElementDirection.INPUT_DATA);
+        DataElement dataElementSecondLineSegment = new DataElement(p,"second_segment","Второй отрезок",domainTypeLineSegment, DataElement.DataElementDirection.INPUT_DATA);
         dataElementRepositiory.save(dataElementSecondLineSegment);
 
         Phrase phraseFirstLineSegment = new Phrase(dataElementFirstLineSegment,4,5);
