@@ -121,6 +121,7 @@ function nextInteraction()
             thead.appendChild(th)
             interactionText.innerText="Каждый компонент данных может быть передан в функцию как входной, выходной или обновляемый параметр или быть возвращаемым значением функции. Вам необходимо для каждого компонента данных выбрать метод передачи в функцию."
             th2.innerText="Метод передачи в функцию"
+            th2.style.width="400px"
             addComponents()
             break
         case 4:
@@ -280,7 +281,7 @@ function addDataElementPresentations()
                 td.appendChild(createSelectBlock(obj, "/answer/3", {
                     "student": studentID,
                     "elementName": currElement
-                }, "elementPresentation", 3))
+                }, "elementPresentation", 3,400))
                 dataElementTableRows[currElement].appendChild(td)
             }
             else
@@ -348,7 +349,7 @@ function addComponentsDataTypes()
         {
             let tr = componentsTableRows[dataElementName][componentName]
             let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *","Type_Long":"long","Type_PointerToLong":"long *","Type_Bool":"bool","Type_PointerToBool":"bool *"}
-            let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype",5)
+            let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype",5,150)
             let td = document.createElement("td")
             td.classList.add("align-middle")
             td.appendChild(block)
@@ -481,6 +482,7 @@ function addCodeBlock()
                                                 let successAlert = document.createElement("div")
                                                 successAlert.classList.add("alert", "alert-success")
                                                 successAlert.innerText = "Поздравляем!!! Вы завершили прототип функции"
+                                                successAlert.innerHTML+="<br><a href='page2.html'>На главную страницу</a>"
                                                 cardBody.appendChild(successAlert)
 
                                             }
@@ -549,7 +551,7 @@ function addCodeBlock()
 
 }
 
-function createSelectBlock(options, url, paramDict, thisParamName, interactionNum)
+function createSelectBlock(options, url, paramDict, thisParamName, interactionNum, width=200)
 {
     let block = document.createElement("div")
     let select = createSelect(options)
@@ -557,8 +559,9 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
     let additionalInfo = document.createElement("p")
     div.classList.add("alert")
     div.style.fontSize = "12px"
-    div.style.width = "320px"
-    select.style.width = "320px"
+    div.style.width = width+"px"
+    select.style.width = width+"px"
+    select.style.fontSize="12px"
 
     block.appendChild(select)
     block.appendChild(additionalInfo)

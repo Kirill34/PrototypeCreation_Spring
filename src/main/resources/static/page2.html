@@ -19,13 +19,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm1">Фамилия</span>
             </div>
-            <input type="text" class="form-control" name="firstName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm1">
+            <input type="text" class="form-control" name="firstName" id="input-last-name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm1">
         </div>
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Имя</span>
             </div>
-            <input type="text" class="form-control" name="lastName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" class="form-control" name="lastName" id="input-first-name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
             <div class="mb-3">
                 <div class="input-group-prepend">
@@ -37,7 +37,7 @@
             <script>
                 getAllProblems()
             </script>
-        <button type="button" class="btn btn-primary" onclick="$.post('/answer/initStudent', $('#student-form').serialize(), (data)=>{ studentID=data; loadFullText(); loadNotice(); loadFuncName(); document.getElementById('student-form').hidden=true; document.getElementById('problem-card').hidden=false}); ">Начать</button>
+        <button type="button" class="btn btn-primary" onclick="if (document.getElementById('input-first-name').value.length>=2 && document.getElementById('input-last-name').value.length>=3) $.post('/answer/initStudent', $('#student-form').serialize(), (data)=>{ studentID=data; loadFullText(); loadNotice(); loadFuncName(); document.getElementById('student-form').hidden=true; document.getElementById('problem-card').hidden=false}); else alert('Вы не ввели фамилию и имя.');">Начать</button>
         </form>
     </div>
 
