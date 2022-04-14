@@ -64,6 +64,8 @@ public class UserController {
 
     private static ProblemClass problem = new ProblemClass();
 
+    private static HashMap<Long,ProblemClass> studentProblems = new HashMap<>();
+
     @GetMapping
     public String getAnswer(String p)
     {
@@ -345,9 +347,13 @@ public class UserController {
         Student student = new Student(firstName, lastName, p );
         Long id = studentRepository.save(student).getId();
 
-        if (!problem.problemExistsById(String.valueOf(problemID))) {
+        studentProblems.put(id, new ProblemClass());
 
-            problem.addNewProblem(p.getId().intValue(), p.getText(), p.getNotice(), p.getFuncName());
+        studentProblems.get(id);
+
+        if (!studentProblems.get(id).problemExistsById(String.valueOf(problemID))) {
+
+            studentProblems.get(id).addNewProblem(p.getId().intValue(), p.getText(), p.getNotice(), p.getFuncName());
             List<DataElement> elements = dataElementRepositiory.findAllByProblem(p);
             for (DataElement el : elements) {
                 System.out.println("Data element: " + el.getId());
@@ -358,36 +364,36 @@ public class UserController {
 
 
                 Phrase phrase = phraseRepository.findByDataElement(el);
-                problem.addProblemDataElement(Math.toIntExact(el.getProblem().getId()), el.getId().intValue(), elName, elMission, direction, phrase.getLeftBorder(), phrase.getRightBorder());
+                studentProblems.get(id).addProblemDataElement(Math.toIntExact(el.getProblem().getId()), el.getId().intValue(), elName, elMission, direction, phrase.getLeftBorder(), phrase.getRightBorder());
 
-                problem.addDomainType(domainType.getId().intValue(), domainType.getName(), domainType.getMission(), domainType.getType());
+                studentProblems.get(id).addDomainType(domainType.getId().intValue(), domainType.getName(), domainType.getMission(), domainType.getType());
 
                 if (domainType.getType() == DomainType.HighlyLevelTypes.ENTITY) {
 
-                    problem.addEntityFields(domainType.getId().intValue(), entityFieldRepository.findAllByDomainType(domainType));
+                    studentProblems.get(id).addEntityFields(domainType.getId().intValue(), entityFieldRepository.findAllByDomainType(domainType));
                 }
 
                 if (domainType.getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER) {
                     //Set min and max of domain type
-                    problem.setDomainTypeMinAndMax(domainType.getId().intValue(), domainType.getLongMinValue(), domainType.getLongMaxValue());
+                    studentProblems.get(id).setDomainTypeMinAndMax(domainType.getId().intValue(), domainType.getLongMinValue(), domainType.getLongMaxValue());
                 }
 
                 if (domainType.getType() == DomainType.HighlyLevelTypes.REAL_NUMBER) {
-                    problem.setDomainTypeMinAndMax(domainType.getId().intValue(), domainType.getMinValue(), domainType.getMaxValue());
+                    studentProblems.get(id).setDomainTypeMinAndMax(domainType.getId().intValue(), domainType.getMinValue(), domainType.getMaxValue());
                 }
 
-                problem.setDomainTypeForDataElement(el.getId().intValue(), domainType.getId().intValue());
+                studentProblems.get(id).setDomainTypeForDataElement(el.getId().intValue(), domainType.getId().intValue());
 
                 List<DataElementImplementation> implementations = dataElementImplementationRepository.findAllByDataElement(el);
                 for (DataElementImplementation implementation : implementations) {
-                    problem.addPresentationOfDataElement(el.getId().intValue(), implementation.getId().intValue(), implementation.getName(), implementation.getMission());
+                    studentProblems.get(id).addPresentationOfDataElement(el.getId().intValue(), implementation.getId().intValue(), implementation.getName(), implementation.getMission());
                     List<DataComponent> components = dataComponentRepository.findAllByImplementation(implementation);
-                    problem.setComponentsForPresentation(implementation.getId().intValue(), components);
+                    studentProblems.get(id).setComponentsForPresentation(implementation.getId().intValue(), components);
                 }
             }
-            problem.setPhraseOrder(problemID.intValue());
+            studentProblems.get(id).setPhraseOrder(problemID.intValue());
         }
-        problem.addStudent(String.valueOf(id), String.valueOf(problemID));
+        studentProblems.get(id).addStudent(String.valueOf(id), String.valueOf(problemID));
         return id;
     }
 
@@ -416,15 +422,15 @@ public class UserController {
     }
 
     @GetMapping("/components")
-    public HashMap<String,List<HashMap<String, String>>> getStudentComponents(String student)
+    public HashMap<String,List<HashMap<String, String>>> getStudentComponents(Long student)
     {
-        return problem.getStudentComponents(student);
+        return studentProblems.get(student).getStudentComponents(String.valueOf(student));
     }
 
     @GetMapping("/element_components")
-    public List<HashMap<String, String>> getStudentComponentsOfElement(String student, String elementName)
+    public List<HashMap<String, String>> getStudentComponentsOfElement(Long student, String elementName)
     {
-        return problem.getStudentComponentsOfDataElement(student, elementName);
+        return studentProblems.get(student).getStudentComponentsOfDataElement(String.valueOf(student), elementName);
     }
 
 
@@ -436,7 +442,7 @@ public class UserController {
 
         Student student1 = studentRepository.findById(student).get();
         //problem.addStudent(String.valueOf(student));
-        answer = problem.chooseDataElementBorders(String.valueOf(student), String.valueOf(leftBorder), String.valueOf(rightBorder));
+        answer = studentProblems.get(student).chooseDataElementBorders(String.valueOf(student), String.valueOf(leftBorder), String.valueOf(rightBorder));
         AnswerElementBorders answerElementBorders = new AnswerElementBorders(student1, leftBorder, rightBorder, answer.get("correct").equals("true"), answer.get("message"));
         answerElementBordersRepository.save(answerElementBorders);
         return  answer;
@@ -468,7 +474,7 @@ public class UserController {
         //answerElementDirectionRepository.save();
         //problem.addStudent(String.valueOf(student));
         answerElementDirectionRepository.save(answerElementDirection);
-        return problem.chooseElementDirection(String.valueOf(student), elementName, elementDirection);
+        return studentProblems.get(student).chooseElementDirection(String.valueOf(student), elementName, elementDirection);
         //return elementDirection;
     }
 
@@ -481,7 +487,7 @@ public class UserController {
         DataElementImplementation implementation = dataElementImplementationRepository.findByDataElementAndName(dataElement,elementPresentation);
 
         //problem.addStudent(String.valueOf(student));
-        HashMap<String,String> answerResult = problem.choosePresentationForDataElement(String.valueOf(student), elementName, elementPresentation);
+        HashMap<String,String> answerResult = studentProblems.get(student).choosePresentationForDataElement(String.valueOf(student), elementName, elementPresentation);
 
         AnswerElementPresentation answer = new AnswerElementPresentation(student1,dataElement,implementation,answerResult.get("correct").equals("true"),answerResult.get("message"));
         answerElementPresentationRepository.save(answer);
@@ -493,7 +499,7 @@ public class UserController {
     {
         //problem.addStudent(student);
 
-        HashMap<String,String> transferMethodAnswer = problem.chooseParameterOrReturnValue(String.valueOf(student), elementName, componentName, transferMethod);
+        HashMap<String,String> transferMethodAnswer = studentProblems.get(student).chooseParameterOrReturnValue(String.valueOf(student), elementName, componentName, transferMethod);
         AnswerComponentTransferMethod answer = new AnswerComponentTransferMethod(studentRepository.findById(student).get(), elementName, componentName, transferMethodAnswer.get("correct").equals("true"), transferMethodAnswer.get("message"), transferMethod);
         answerComponentTransferMethodRepository.save(answer);
 
@@ -506,9 +512,9 @@ public class UserController {
         //problem.addStudent(student);
         HashMap<String,String> answer = new HashMap<>();
         if (parameterName.equals("return"))
-            answer = problem.chooseReturnValuetype(String.valueOf(student), datatype);
+            answer = studentProblems.get(student).chooseReturnValuetype(String.valueOf(student), datatype);
         else
-            answer = problem.chooseParameterType(String.valueOf(student), parameterName, datatype);
+            answer = studentProblems.get(student).chooseParameterType(String.valueOf(student), parameterName, datatype);
         AnswerDatatype answerDatatype = new AnswerDatatype(studentRepository.findById(student).get(), datatype, parameterName, answer.get("correct").equals("true"), answer.get("message"));
         answerDatatypeRepository.save(answerDatatype);
         return answer;
@@ -518,7 +524,7 @@ public class UserController {
     public HashMap<String, String> addLexemToPrototype(Long student, String lexemType, String lexemValue)
     {
         //problem.addStudent(student);
-        HashMap<String,String> answer = problem.addLexemToPrototypeCode(String.valueOf(student), lexemType, lexemValue);
+        HashMap<String,String> answer = studentProblems.get(student).addLexemToPrototypeCode(String.valueOf(student), lexemType, lexemValue);
         AnswerPrototypeCode answerPrototypeCode = new AnswerPrototypeCode(studentRepository.findById(student).get(), answer.get("code"), answer.get("correct").equals("true"), answer.get("message"), answer.containsKey("completed"));
         answerPrototypeCodeRepository.save(answerPrototypeCode);
         return answer;
@@ -528,48 +534,48 @@ public class UserController {
     public HashMap<String, String> removeLexem(Long student)
     {
         //problem.addStudent(student);
-        HashMap<String,String> answer = problem.removeLastLexemFromPrototypeCode(String.valueOf(student));
+        HashMap<String,String> answer = studentProblems.get(student).removeLastLexemFromPrototypeCode(String.valueOf(student));
         AnswerPrototypeCode answerPrototypeCode = new AnswerPrototypeCode(studentRepository.findById(student).get(), answer.get("code"), true, "",answer.containsKey("completed"));
         answerPrototypeCodeRepository.save(answerPrototypeCode);
         return answer;
     }
 
     @GetMapping("/problemLexems")
-    public String[] getProblemLexems(String student)
+    public String[] getProblemLexems(Long student)
     {
         //problem.addStudent(student);
-        String text = problem.getFullText(student);
+        String text = studentProblems.get(student).getFullText(String.valueOf(student));
         return text.split(" ");
     }
 
     @GetMapping("/parameters")
-    public List<String> getStudentParameters(String student)
+    public List<String> getStudentParameters(Long student)
     {
-        return problem.getStudentParameters(student);
+        return studentProblems.get(student).getStudentParameters(String.valueOf(student));
     }
 
     @GetMapping("/parametersWithDescription")
-    public List<HashMap<String,String>> getStudentParameterList(String student)
+    public List<HashMap<String,String>> getStudentParameterList(Long student)
     {
-        return problem.getParamList(student);
+        return studentProblems.get(student).getParamList(String.valueOf(student));
     }
 
     @GetMapping("/returnWithDescription")
-    public HashMap<String,String> getStudentReturnValue(String student)
+    public HashMap<String,String> getStudentReturnValue(Long student)
     {
-        return problem.getReturnValue(student);
+        return studentProblems.get(student).getReturnValue(String.valueOf(student));
     }
 
     @GetMapping("/presentations")
-    public HashMap<String,String> getElementPresentations(String student, String elementName)
+    public HashMap<String,String> getElementPresentations(Long student, String elementName)
     {
-        return problem.getPresentationsForDataElement(student, elementName);
+        return studentProblems.get(student).getPresentationsForDataElement(String.valueOf(student), elementName);
     }
 
     @GetMapping("/lexemsForPrototype")
-    public List<HashMap<String,String>> getLexemesForPrototype(String student)
+    public List<HashMap<String,String>> getLexemesForPrototype(Long student)
     {
-        return problem.getLexemesForPrototype(student);
+        return studentProblems.get(student).getLexemesForPrototype(String.valueOf(student));
     }
 
     @GetMapping("/model")
