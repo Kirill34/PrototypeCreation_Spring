@@ -540,6 +540,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#Logical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Logical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/problem-ontology#Scalar"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#Number -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/problem-ontology#Number">

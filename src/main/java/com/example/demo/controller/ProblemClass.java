@@ -327,6 +327,7 @@ public class ProblemClass {
         typeClasses.put(DomainType.HighlyLevelTypes.INTEGER_NUMBER, "http://www.semanticweb.org/problem-ontology#IntegerNumber");
         typeClasses.put(DomainType.HighlyLevelTypes.REAL_NUMBER, "http://www.semanticweb.org/problem-ontology#FloatNumber");
         typeClasses.put(DomainType.HighlyLevelTypes.ENTITY, "http://www.semanticweb.org/problem-ontology#Entity");
+        typeClasses.put(DomainType.HighlyLevelTypes.LOGICAL,"http://www.semanticweb.org/problem-ontology#Logical");
 
         domainType.addOntClass(inf.getOntClass(typeClasses.get(type)));
     }
@@ -338,7 +339,7 @@ public class ProblemClass {
         domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#maxValue"),inf.createTypedLiteral(max));
     }
 
-    public void setDomainTypeMinAndMax(int domainTypeId, int min, int max)
+    public void setDomainTypeMinAndMax(int domainTypeId, long min, long max)
     {
         Resource domainType = findDomainTypeById(domainTypeId);
         domainType.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/problem-ontology#minValue"),inf.createTypedLiteral(min));
@@ -381,7 +382,7 @@ public class ProblemClass {
                 addDomainType(component.getDomainType().getId().intValue(), component.getDomainType().getName(), component.getDomainType().getMission(), component.getDomainType().getType());
                 if (component.getDomainType().getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER)
                 {
-                    setDomainTypeMinAndMax(component.getDomainType().getId().intValue(), (int)component.getDomainType().getMinValue(), (int)component.getDomainType().getMaxValue());
+                    setDomainTypeMinAndMax(component.getDomainType().getId().intValue(), component.getDomainType().getLongMinValue(), component.getDomainType().getLongMaxValue());
                 }
                 if (component.getDomainType().getType() == DomainType.HighlyLevelTypes.REAL_NUMBER)
                 {
@@ -442,7 +443,10 @@ public class ProblemClass {
             if (ownDomainType == null)
             {
                 addDomainType(dt.getId().intValue(),dt.getName(), dt.getMission(),dt.getType());
-                setDomainTypeMinAndMax(dt.getId().intValue(), (int)dt.getMinValue(), (int)dt.getMaxValue());
+                if (dt.getType()== DomainType.HighlyLevelTypes.REAL_NUMBER)
+                    setDomainTypeMinAndMax(dt.getId().intValue(), dt.getMinValue(), dt.getMaxValue());
+                if (dt.getType()== DomainType.HighlyLevelTypes.INTEGER_NUMBER)
+                    setDomainTypeMinAndMax(dt.getId().intValue(),dt.getLongMinValue(),dt.getLongMaxValue());
                 ownDomainType = findDomainTypeById(dt.getId().intValue());
             }
             fieldIndividual.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDomainType"),ownDomainType);
@@ -1609,6 +1613,16 @@ public class ProblemClass {
 
         lexemes.add(comma);
 
+        //Type (bool)
+        HashMap<String,String> boolLexem = new HashMap<>();
+        boolLexem.put("type","BoolLexem");
+        boolLexem.put("value","bool");
+
+        //Type (long)
+        HashMap<String,String> longLexem = new HashMap<>();
+        longLexem.put("type","LongLexem");
+        longLexem.put("value","long");
+
         //Type (int)
         HashMap<String,String> intLexem = new HashMap<>();
         intLexem.put("type","IntLexem");
@@ -1634,7 +1648,9 @@ public class ProblemClass {
         voidLexem.put("type","VoidLexem");
         voidLexem.put("value","void");
 
+        lexemes.add(boolLexem);
         lexemes.add(floatLexem);
+        lexemes.add(longLexem);
         lexemes.add(intLexem);
         lexemes.add(charLexem);
         lexemes.add(voidLexem);
@@ -1649,6 +1665,14 @@ public class ProblemClass {
     public List<Resource> getLexemesForDataType(Resource datatype)
     {
         ArrayList<Resource> lexemes = new ArrayList<>();
+        if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Bool")))
+        {
+            lexemes.add(createLexemByTypeAndName("Bool","bool"));
+        }
+        if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long")))
+        {
+            lexemes.add(createLexemByTypeAndName("Long","long"));
+        }
         if (datatype.hasProperty(RDF.type, inf.getOntClass("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int")))
         {
             lexemes.add(createLexemByTypeAndName("Int","int"));
@@ -2087,7 +2111,7 @@ public class ProblemClass {
         String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable",
                 "CantReturn", "FewReturnValues", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent","CantReturnInputComponent","CantReturnUpdatableComponent",
                 "ElementAlreadyDefined", "LongPhrase", "PhraseDoesntContainElements", "PhrasePartlyDescribesElement","PhraseDoesntDescribeElement",
-                "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity","ReturnPointer",
+                "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity","ReturnPointer","LogicalTypeForNumber","NumberForLogicalType",
                 "CommaAfterAllParameters","FunctionNameExpected","IncorrectFinishOfParamList","IncorrectFinishOfPrototype","IncorrectLexemOfReturnType","IncorrectLexemParamType","IncorrectNameOfParam","IncorrectParamSeparator","IncorrectStartOfParamList","IncorrectStartOfReturnType","IncorrectStartParamType","NotAllParameters"};
 
         for (String name: classNames)
@@ -2314,6 +2338,16 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("NotEnoughtType")))
         {
             messages.put(Language.RU,"Разве для представления \""+domainTypeMission+"\" достаточно использовать тип данных  "+dataTypeString+"?");
+        }
+
+        if (classes.contains(ontClasses.get("LogicalTypeForNumber")))
+        {
+            messages.put(Language.RU,"Разве для представления числа можно использовать логический тип?");
+        }
+
+        if (classes.contains(ontClasses.get("NumberForLogicalType")))
+        {
+            messages.put(Language.RU,"Разве для представления логического типа рационально использовать числовой тип?");
         }
 
         if (classes.contains(ontClasses.get("OutputParameterByValue")))

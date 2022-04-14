@@ -13,6 +13,7 @@ public class DomainType {
     public enum HighlyLevelTypes {
         INTEGER_NUMBER,
         REAL_NUMBER,
+        LOGICAL,
         CHAR,
         LIST,
         SET,
@@ -38,6 +39,12 @@ public class DomainType {
     @Nullable
     private float maxValue;
 
+    @Nullable
+    private long longMinValue=0;
+
+    @Nullable
+    private long longMaxValue=0;
+
     public Long getId() {
         return id;
     }
@@ -62,6 +69,27 @@ public class DomainType {
         return maxValue;
     }
 
+    public long getLongMinValue()
+    {
+        return longMinValue;
+    }
+
+    public long getLongMaxValue() {
+        return longMaxValue;
+    }
+
+    public static DomainType createLogicalDomainType(String name, String mission)
+    {
+        DomainType domainType = new DomainType();
+        domainType.name=name;
+        domainType.mission=mission;
+        domainType.type=HighlyLevelTypes.LOGICAL;
+        domainType.minValue=0;
+        domainType.maxValue=1;
+        return domainType;
+    }
+
+
     public static DomainType createRealDomainType(String name, String mission, float minValue, float maxValue)
     {
         DomainType domainType = new DomainType();
@@ -73,12 +101,12 @@ public class DomainType {
         return domainType;
     }
 
-    public static DomainType createIntegerDomainType(String name, String mission, int minValue, int maxValue) {
+    public static DomainType createIntegerDomainType(String name, String mission, long minValue, long maxValue) {
         DomainType domainType = new DomainType();
         domainType.name = name;
         domainType.mission = mission;
-        domainType.minValue = minValue;
-        domainType.maxValue = maxValue;
+        domainType.longMinValue = minValue;
+        domainType.longMaxValue=maxValue;
         domainType.type = HighlyLevelTypes.INTEGER_NUMBER;
         return domainType;
     }

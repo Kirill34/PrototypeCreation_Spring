@@ -200,6 +200,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Bool -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Bool">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BoolLexem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BoolLexem">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#BracketLexem">
@@ -331,7 +347,7 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Number"/>
     </owl:Class>
     
 
@@ -354,6 +370,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LongLexem">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ScalarTypeLexem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Number -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Number">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar"/>
     </owl:Class>
     
 
@@ -407,7 +431,7 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Number"/>
     </owl:Class>
     
 
@@ -589,6 +613,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Bool -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Bool">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Bool"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Char -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Char">
@@ -609,6 +641,23 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Int">
         <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Long -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Long">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToBool -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToBool">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer"/>
+        <pointsTo rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Bool"/>
     </owl:NamedIndividual>
     
 
@@ -636,6 +685,15 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToInt">
         <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer"/>
         <pointsTo rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Int"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToLong -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_PointerToLong">
+        <rdf:type rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer"/>
+        <pointsTo rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Type_Long"/>
     </owl:NamedIndividual>
     
 
