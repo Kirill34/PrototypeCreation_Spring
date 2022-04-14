@@ -81,6 +81,70 @@ public class UserController {
         return  problem;
     }
 
+    private void addProblem1()
+    {
+        Problem p = new Problem("Определить признак пересечения первого отрезка и второго отрезка на числовой оси","has_intersection","Отрезки задаются целыми числами в диапазоне [-10^10; 10^10]. \n" +
+                "Отрезки пересекаются, если имеют общие значения на числовой оси");
+        problemRepository.save(p);
+
+        DomainType domainTypeHasIntersection = DomainType.createLogicalDomainType("hasIntersection","Признак пересечения");
+        domainTypeRepository.save(domainTypeHasIntersection);
+
+        DataElement dataElementHasIntersection = new DataElement(p,"intersection_exists","Признак пересечения",domainTypeHasIntersection, DataElement.DataElementDirection.OUTPUT_DATA);
+        dataElementRepositiory.save(dataElementHasIntersection);
+
+        Phrase phraseHasIntersection = new Phrase(dataElementHasIntersection,2,3);
+        phraseRepository.save(phraseHasIntersection);
+
+        DomainType domainTypeLineSegment = DomainType.createEntityDomainType("line_segment","Отрезок на числовой оси");
+        domainTypeRepository.save(domainTypeLineSegment);
+
+        DomainType domainTypeLineSegmentBorder = DomainType.createIntegerDomainType("","",-10000000000L,10000000000L);
+        domainTypeRepository.save(domainTypeLineSegmentBorder);
+
+        EntityField entityFieldLeftBorder = new EntityField("left_border","Левая граница",domainTypeLineSegment,domainTypeLineSegmentBorder);
+        entityFieldRepository.save(entityFieldLeftBorder);
+
+        EntityField entityFieldRightBorder = new EntityField("right_border","Правая граница",domainTypeLineSegment,domainTypeLineSegmentBorder);
+        entityFieldRepository.save(entityFieldRightBorder);
+
+        DataElement dataElementFirstLineSegment = new DataElement(p,"first_line_segment","Первый отрезок",domainTypeLineSegment, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementFirstLineSegment);
+
+        DataElement dataElementSecondLineSegment = new DataElement(p,"second_line_border","Второй отрезок",domainTypeLineSegment, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementSecondLineSegment);
+
+        Phrase phraseFirstLineSegment = new Phrase(dataElementFirstLineSegment,4,5);
+        phraseRepository.save(phraseFirstLineSegment);
+
+        Phrase phraseSecondLineSegment = new Phrase(dataElementSecondLineSegment,7,8);
+        phraseRepository.save(phraseSecondLineSegment);
+
+        DataElementImplementation implementationHasIntersection = new DataElementImplementation("hasIntersectionLogical", "Признак пересечения - логический тип", dataElementHasIntersection);
+        dataElementImplementationRepository.save(implementationHasIntersection);
+
+        DataComponent dataComponentHasIntersection = new DataComponent("intersection_exists_c","Признак пересечения",implementationHasIntersection,domainTypeHasIntersection);
+        dataComponentRepository.save(dataComponentHasIntersection);
+
+        DataElementImplementation implementationFirstLineSegment = new DataElementImplementation("firstLineSegment2Numbers","2 числа: левая граница и правая граница",dataElementFirstLineSegment);
+        dataElementImplementationRepository.save(implementationFirstLineSegment);
+
+        DataComponent dataComponentFirstLeftBorder = new DataComponent("left_border","Левая граница",implementationFirstLineSegment,domainTypeLineSegmentBorder);
+        dataComponentRepository.save(dataComponentFirstLeftBorder);
+
+        DataComponent dataComponentFirstRightBorder = new DataComponent("right_border","Правая граница",implementationFirstLineSegment,domainTypeLineSegmentBorder);
+        dataComponentRepository.save(dataComponentFirstRightBorder);
+
+        DataElementImplementation implementationSecondLineSegment = new DataElementImplementation("secondLineSegment2Numbers","2 числа: левая граница и правая граница",dataElementSecondLineSegment);
+        dataElementImplementationRepository.save(implementationSecondLineSegment);
+
+        DataComponent dataComponentSecondLeftBorder = new DataComponent("left_border","Левая граница",implementationSecondLineSegment,domainTypeLineSegmentBorder);
+        dataComponentRepository.save(dataComponentSecondLeftBorder);
+
+        DataComponent dataComponentSecondRightBorder = new DataComponent("right_border","Правая граница",implementationSecondLineSegment,domainTypeLineSegmentBorder);
+        dataComponentRepository.save(dataComponentSecondRightBorder);
+    }
+
     private void addProblem3()
     {
         Problem p = new Problem("Изменить заряд батарейки в соответствии с запрашиваемым количеством заряда. Дополнительно вычислить количество реально отданного заряда","get_charge",": Заряд батарейки не более 100 единиц. Запрашиваться может до 1000 единиц.");
@@ -264,6 +328,7 @@ public class UserController {
     {
         if (problemRepository.count() == 0)
         {
+            addProblem1();
             addProblem2();
             addProblem3();
             addProblem4();
@@ -304,7 +369,7 @@ public class UserController {
 
                 if (domainType.getType() == DomainType.HighlyLevelTypes.INTEGER_NUMBER) {
                     //Set min and max of domain type
-                    problem.setDomainTypeMinAndMax(domainType.getId().intValue(), (int) domainType.getMinValue(), (int) domainType.getMaxValue());
+                    problem.setDomainTypeMinAndMax(domainType.getId().intValue(), domainType.getLongMinValue(), domainType.getLongMaxValue());
                 }
 
                 if (domainType.getType() == DomainType.HighlyLevelTypes.REAL_NUMBER) {
