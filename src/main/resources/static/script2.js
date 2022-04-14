@@ -337,7 +337,7 @@ function addComponentsDataTypes()
         for (let componentName in componentParameters[dataElementName])
         {
             let tr = componentsTableRows[dataElementName][componentName]
-            let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *"}
+            let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *","Type_Long":"long","Type_PointerToLong":"long *","Type_Bool":"bool","Type_PointerToBool":"bool *"}
             let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':componentParameters[dataElementName][componentName]}, "datatype",5)
             let td = document.createElement("td")
             td.classList.add("align-middle")
@@ -348,7 +348,7 @@ function addComponentsDataTypes()
     if (returnComponent != null)
     {
         let tr = componentsTableRows[returnComponent.element][returnComponent.component]
-        let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *"}
+        let options = {"Type_Int": "int", "Type_PointerToInt" : "int *", "Type_Float" : "float", "Type_Char": "char", "Type_PointerToChar":"char *","Type_PointerToFloat":"float *","Type_Long":"long","Type_PointerToLong":"long *","Type_Bool":"bool","Type_PointerToBool":"bool *"}
         let block = createSelectBlock(options, "/answer/5", {'student':studentID,'parameterName':'return'}, "datatype",5)
         let td = document.createElement("td")
         td.classList.add("align-middle")
