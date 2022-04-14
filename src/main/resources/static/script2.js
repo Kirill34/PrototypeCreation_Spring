@@ -30,19 +30,21 @@ function getAllProblems()
     xhr.onload = () => {
         if (xhr.status===200) {
             let obj = xhr.response
+            let counter=0
             for (let ind in obj) {
                 if (ind >= 0) {
+                    counter++
                     let problem = obj[ind]
                     console.log(problem)
                     let option = document.createElement("option")
                     option.value = problem.id
-                    option.text = problem.id + ") " + "Напишите прототип функции, которая " + problem.text
+                    option.text = counter + ") " + "Напишите прототип функции для решения задачи: " + problem.text
                     select.add(option)
                 }
 
             }
         }
-        xhr.send()
+        //xhr.send()
         //document.getElementById('element-selection-error').parentElement.appendChild(select)
         //alert(xhr.responseText)
     }
