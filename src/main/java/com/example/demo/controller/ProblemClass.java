@@ -2111,7 +2111,7 @@ public class ProblemClass {
         String[] classNames = new String[]{"CorrectInput","CorrectOutput","CorrectUpdatable","IncorrectInput","IncorrectOutput","IncorrectUpdatable",
                 "CantReturn", "FewReturnValues", "InputParameterForOutputComponent", "UpdatableParameterForOutputComponent", "UpdatableParameterForInputComponent", "OutputParameterForInputComponent", "InputParameterForUpdatableComponent", "OutputParameterForUpdatableComponent","CantReturnInputComponent","CantReturnUpdatableComponent",
                 "ElementAlreadyDefined", "LongPhrase", "PhraseDoesntContainElements", "PhrasePartlyDescribesElement","PhraseDoesntDescribeElement",
-                "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity","ReturnPointer","LogicalTypeForNumber","NumberForLogicalType",
+                "CollectionForScalar","EntityForScalar","ExcessType","InputParameterByPointer","IntegerTypeForRealNumber","NotEnoughtType","OutputParameterByValue","RealTypeForInteger","ReturnPointer","ScalarForCollection","ScalarForEntity","ReturnPointer","LogicalTypeForNumber","NumberForLogicalType","RealTypeForLogical",
                 "CommaAfterAllParameters","FunctionNameExpected","IncorrectFinishOfParamList","IncorrectFinishOfPrototype","IncorrectLexemOfReturnType","IncorrectLexemParamType","IncorrectNameOfParam","IncorrectParamSeparator","IncorrectStartOfParamList","IncorrectStartOfReturnType","IncorrectStartParamType","NotAllParameters"};
 
         for (String name: classNames)
@@ -2348,6 +2348,11 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("NumberForLogicalType")))
         {
             messages.put(Language.RU,"Разве для представления логического типа рационально использовать числовой тип?");
+        }
+
+        if (classes.contains(ontClasses.get("RealTypeForLogical")))
+        {
+            messages.put(Language.RU,"Разве для представления логического типа рационально использовать вещественный тип?");
         }
 
         if (classes.contains(ontClasses.get("OutputParameterByValue")))

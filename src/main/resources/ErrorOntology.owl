@@ -490,6 +490,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForLogical -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForLogical">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDataType"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ReturnPointer -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ReturnPointer">
