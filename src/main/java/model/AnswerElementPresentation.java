@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -52,6 +52,8 @@ public class AnswerElementPresentation {
         this.id = id;
     }
 
+    private LocalDateTime dateTime;
+
     public AnswerElementPresentation(Student student, DataElement dataElement, DataElementImplementation implementation, boolean isCorrect, String message)
     {
         this.student = student;
@@ -59,5 +61,6 @@ public class AnswerElementPresentation {
         this.implementation = implementation;
         this.isCorrect = isCorrect;
         this.message = message;
+        this.dateTime=LocalDateTime.now();
     }
 }
