@@ -128,7 +128,7 @@ public class UserController {
         DataComponent dataComponentHasIntersection = new DataComponent("intersection_exists_c","Признак пересечения",implementationHasIntersection,domainTypeHasIntersection);
         dataComponentRepository.save(dataComponentHasIntersection);
 
-        DataElementImplementation implementationFirstLineSegment = new DataElementImplementation("firstLineSegment2Numbers","2 числа: левая граница и правая граница",dataElementFirstLineSegment);
+        DataElementImplementation implementationFirstLineSegment = new DataElementImplementation("firstLineSegment2Numbers","2 числа: левая граница [-10^10;10^10] и правая граница [-10^10;10^10]",dataElementFirstLineSegment);
         dataElementImplementationRepository.save(implementationFirstLineSegment);
 
         DataComponent dataComponentFirstLeftBorder = new DataComponent("left_border","Левая граница",implementationFirstLineSegment,domainTypeLineSegmentBorder);
@@ -137,7 +137,7 @@ public class UserController {
         DataComponent dataComponentFirstRightBorder = new DataComponent("right_border","Правая граница",implementationFirstLineSegment,domainTypeLineSegmentBorder);
         dataComponentRepository.save(dataComponentFirstRightBorder);
 
-        DataElementImplementation implementationSecondLineSegment = new DataElementImplementation("secondLineSegment2Numbers","2 числа: левая граница и правая граница",dataElementSecondLineSegment);
+        DataElementImplementation implementationSecondLineSegment = new DataElementImplementation("secondLineSegment2Numbers","2 числа: левая граница [-10^10;10^10] и правая граница [-10^10;10^10]",dataElementSecondLineSegment);
         dataElementImplementationRepository.save(implementationSecondLineSegment);
 
         DataComponent dataComponentSecondLeftBorder = new DataComponent("left_border","Левая граница",implementationSecondLineSegment,domainTypeLineSegmentBorder);
@@ -155,7 +155,7 @@ public class UserController {
         DomainType domainTypeCharge = DomainType.createIntegerDomainType("charge", "Заряд батареи", 0, 100);
         domainTypeRepository.save(domainTypeCharge);
 
-        DomainType domainTypeEnquiredCharge = DomainType.createIntegerDomainType("enquired_charge","ЗАпрашиваемый заряд батареи",0,1000);
+        DomainType domainTypeEnquiredCharge = DomainType.createIntegerDomainType("enquired_charge","Запрашиваемый заряд батареи",0,1000);
         domainTypeRepository.save(domainTypeEnquiredCharge);
 
         DataElement dataElementCurrentCharge = new DataElement(p, "current_charge", "Количество заряда батарейки", domainTypeCharge, DataElement.DataElementDirection.CHANGED_DATA);
@@ -312,7 +312,7 @@ public class UserController {
         DataElement dataElementInterval = new DataElement(p,"interval","Интервал",domainTypeInterval, DataElement.DataElementDirection.INPUT_DATA);
         dataElementRepositiory.save(dataElementInterval);
 
-        DataElementImplementation implementationInterval = new DataElementImplementation("interval2Numbers","2 вещественных числа: левая граница и правая граница",dataElementInterval);
+        DataElementImplementation implementationInterval = new DataElementImplementation("interval2Numbers","2 вещественных числа: левая граница [-1000;1000] и правая граница [-1000;1000]",dataElementInterval);
         dataElementImplementationRepository.save(implementationInterval);
 
         DataComponent dataComponentIntervalLeft = new DataComponent("left_border","Левая граница интервала",implementationInterval,domainTypeIntervalBorder);
