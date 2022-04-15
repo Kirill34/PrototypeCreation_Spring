@@ -416,6 +416,7 @@ function addCodeBlock()
                     let title = document.createElement("p")
                     title.classList.add("card-title")
                     title.innerText = "Составьте прототип функции " + funcName
+                    title.innerHTML+="<br>Параметры перечислять <b>строго</b> в том порядке, который указан в комментарии"
                     block.appendChild(title)
                     block.appendChild(div)
                     let cardBody = document.createElement("div")
@@ -557,11 +558,12 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
     let select = createSelect(options)
     let div = document.createElement("div")
     let additionalInfo = document.createElement("p")
+    additionalInfo.style.width=width+"px"
     div.classList.add("alert")
-    div.style.fontSize = "12px"
+    div.style.fontSize = "13px"
     div.style.width = width+"px"
     select.style.width = width+"px"
-    select.style.fontSize="12px"
+    select.style.fontSize="13px"
 
     block.appendChild(select)
     block.appendChild(additionalInfo)
@@ -596,10 +598,11 @@ function createSelectBlock(options, url, paramDict, thisParamName, interactionNu
                     div.classList.add("alert-success")
                     div.innerText = "Верно"
                     select.disabled = true
+                    let selectedText = select.options[select.selectedIndex].text
                     setTimeout(() => {
                         div.hidden = true
                     }, 500)
-                    operationOfInteraction(interactionNum, paramDict, ev.srcElement.value, additionalInfo)
+                    operationOfInteraction(interactionNum, paramDict, ev.srcElement.value, selectedText, additionalInfo)
                 } else {
                     div.classList.remove("alert-warning")
                     div.classList.add("alert-danger")
@@ -642,7 +645,7 @@ function createSelect(options)
 let elementsWithDirections = []
 let elementsWithPresentations = []
 
-function operationOfInteraction(interactionNum, specificDict, selectedValue, additionalInfo)
+function operationOfInteraction(interactionNum, specificDict, selectedValue, selectedText, additionalInfo)
 {
     switch (interactionNum)
     {
@@ -657,6 +660,7 @@ function operationOfInteraction(interactionNum, specificDict, selectedValue, add
             break
         case 3:
             elementsWithPresentations.push(specificDict.elementName)
+            additionalInfo.innerText=selectedText
             if (elementsWithPresentations.length === dataElements.length)
             {
                 //alert("Вы корректно выбрали представления для всех элементов данных. Для перехода к следующему позаданию нажмите \"Далее\"")
