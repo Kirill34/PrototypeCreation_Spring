@@ -10,6 +10,17 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>.
     <script src="fixIERangeObject.js"></script>
     <script src="script2.js"></script>
+    <style>
+        .unselectable {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none;   /* Chrome/Safari/Opera */
+            -khtml-user-select: none;    /* Konqueror */
+            -moz-user-select: none;      /* Firefox */
+            -ms-user-select: none;       /* Internet Explorer/Edge */
+            user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+        }
+    </style>
 </head>
 <body>
 
@@ -43,11 +54,11 @@
 
     <div id="problem-card" hidden=hidden class="card" style="padding: 20px; margin: 20px;">
         <div class="card-body">
-            <h5 class="card-title" id="exercise">Напишите прототип функции для решения задачи</h5>
-            <div class="card-text alert alert-primary" id="problem-text">вычисляет сумму доходов за январь и доходов за февраль</div>
-            <p style="font-style: italic" id="notice"></p>
-            <p class="card-text" id="interaction-text" >Выделите фрагменты текста из формулировки задания, которые соответствуют элементам данных решаемой задачи. После каждого выделения нажмите на кнопку "Отметить"</p>
-            <div class="alert alert-danger" id="element-selection-error" hidden=hidden></div>
+            <h5 class="card-title unselectable" id="exercise">Напишите прототип функции для решения задачи</h5>
+            <div class="card-text alert alert-primary" id="problem-text">Подождите... Задача загружается ...</div>
+            <p style="font-style: italic" id="notice" class="unselectable"></p>
+            <p class="card-text unselectable" id="interaction-text">Выделите фрагменты текста из формулировки задания, которые соответствуют элементам данных решаемой задачи. После каждого выделения нажмите на кнопку "Отметить"</p>
+            <div class="alert alert-danger unselectable" id="element-selection-error" hidden=hidden></div>
             <button class="btn btn-primary" id="button-select-element" onclick="checkDataElementBorders();">Отметить</button>
         </div>
     </div>
