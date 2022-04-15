@@ -539,7 +539,7 @@ noValue(?phrase1 http://www.semanticweb.org/problem-ontology#hasRighterPhrase)
 (?student http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#solves ?p)
 (?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
 (?answ http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
-ge(?lba,?lb1)
+greaterThan(?lba,?rb1)
 greaterThan(?rba,?rb1)
 makeSkolem(?error, ?answ, ?student)
 ->
