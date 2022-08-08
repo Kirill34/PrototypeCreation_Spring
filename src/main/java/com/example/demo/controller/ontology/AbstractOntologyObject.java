@@ -6,6 +6,7 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.tdb.store.Hash;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +29,15 @@ public abstract class AbstractOntologyObject {
     /**
      * Связанные объекты
      */
-    private HashMap<String, List<AbstractOntologyObject>> objectMap;
+    private HashMap<String, List<AbstractOntologyObject>> objectMap = new HashMap<>();
+
+
+    public AbstractOntologyObject(OntModel ontModel, String ontClass, Resource resource)
+    {
+        this.ontClass = ontClass;
+        this.ontologyModel = ontModel;
+        this.ontResource=resource;
+    }
 
     public AbstractOntologyObject(OntModel ontModel, String ontClass)
     {
@@ -77,6 +86,8 @@ public abstract class AbstractOntologyObject {
     protected void setObjectProperty(String objectPropertyName, AbstractOntologyObject object)
     {
         ontResource.addProperty(ontologyModel.getObjectProperty(objectPropertyName),object.ontResource);
+        if (!this.objectMap.containsKey(objectPropertyName))
+            this.objectMap.put(objectPropertyName, new ArrayList<>());
         this.objectMap.get(objectPropertyName).add(object);
     }
 }

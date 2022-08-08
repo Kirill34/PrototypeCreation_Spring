@@ -1,0 +1,52 @@
+{
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase":
+  {
+    "ru": "Выделена слишком длинная фраза",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement":
+  {
+    "ru": "Выделена слишком короткая фраза, она описывает элемент данных частично",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ElementAlreadyDefined":
+  {
+    "ru": "Элемент данных  \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" уже был выделен",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntContainElements":
+  {
+    "ru": "Выделенная фраза не описывает никакой элемент данных",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenOutput":
+  {
+    "ru": "Разве \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" вычисляется данной функцией?",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenUpdatable":
+  {
+    "ru": "Разве \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" вычисляется данной функцией?",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenInput":
+  {
+    "ru": "Разве \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" изначально известен?",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenUpdatable":
+  {
+    "ru": "Разве \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" изначально известен?",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenInput":
+  {
+    "ru": "Разве \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" не вычисляется заново?",
+    "en": ""
+  },
+  "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenOutput":
+  {
+    "ru": "Разве \"<http://www.semanticweb.org/problem-ontology#hasData::http://www.semanticweb.org/problem-ontology#mission>\" не используется для вычисления?",
+    "en": ""
+  }
+}

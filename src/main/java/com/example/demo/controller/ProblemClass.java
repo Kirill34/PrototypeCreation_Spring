@@ -2278,46 +2278,56 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("UpdatableParameterForInputComponent")))
         {
             messages.put(Language.RU, "Разве \""+mission+"("+componentMission+")\""+" вычисляется?");
+            messages.put(Language.EN,"Is \""+mission+"\".\""+componentMission+"\""+" calculated?");
         }
 
         if (classes.contains(ontClasses.get("UpdatableParameterForOutputComponent")))
         {
             messages.put(Language.RU,"Разве \""+mission+"("+componentMission+")\""+" известен?");
+            messages.put(Language.EN, "Is \""+mission+"\".\""+componentMission+"\" initialized?");
         }
 
         if (classes.contains(ontClasses.get("ElementAlreadyDefined")))
         {
             messages.put(Language.RU,"Повторно выделен элемент");
+            messages.put(Language.EN,"Data element is already defined");
         }
 
         if (classes.contains(ontClasses.get("LongPhrase")))
         {
             messages.put(Language.RU,"Выделена слишком длинная фраза");
+            messages.put(Language.EN,"You selected too many words; please select only the data element");
         }
 
         if (classes.contains(ontClasses.get("PhraseDoesntContainElements")))
         {
             messages.put(Language.RU,"Выделена фраза, которая не описывает никакой элемент данных");
+            messages.put(Language.EN,"Selected phrase doesn't describe any data element");
+
         }
 
         if (classes.contains(ontClasses.get("PhrasePartlyDescribesElement")))
         {
             messages.put(Language.RU,"Выделена слишком короткая фраза - она описывает один элемент данных частично");
+            messages.put(Language.EN,"The phrase you selected is too short. It describes the data element partly");
         }
 
         if (classes.contains(ontClasses.get("PhraseDoesntDescribeElement")))
         {
             messages.put(Language.RU,"Выделенная фраза не описывает ни один из элементов данных");
+            messages.put(Language.EN,"Selected phrase doesn't describe any data element");
         }
 
         if (classes.contains(ontClasses.get("CollectionForScalar")))
         {
             messages.put(Language.RU,"Разве можно(рационально) представлять сущность массивом элементов?");
+            messages.put(Language.EN,"Is it possible to implement an entity as array of elements?");
         }
 
         if (classes.contains(ontClasses.get("EntityForScalar")))
         {
             messages.put(Language.RU,"Разве можно(рационально) представлять одно скалярное значение сущностью со множеством характеристик?");
+            messages.put(Language.EN,"Is it possible to implement one scalar values as a difficult entity?");
         }
 
         if (classes.contains(ontClasses.get("ExcessType")))
@@ -2328,6 +2338,7 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("InputParameterByPointer")))
         {
             messages.put(Language.RU,"Разве вы хотите изменять параметр "+parameterName+", используя указатель на него?");
+            messages.put(Language.EN,"Do you want to change the \""+parameterName+"\" using a pointer?");
         }
 
         if (classes.contains(ontClasses.get("IntegerTypeForRealNumber")))
@@ -2434,6 +2445,7 @@ public class ProblemClass {
         if (classes.contains(ontClasses.get("IncorrectStartParamType")))
         {
             messages.put(Language.RU,"Разве тип "+String.valueOf(lastLexemParamNumber)+" параметра начинается с лексемы \""+lastLexemValue+"\"?");
+            messages.put(Language.EN,"Is \""+lastLexemValue+"\" a datatype of function's argument?");
         }
 
         if (classes.contains(ontClasses.get("NotAllParameters")))

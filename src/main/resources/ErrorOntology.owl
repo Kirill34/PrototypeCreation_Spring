@@ -108,6 +108,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenOutput -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenOutput">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenUpdatable -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenUpdatable">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutput -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutput">
@@ -116,9 +132,41 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenInput -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenInput">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenUpdatable -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenUpdatable">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatable -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatable">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenInput -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenInput">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenOutput -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenOutput">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectDirection"/>
     </owl:Class>
     
@@ -399,6 +447,12 @@
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectPhrase"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError"/>
     
 
 

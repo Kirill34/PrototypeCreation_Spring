@@ -1,11 +1,26 @@
 package com.example.demo.controller.ontology;
 
+import com.example.demo.controller.ontology.problem.Problem;
+import com.example.demo.controller.ontology.session.Session;
+import com.example.demo.controller.ontology.session.Student;
+import com.example.demo.controller.ontology.session.answer.Answer;
+import com.example.demo.controller.ontology.session.answer.DataElementDirectionChoice;
+import com.example.demo.controller.ontology.session.answer.DataElementIdentifying;
+import model.DataElement;
+import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.InfModel;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.reasoner.Reasoner;
+import org.apache.jena.reasoner.rulesys.GenericRuleReasoner;
+import org.apache.jena.reasoner.rulesys.Rule;
 import org.apache.jena.riot.RDFDataMgr;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +33,8 @@ public class Model {
     protected static String LANGUAGE_ONTOLOGY_FILE = "LanguageOntology.owl";
     protected static String ERROR_ONTOLOGY_FILE = "ErrorOntology.owl";
 
-    protected static String DATA_DIRECTION_RULES = "rules/data_direction.rules";
-    protected static String ELEMENT_BORDERS_RULES = "rules/element_borders.rules";
+    protected static String DATA_DIRECTION_RULES = "rules/2.rules";
+    protected static String ELEMENT_BORDERS_RULES = "rules/1.rules";
     protected static String DATA_PRESENTATION_RULES = "rules/data_presentation.rules";
     protected static String PARAMETERS_RETURNS_RULES = "rules/parameters_returns.rules";
     protected static String TYPES_RULES = "rules/types.rules";
@@ -36,6 +51,11 @@ public class Model {
      * Задачи на написание прототипа функции
      */
     protected List<Problem> problemList = new ArrayList<>();
+
+    /**
+     * Студенты
+     */
+    protected List<Student> studentList = new ArrayList<>();
 
     protected Reasoner[] reasoners = new Reasoner[6];
 
@@ -72,13 +92,13 @@ public class Model {
         model = ModelFactory.createUnion(model, errorModel);
 
 
-        /*
+
         //Ризонер для интеракции 0 "Выделение элементов данных из текста"
         reasoners[0] = createReasonerForInteraction(ELEMENT_BORDERS_RULES);
 
         //Ризонер для интеракции 1 "Направления элементов данных"
         reasoners[1] = createReasonerForInteraction(DATA_DIRECTION_RULES);
-
+        /*
         //Ризонер для интеракции 2 "Представления элементов данных"
         reasoners[2] = createReasonerForInteraction(DATA_PRESENTATION_RULES);
 
@@ -95,11 +115,75 @@ public class Model {
         ontologyModel = ModelFactory.createOntologyModel( OWL_MEM_MICRO_RULE_INF, model);
     }
 
+    private Reasoner createReasonerForInteraction(String rulesFile)
+    {
+        InputStream stream = getClass().getClassLoader().getResourceAsStream(rulesFile);
+        String rules = readStream( stream);
+        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(rules));
+        reasoner.setDerivationLogging(true);
+        reasoner.setDerivationLogging(true);
+        reasoner.bindSchema(model);
+        return reasoner;
+    }
+
+    protected static String readStream(InputStream is) {
+        StringBuilder sb = new StringBuilder(512);
+        try {
+            Reader r = new InputStreamReader(is, "UTF-8");
+            int c = 0;
+            while ((c = r.read()) != -1) {
+                sb.append((char) c);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return sb.toString();
+    }
+
     public Problem addProblem(int id, String text, String notice, String funcName)
     {
         Problem p = new Problem(ontologyModel,id, text,notice, funcName);
         problemList.add(p);
         return p;
+    }
+
+
+    public Student addStudent(int id)
+    {
+        Student s = new Student(id, ontologyModel);
+        studentList.add(s);
+        return s;
+    }
+
+    public Session addSession(Student s, Problem p)
+    {
+        Session session = new Session(ontologyModel, s, p);
+        return session;
+    }
+
+    public com.example.demo.controller.ontology.error.Error checkAnswer(Session session, Answer answer)
+    {
+        session.addAnswer(answer);
+
+        if (answer instanceof DataElementIdentifying)
+        {
+            ontologyModel.write(System.out);
+            InfModel infModel = ModelFactory.createInfModel(reasoners[0],ontologyModel);
+            org.apache.jena.rdf.model.Model diff = infModel.getDeductionsModel().difference(ontologyModel);
+            ontologyModel.add(diff);
+            System.out.println(diff.toString());
+            return answer.getError();
+        }
+
+        if (answer instanceof DataElementDirectionChoice)
+        {
+            InfModel infModel = ModelFactory.createInfModel(reasoners[1],ontologyModel);
+            org.apache.jena.rdf.model.Model diff = infModel.getDeductionsModel().difference(ontologyModel);
+            ontologyModel.add(diff);
+            return answer.getError();
+        }
+
+        return null;
     }
 
 
