@@ -1,0 +1,242 @@
+[
+->
+print("Works+")
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofStudent ?student)
+->
+print("Of sudent")
+]
+
+[
+(?problem rdf:type http://www.semanticweb.org/problem-ontology#Problem)
+->
+print("Problem+")
+]
+
+[
+(?answ http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+->
+print("Left border", ?lb)
+]
+
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+noValue(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDefinedElement ?dataElement)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDefinedElement ?dataElement)
+]
+
+[
+noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDefinedElement ?dataElement)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ElementAlreadyDefined)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+equal(?lb,?lba)
+lessThan(?rba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №2")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+greaterThan(?lba,?lb)
+lessThan(?rba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №3")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+greaterThan(?lba,?lb)
+equal(?rba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №4")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhrasePartlyDescribesElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+lessThan(?lba,?lb)
+equal(?rba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №5")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+equal(?lba,?lb)
+greaterThan(?rba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №6")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+lessThan(?lba,?lb)
+greaterThan(?rba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №7")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#LongPhrase)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb1)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb1)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRighterPhrase ?phrase2)
+(?phrase2 http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb2)
+(?phrase2 http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb2)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+lessThan(?rba,?lb2)
+greaterThan(?lba,?rb1)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №7")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntDescribeElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+lessThan(?rba,?lb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №7")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntDescribeElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+(?phrase rdf:type http://www.semanticweb.org/problem-ontology#Phrase)
+(?phrase http://www.semanticweb.org/problem-ontology#describe ?dataElement)
+(?phrase http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lb)
+(?phrase http://www.semanticweb.org/problem-ontology#hasRightBorder ?rb)
+noValue(?phrase http://www.semanticweb.org/problem-ontology#hasRighterPhrase)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementIdentifying)
+(?answer http://www.semanticweb.org/problem-ontology#hasRightBorder ?rba)
+(?answer http://www.semanticweb.org/problem-ontology#hasLeftBorder ?lba)
+greaterThan(?lba,?rb)
+makeSkolem(?error, ?answer, ?session)
+->
+print("Сработало правило №7")
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#PhraseDoesntDescribeElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]

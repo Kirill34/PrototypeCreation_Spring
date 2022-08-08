@@ -1,0 +1,122 @@
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasInputData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 0)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasInputData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 1)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenOutput)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasInputData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 2)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectInputChosenUpdatable)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasOutputData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 1)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasOutputData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 0)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenInput)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasOutputData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 2)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectOutputChosenUpdatable)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasChangedData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 2)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasChangedData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 0)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenInput)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?problem http://www.semanticweb.org/problem-ontology#hasChangedData ?dataElement)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementDirectionChoice)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDirection 1)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CorrectUpdatableChosenOutput)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+]
