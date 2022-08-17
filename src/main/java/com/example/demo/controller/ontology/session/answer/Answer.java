@@ -2,6 +2,7 @@ package com.example.demo.controller.ontology.session.answer;
 
 import com.example.demo.controller.ontology.AbstractOntologyObject;
 import com.example.demo.controller.ontology.ObjectProperties;
+import com.example.demo.controller.ontology.OntologyClasses;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -51,5 +52,10 @@ public class Answer extends AbstractOntologyObject {
     public com.example.demo.controller.ontology.error.Error getError()
     {
         return new com.example.demo.controller.ontology.error.Error(ontologyModel, this.getErrorClass(), this.getErrorResource());
+    }
+
+    public boolean isCorrect()
+    {
+        return this.getErrorClass().equals(OntologyClasses.Error.NO_ERROR);
     }
 }

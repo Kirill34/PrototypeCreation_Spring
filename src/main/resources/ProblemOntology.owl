@@ -301,6 +301,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasFixedLength -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFixedLength"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasFullText -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFullText"/>

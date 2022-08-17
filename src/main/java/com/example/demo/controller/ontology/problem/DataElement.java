@@ -55,4 +55,14 @@ public class DataElement extends AbstractOntologyObject {
     public String getMission() {
         return mission;
     }
+
+    public void setNextDataElement(DataElement dataElement)
+    {
+        this.setObjectProperty(ObjectProperties.Problem.HAS_NEXT_COMPONENT, dataElement);
+    }
+
+    public void setNextField(DataElement dataElement)
+    {
+        this.setObjectProperty(ObjectProperties.Problem.HAS_NEXT_FIELD, dataElement);
+    }
 }

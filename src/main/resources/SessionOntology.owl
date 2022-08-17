@@ -27,9 +27,47 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingField"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAnswer"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChangedParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChangedParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenTransferMethod -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenTransferMethod"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType"/>
     
 
 
@@ -51,6 +89,20 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasInputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasInputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer"/>
@@ -63,15 +115,47 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasNextSessionComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasNextSessionComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasOutputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasOutputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasQuestion -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasQuestion"/>
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSession -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSession"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent"/>
     
 
 
@@ -96,6 +180,12 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent"/>
     
 
 
@@ -175,6 +265,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ChangedParameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ChangedParameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Parameter"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataDirectionError -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataDirectionError">
@@ -199,9 +297,49 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Error -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Error"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#InputParameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#InputParameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#OutputParameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#OutputParameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Parameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Parameter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent"/>
+    </owl:Class>
     
 
 
@@ -211,15 +349,37 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ReturnValue -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ReturnValue">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Session -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Session"/>
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Student"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#TransferMethodChoice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#TransferMethodChoice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"/>
+    </owl:Class>
     
 
 

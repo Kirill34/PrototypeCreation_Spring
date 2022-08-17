@@ -13,6 +13,10 @@ public class ObjectProperties {
         public static String HAS_FIRST_PHRASE = "http://www.semanticweb.org/problem-ontology#hasFirstPhrase";
         public static String HAS_RIGHTER_PHRASE = "http://www.semanticweb.org/problem-ontology#hasRighterPhrase";
         public static String HAS_DOMAIN_TYPE = "http://www.semanticweb.org/problem-ontology#hasDomainType";
+        public static String HAS_FIRST_COMPONENT = "http://www.semanticweb.org/problem-ontology#hasFirstComponent";
+        public static String HAS_NEXT_COMPONENT = "http://www.semanticweb.org/problem-ontology#hasNextComponent";
+        public static String HAS_FIRST_FIELD = "http://www.semanticweb.org/problem-ontology#hasFirstField";
+        public static String HAS_NEXT_FIELD = "http://www.semanticweb.org/problem-ontology#hasNextField";
     }
 
     public static class Session
@@ -26,5 +30,12 @@ public class ObjectProperties {
         public static String HAS_ERROR = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError";
         public static String HAS_DEFINED_ELEMENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasDefinedElement";
         public static String OF_DATA_ELEMENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement";
+        public static String HAS_CHOSEN_IMPLEMENTATION = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation";
+        public static String HAS_ACCORDING_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent";
+        public static String HAS_FIRST_SESSION_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent";
+        public static String HAS_NEXT_SESSION_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasNextSessionComponent";
+        public static String HAS_CHOSEN_TRANSFER_METHOD = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenTransferMethod";
+        public static String OF_SESSION_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent";
+        public static String HAS_CHOSEN_TYPE = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType";
     }
 }

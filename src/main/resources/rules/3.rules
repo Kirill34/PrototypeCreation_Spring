@@ -1,0 +1,191 @@
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+noValue(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?firstComponent)
+->
+(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?firstComponent)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+(?component http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComponent)
+noValue(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+->
+(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+]
+
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent)
+makeSkolem(?sessionComponent, ?answer, ?session, ?firstComponent)
+->
+(?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+(?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+]
+
+[
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?comp)
+noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?comp)
+->
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?comp)
+]
+
+[
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?comp)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasNextSessionComponent ?nextComp)
+noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?nextComp)
+->
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?nextComp)
+]
+
+
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+(?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+(?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+(?domainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+(?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType1)
+(?domainType1 rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationCollectionForScalar)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+(?domainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+(?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType1)
+(?domainType1 rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationEntityForScalar)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+(?domainType rdf:type http://www.semanticweb.org/problem-ontology#List)
+(?domainType http://www.semanticweb.org/problem-ontology#hasFixedLength ?length)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+(?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+(?domainType rdf:type http://www.semanticweb.org/problem-ontology#List)
+noValue(?domainType http://www.semanticweb.org/problem-ontology#hasFixedLength)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+(?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UndefinedCollectionSize)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+(?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+(?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+(?domainType rdf:type http://www.semanticweb.org/problem-ontology#List)
+(?domainType http://www.semanticweb.org/problem-ontology#hasFixedLength ?len)
+(?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+(?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+makeSkolem(?error, ?answer, ?session)
+->
+(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFirstField ?field)
+    (?field http://www.semanticweb.org/problem-ontology#hasDomainType ?dt1)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?dt1)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+
+]

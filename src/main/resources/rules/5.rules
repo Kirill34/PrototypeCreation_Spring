@@ -1,0 +1,15 @@
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/problem-ontology#minValue ?minTypeValue)
+    (?rdfType http://www.semanticweb.org/problem-ontology#maxValue ?maxTypeValue)
+    ->
+    print("Language type choice", ?minTypeValue, " ", ?maxTypeValue)
+]
