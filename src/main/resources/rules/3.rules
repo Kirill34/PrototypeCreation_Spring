@@ -4,8 +4,6 @@
 (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
-(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
-(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
 (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
 noValue(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?firstComponent)
 ->
@@ -18,13 +16,12 @@ noValue(?implementation http://www.semanticweb.org/problem-ontology#hasComponent
 (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
-(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
-(?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
 (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
 (?component http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComponent)
 noValue(?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
 ->
 (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?nextComponent)
+print("Next component")
 ]
 
 
@@ -43,6 +40,24 @@ makeSkolem(?sessionComponent, ?answer, ?session, ?firstComponent)
 (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
 (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+]
+
+
+
+
+
+[
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?sessionComponent)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent ?nextComponent)
+    noValue(?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasNextSessionComponent)
+    makeSkolem(?nextSessionComponent, ?answer, ?session, ?firstComponent)
+    ->
+    (?nextSessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?nextSessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?nextComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasNextSessionComponent ?nextSessionComponent)
+    print("Next session component is added")
 ]
 
 [
@@ -69,7 +84,7 @@ noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontolo
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
 (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
-(?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+
 (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
 (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
 noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
@@ -171,6 +186,127 @@ makeSkolem(?error, ?answer, ?session)
 (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
 ]
 
+
+
+[
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFirstField ?field)
+    noValue(?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    ->
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+]
+
+[
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    (?field http://www.semanticweb.org/problem-ontology#hasNextField ?nextField)
+    noValue(?domainType http://www.semanticweb.org/problem-ontology#hasField ?nextField)
+    ->
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?nextField)
+]
+
+[
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFirstField ?field)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?field http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?componentDomainType)
+    ->
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+    print("Checked accordance")
+]
+
+[
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?firstComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+
+    (?prevField http://www.semanticweb.org/problem-ontology#hasNextField ?field)
+    (?prevComponent http://www.semanticweb.org/problem-ontology#hasNextComponent ?firstComponent)
+    (?prevComponent http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?prevField)
+    (?prevComponent http://www.semanticweb.org/problem-ontology#hasAccordingField ?prevField)
+
+    (?field http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?componentDomainType)
+    ->
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+    print("Accordance is checked")
+]
+
+[
+   (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+
+    ->
+    print("OK")
+]
+
+[
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?firstComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+
+    (?prevField http://www.semanticweb.org/problem-ontology#hasNextField ?field)
+    (?prevComponent http://www.semanticweb.org/problem-ontology#hasNextComponent ?firstComponent)
+    (?prevComponent http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?prevField)
+    (?prevComponent http://www.semanticweb.org/problem-ontology#hasAccordingField ?prevField)
+
+    (?field http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+    ->
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasAccordingField ?field)
+    print("Yet field is checked")
+]
+
+[
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFirstField ?field)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?field http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?fieldDomainType)
+    ->
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#hasAccordingField ?field)
+    print("First field is checked")
+]
+
+[
+(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    (?component http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+
+    ->
+    print("Has checked accordance")
+]
+
+
 [
     (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
     (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
@@ -179,13 +315,33 @@ makeSkolem(?error, ?answer, ?session)
     (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
     (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
     (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
-    (?domainType http://www.semanticweb.org/problem-ontology#hasFirstField ?field)
-    (?field http://www.semanticweb.org/problem-ontology#hasDomainType ?dt1)
-    (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
-    (?firstComponent http://www.semanticweb.org/problem-ontology#hasDomainType ?dt1)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    (?component http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+    noValue(?component http://www.semanticweb.org/problem-ontology#hasAccordingField ?field)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UnexpectedImplementationComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Entity)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasComponent ?component)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasField ?field)
+    (?component http://www.semanticweb.org/problem-ontology#hasCheckedAccordance ?field)
+    (?component http://www.semanticweb.org/problem-ontology#hasAccordingField ?field)
+    noValue(?field http://www.semanticweb.org/problem-ontology#hasNextField)
+    noValue(?component http://www.semanticweb.org/problem-ontology#hasNextComponent)
     makeSkolem(?error, ?answer, ?session)
     ->
     (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
     (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
-
+    print("All correct")
 ]

@@ -3,13 +3,376 @@
     (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
     (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
     (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
-    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
     (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
     (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
     (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?dtMax)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?dtMin)
     (?type rdf:type ?rdfType)
-    (?rdfType http://www.semanticweb.org/problem-ontology#minValue ?minTypeValue)
     (?rdfType http://www.semanticweb.org/problem-ontology#maxValue ?maxTypeValue)
+    (?rdfType http://www.semanticweb.org/problem-ontology#minValue ?minTypeValue)
+    le(?minTypeValue,?dtMin)
+    ge(?maxTypeValue,?dtMax)
+    makeSkolem(?error, ?answer, ?session)
     ->
-    print("Language type choice", ?minTypeValue, " ", ?maxTypeValue)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?dtMax)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?dtMin)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/problem-ontology#maxValue ?maxTypeValue)
+    (?rdfType http://www.semanticweb.org/problem-ontology#minValue ?minTypeValue)
+    greaterThan(?minTypeValue,?dtMin)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?dtMax)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?dtMin)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/problem-ontology#maxValue ?maxTypeValue)
+    (?rdfType http://www.semanticweb.org/problem-ontology#minValue ?minTypeValue)
+    lessThan(?maxTypeValue,?dtMax)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Long)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    (?domainType http://www.semanticweb.org/problem-ontology#maxValue ?dtMax)
+    (?domainType http://www.semanticweb.org/problem-ontology#minValue ?dtMin)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/problem-ontology#maxValue ?maxTypeValue)
+    (?rdfType http://www.semanticweb.org/problem-ontology#minValue ?minTypeValue)
+
+    (http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int http://www.semanticweb.org/problem-ontology#maxValue ?intMax)
+    (http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Int http://www.semanticweb.org/problem-ontology#minValue ?intMin)
+
+    le(?intMin,?dtMin)
+    ge(?intMax,?dtMax)
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#RealNumber)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#IntegerNumber)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#IntegerNumber)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#FloatNumber)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#OutputParameter)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    noValue(?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer true)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#OutputParameter)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer false)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ChangedParameter)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    noValue(?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer true)
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ChangedParameter)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer false)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#InputParameter)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer false)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ReturnValue)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer false)
+]
+
+[
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer ?m)
+    ->
+    print("Must be transferred: ",?m)
+]
+
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer false)
+    ->
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer true)
+    ->
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?pointedType)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    noValue(?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    noValue(?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer true)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterByValue)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Scalar)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#InputParameter)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterByPointer)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+
+
+
+
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFixedLength ?dtLen)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayLength ?typeLen)
+    equal(?dtLen,?typeLen)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFixedLength ?dtLen)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayLength ?typeLen)
+    greaterThan(?dtLen,?typeLen)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughArrayLength)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Array)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Collection)
+    (?domainType http://www.semanticweb.org/problem-ontology#hasFixedLength ?dtLen)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayLength ?typeLen)
+    lessThan(?dtLen,?typeLen)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessArrayLength)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Char)
+    (?type rdf:type ?rdfType)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType ?type)
+    noValue(?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Char)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Number)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?component)
+    (?component http://www.semanticweb.org/problem-ontology#hasDomainType ?domainType)
+    (?domainType rdf:type http://www.semanticweb.org/problem-ontology#Char)
+    (?type rdf:type ?rdfType)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NumberTypeForChar)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+]
+
+[
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent ?sessionComponent)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType ?type)
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
 ]

@@ -1,4 +1,18 @@
 [
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    noValue(?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?sessionComponent)
+    ->
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?sessionComponent)
+    print("Has session component")
+]
+
+[
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSessionComponent ?sessionComponent)
+    ->
+    print("Has first session component")
+]
+
+[
 (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
 (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
 (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#TransferMethodChoice)
@@ -377,3 +391,24 @@ makeSkolem(?error, ?answer, ?session)
 print("Cant return updatable component")
 ]
 
+
+[
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?dataElement http://www.semanticweb.org/problem-ontology#name ?deName)
+    (?firstComponent http://www.semanticweb.org/problem-ontology#name ?cName)
+    noValue(?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameterName)
+    strConcat(?deName,"_",?cName,?paramName)
+    ->
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameterName ?paramName)
+    print("Param name: ",?paramName)
+]

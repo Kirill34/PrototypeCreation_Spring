@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -325,6 +326,105 @@ public class UserController {
         phraseRepository.save(phraseInterval);
     }
 
+    private void addProblem6()
+    {
+        Problem p = new Problem("Calculates the count of days between the birth date and the first date at school","distance_between_dates","");
+        problemRepository.save(p);
+
+        DomainType domainTypeInterval = DomainType.createIntegerDomainType("intervalDays","Interval in days [0;74000]",0,74000);
+        domainTypeRepository.save(domainTypeInterval);
+
+        DataElement dataElementCountOfDays = new DataElement(p,"count_of_days","Count of days",domainTypeInterval, DataElement.DataElementDirection.OUTPUT_DATA);
+        dataElementRepositiory.save(dataElementCountOfDays);
+
+        DomainType domainTypeDate = DomainType.createEntityDomainType("date","Date");
+        domainTypeRepository.save(domainTypeDate);
+
+        DomainType domainTypeDay = DomainType.createIntegerDomainType("dayNumber","Number of day",1,31);
+        domainTypeRepository.save(domainTypeDay);
+
+        DomainType domainTypeMonth = DomainType.createIntegerDomainType("monthNumber","Number of month",1,12);
+        domainTypeRepository.save(domainTypeMonth);
+
+        DomainType domainTypeYear = DomainType.createIntegerDomainType("year","Number of year",2000,2100);
+        domainTypeRepository.save(domainTypeYear);
+
+        EntityField entityFieldDay = new EntityField("day","Number of day",domainTypeDate,domainTypeDay);
+        entityFieldRepository.save(entityFieldDay);
+
+        EntityField entityFieldMonth = new EntityField("month","Number of month",domainTypeDate,domainTypeMonth);
+        entityFieldRepository.save(entityFieldMonth);
+
+        EntityField entityFieldYear = new EntityField("year","Number of year",domainTypeDate,domainTypeYear);
+        entityFieldRepository.save(entityFieldYear);
+
+        DataElement dataElementDateOfBirth = new DataElement(p,"date_of_birth","Date of birth",domainTypeDate, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementDateOfBirth);
+
+        DataElement dataElementFirstDateAtSchool = new DataElement(p,"first_date_at_school","First date at school",domainTypeDate, DataElement.DataElementDirection.INPUT_DATA);
+        dataElementRepositiory.save(dataElementFirstDateAtSchool);
+
+        Phrase phraseCountOfDays = new Phrase(dataElementCountOfDays,2,5);
+        phraseRepository.save(phraseCountOfDays);
+
+        Phrase phraseDateOfBirth = new Phrase(dataElementDateOfBirth,7,9);
+        phraseRepository.save(phraseDateOfBirth);
+
+        Phrase phraseFirstDateAtSchool = new Phrase(dataElementFirstDateAtSchool,11,15);
+        phraseRepository.save(phraseFirstDateAtSchool);
+
+        DataElementImplementation implementationCountOfDays = new DataElementImplementation("number","A number",dataElementCountOfDays);
+        dataElementImplementationRepository.save(implementationCountOfDays);
+
+        DataComponent dataComponentCountOfDays = new DataComponent("dayscount","Count of days",implementationCountOfDays,domainTypeInterval);
+        dataComponentRepository.save(dataComponentCountOfDays);
+
+        ArrayList<DataElement> dataElements = new ArrayList<>();
+        dataElements.add(dataElementDateOfBirth);
+        dataElements.add(dataElementFirstDateAtSchool);
+
+        for (DataElement el: dataElements) {
+
+            DataElementImplementation implementationEntity = new DataElementImplementation("entity","An entity with 3 characteristics: day (number), month (number), year (number)",el);
+            dataElementImplementationRepository.save(implementationEntity);
+
+            DataElementImplementation implementationThreeScalars = new DataElementImplementation("freefields"+el.getName(), "3 scalars: day (number), month (number), year (number)", el);
+            dataElementImplementationRepository.save(implementationThreeScalars);
+
+            DataComponent dataComponentDay = new DataComponent("day", "Number of day", implementationThreeScalars, domainTypeDay);
+            dataComponentRepository.save(dataComponentDay);
+
+            DataComponent dataComponentMonth = new DataComponent("month", "Number of month", implementationThreeScalars, domainTypeMonth);
+            dataComponentRepository.save(dataComponentMonth);
+
+            DataComponent dataComponentYear = new DataComponent("year", "Number of year", implementationThreeScalars, domainTypeYear);
+            dataComponentRepository.save(dataComponentYear);
+
+
+            DataElementImplementation implementationTwoScalars = new DataElementImplementation("freefields2", "2 scalars: day (number), month (number)", el);
+            dataElementImplementationRepository.save(implementationTwoScalars);
+
+            DataComponent dataComponentDay2 = new DataComponent("day", "Number of day", implementationTwoScalars, domainTypeDay);
+            dataComponentRepository.save(dataComponentDay2);
+
+            DataComponent dataComponentMonth2 = new DataComponent("month", "Number of month", implementationTwoScalars, domainTypeMonth);
+            dataComponentRepository.save(dataComponentMonth2);
+
+
+            DataElementImplementation implementationCollection3 = new DataElementImplementation("collection3","A collection of 3 elements of type \"number\"",el);
+            dataElementImplementationRepository.save(implementationCollection3);
+
+            DataElementImplementation implementationCollectionN = new DataElementImplementation("collectionN","A collection of N elements of type \"number\"",el);
+            dataElementImplementationRepository.save(implementationCollectionN);
+
+            DataElementImplementation implementationCollectionNandN = new DataElementImplementation("collectionNN","A collection of N elements of type \"number\", size of collection (number)",el);
+            dataElementImplementationRepository.save(implementationCollectionNandN);
+
+        }
+
+
+    }
+
     @GetMapping("/initDB")
     private void initDB()
     {
@@ -335,6 +435,7 @@ public class UserController {
             addProblem3();
             addProblem4();
             addProblem5();
+            addProblem6();
         }
     }
 

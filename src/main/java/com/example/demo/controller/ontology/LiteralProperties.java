@@ -26,5 +26,7 @@ public class LiteralProperties {
     {
         public static String MIN_VALUE = "http://www.semanticweb.org/problem-ontology#minValue";
         public static String MAX_VALUE = "http://www.semanticweb.org/problem-ontology#maxValue";
+        public static String HAS_ARRAY_LENGTH = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayLength";
+        public static String HAS_VALUE = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value";
     }
 }

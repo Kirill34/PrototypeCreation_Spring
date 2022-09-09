@@ -56,6 +56,8 @@ public class Problem extends AbstractOntologyObject {
      */
     private Set<DataElement> changedDataElements = new HashSet<>();
 
+    private List<DataElement> dataElements = new ArrayList<>();
+
     /**
      * Фразы, описывающие элементы данных
      */
@@ -150,6 +152,13 @@ public class Problem extends AbstractOntologyObject {
     {
         Phrase phrase = new Phrase(ontologyModel, leftBorder, rightBorder, dataElement);
         phrases.add(phrase);
+
+        if (dataElements.isEmpty())
+            this.setObjectProperty(ObjectProperties.Problem.HAS_FIRST_DATA_ELEMENT,dataElement);
+        else
+            dataElements.get(dataElements.size()-1).setSiblingDataElement(dataElement);
+
+        dataElements.add(dataElement);
         switch (direction)
         {
             case INPUT_DATA:

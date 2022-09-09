@@ -61,6 +61,11 @@ public class DataElement extends AbstractOntologyObject {
         this.setObjectProperty(ObjectProperties.Problem.HAS_NEXT_COMPONENT, dataElement);
     }
 
+    public void setSiblingDataElement(DataElement dataElement)
+    {
+        this.setObjectProperty(ObjectProperties.Problem.HAS_NEXT_DATA_ELEMENT,dataElement);
+    }
+
     public void setNextField(DataElement dataElement)
     {
         this.setObjectProperty(ObjectProperties.Problem.HAS_NEXT_FIELD, dataElement);

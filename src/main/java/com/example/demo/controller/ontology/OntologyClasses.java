@@ -11,6 +11,7 @@ public class OntologyClasses {
         public static String DOMAIN_TYPE_SCALAR = "http://www.semanticweb.org/problem-ontology#Scalar";
         public static String DOMAIN_TYPE_LOGICAL = "http://www.semanticweb.org/problem-ontology#Logical";
         public static String DOMAIN_TYPE_NUMBER = "http://www.semanticweb.org/problem-ontology#Number";
+        public static String DOMAIN_TYPE_CHAR = "http://www.semanticweb.org/problem-ontology#Char";
         public static String DOMAIN_TYPE_FLOAT_NUMBER = "http://www.semanticweb.org/problem-ontology#FloatNumber";
         public static String DOMAIN_TYPE_INTEGER_NUMBER = "http://www.semanticweb.org/problem-ontology#IntegerNumber";
         public static String DOMAIN_TYPE_COLLECTION = "http://www.semanticweb.org/problem-ontology#Collection";
@@ -30,6 +31,7 @@ public class OntologyClasses {
         public static String ANSWER_DATA_ELEMENT_IMPLEMENTATION = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation";
         public static String ANSWER_TRANSFER_METHOD_CHOICE = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#TransferMethodChoice";
         public static String ANSWER_LANGUAGE_TYPE_CHOICE = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice";
+        public static String ANSWER_LEXEME_CHOICE = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice";
         public static String SESSIONS_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent";
 
         public static String TRANSFER_METHOD_RETURN_VALUE = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ReturnValue";
@@ -55,6 +57,7 @@ public class OntologyClasses {
 
         public static String IMPLEMENTATION_COLLECTION_FOR_SCALAR = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ImplementationCollectionForScalar";
         public static String UNDEFINED_COLLECTION_SIZE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UndefinedCollectionSize";
+        public static String UNEXPECTED_IMPLEMENTATION_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#UnexpectedImplementationComponent";
 
         public static String INPUT_PARAMETER_FOR_OUTPUT_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForOutputComponent";
         public static String INPUT_PARAMETER_FOR_CHANGED_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterForUpdatableComponent";
@@ -66,6 +69,26 @@ public class OntologyClasses {
         public static String RETURN_VALUE_FOR_INPUT_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturnInputComponent";
         public static String RETURN_VALUE_FOR_CHANGED_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturnUpdatableComponent";
         public static String CANT_RETURN_COLLECTION = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CantReturnCollection";
+
+        public static String EXCESS_TYPE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessType";
+        public static String NOT_ENOUGH_TYPE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughtType";
+        public static String REAL_TYPE_FOR_INTEGER = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#RealTypeForInteger";
+        public static String INTEGER_TYPE_FOR_REAL = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IntegerTypeForRealNumber";
+        public static String OUTPUT_PARAMETER_BY_VALUE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#OutputParameterByValue";
+        public static String INPUT_PARAMETER_BY_POINTER = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#InputParameterByPointer";
+        public static String NOT_ENOUGH_ARRAY_LENGTH = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotEnoughArrayLength";
+        public static String EXCESS_ARRAY_LENGTH = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#ExcessArrayLength";
+        public static String NUMBER_TYPE_FOR_CHAR = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NumberTypeForChar";
+
+        public static String INCORRECT_LEXEM_OF_RETURN_TYPE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemOfReturnType";
+        public static String INCORRECT_LEXEM_OF_PARAM_TYPE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemParamType";
+        public static String EXPECTED_FUNCTION_NAME = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FunctionNameExpected";
+        public static String INCORRECT_START_OF_PARAM_LIST = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfParamList";
+        public static String INCORRECT_START_OF_RETURN_TYPE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfReturnType";
+        public static String INCORRECT_START_OF_PARAM_TYPE = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartParamType";
+        public static String INCORRECT_NAME_OF_PARAM = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectNameOfParam";
+        public static String COMMA_AFTER_ALL_PARAMS = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CommaAfterAllParameters";
+        public static String NOT_ALL_PARAMETERS = "http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotAllParameters";
     }
 
     public static class Language {

@@ -8,6 +8,8 @@ public class ObjectProperties {
         public static String HAS_INPUT_DATA = "http://www.semanticweb.org/problem-ontology#hasInputData";
         public static String HAS_OUTPUT_DATA = "http://www.semanticweb.org/problem-ontology#hasOutputData";
         public static String HAS_CHANGED_DATA = "http://www.semanticweb.org/problem-ontology#hasChangedData";
+        public static String HAS_FIRST_DATA_ELEMENT = "http://www.semanticweb.org/problem-ontology#hasFirstDataElement";
+        public static String HAS_NEXT_DATA_ELEMENT = "http://www.semanticweb.org/problem-ontology#hasNextDataElement";
         public static String HAS_PRESENTATION = "http://www.semanticweb.org/problem-ontology#hasPresentation";
         public static String DESCRIBES = "http://www.semanticweb.org/problem-ontology#describe";
         public static String HAS_FIRST_PHRASE = "http://www.semanticweb.org/problem-ontology#hasFirstPhrase";
@@ -37,5 +39,16 @@ public class ObjectProperties {
         public static String HAS_CHOSEN_TRANSFER_METHOD = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenTransferMethod";
         public static String OF_SESSION_COMPONENT = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofSessionComponent";
         public static String HAS_CHOSEN_TYPE = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenType";
+        public static String HAS_CHOSEN_LEXEME = "http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme";
+
+    }
+
+    public static class Language
+    {
+        public static String POINTS_TO = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo";
+        public static String ARRAY_OF = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#arrayOf";
+        public static String HAS_FIRST_LEXEME = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem";
+        public static String HAS_NEXT_LEXEME = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem";
+        public static String HAS_ACCORDING_LEXEME = "http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme";
     }
 }

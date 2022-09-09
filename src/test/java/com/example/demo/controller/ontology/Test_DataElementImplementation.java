@@ -142,4 +142,39 @@ public class Test_DataElementImplementation {
         com.example.demo.controller.ontology.error.Error e = m.checkAnswer(session, answer);
         assert (Objects.equals(e.ontClass, OntologyClasses.Error.NO_ERROR));
     }
+
+    @Test
+    public void test_UnexpectedImplementationComponent()
+    {
+        Model m = new Model();
+        Problem p = m.addProblem(1,"Calculates days between dates","some notice","date_distance");
+        Student s = m.addStudent(1);
+        Session session = m.addSession(s,p);
+
+        DomainType domainType_Day = new IntegerNumber(m.ontologyModel, 1,31);
+        DomainType domainType_Month = new IntegerNumber(m.ontologyModel,1,12);
+        DomainType domainType_Year = new IntegerNumber(m.ontologyModel,1900,2100);
+
+        ArrayList<DataElement> fields = new ArrayList<>();
+        fields.add(new DataElement(m.ontologyModel, "day","number of day", domainType_Day));
+        fields.add(new DataElement(m.ontologyModel, "month","number of month", domainType_Month));
+        fields.add(new DataElement(m.ontologyModel,"year","number of year",domainType_Year));
+
+        DomainType domainType = new Entity(m.ontologyModel,"date", fields);
+        DataElement dataElement = new DataElement(m.ontologyModel, "test", "test", domainType);
+        p.addDataElement(dataElement, DataElement.Direction.OUTPUT_DATA,2,3);
+
+        DataElement componentDay = new DataElement(m.ontologyModel, "day","day", domainType_Day);
+        DataElement componentMonth = new DataElement(m.ontologyModel,"month","month",domainType_Month);
+        DataElement componentYear = new DataElement(m.ontologyModel, "year" ,"year",domainType_Year);
+
+        ArrayList<DataElement> components = new ArrayList<>();
+        components.add(componentDay);
+        components.add(componentYear);
+        components.add(componentMonth);
+        DataElementImplementation implementation = new DataElementImplementation(m.ontologyModel, components);
+        Answer answer = new DataElementImplementationChoice(m.ontologyModel, dataElement, implementation);
+        com.example.demo.controller.ontology.error.Error e = m.checkAnswer(session, answer);
+        assert (Objects.equals(e.ontClass, OntologyClasses.Error.UNEXPECTED_IMPLEMENTATION_COMPONENT));
+    }
 }

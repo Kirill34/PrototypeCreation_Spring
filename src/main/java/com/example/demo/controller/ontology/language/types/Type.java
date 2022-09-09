@@ -1,4 +1,4 @@
-package com.example.demo.controller.ontology.language;
+package com.example.demo.controller.ontology.language.types;
 
 import com.example.demo.controller.ontology.AbstractOntologyObject;
 import org.apache.jena.ontology.OntModel;

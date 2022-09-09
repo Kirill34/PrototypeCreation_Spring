@@ -2,7 +2,7 @@ package com.example.demo.controller.ontology.session.answer;
 
 import com.example.demo.controller.ontology.ObjectProperties;
 import com.example.demo.controller.ontology.OntologyClasses;
-import com.example.demo.controller.ontology.language.Type;
+import com.example.demo.controller.ontology.language.types.Type;
 import com.example.demo.controller.ontology.session.SessionComponent;
 import org.apache.jena.ontology.OntModel;
 

@@ -1326,7 +1326,7 @@ public class ProblemClass {
             Individual datatype = inf.getIndividual("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#"+typeName);
             param.addProperty(inf.getObjectProperty("http://www.semanticweb.org/problem-ontology#hasDataType"), datatype);
 
-            Resource lexemType = createLexemByTypeAndName("IntLexem","int");
+            Resource lexemType = createLexemByTypeAndName("IntLexeme","int");
 
             List<Resource> typeLexemes = getLexemesForDataType(datatype);
             Resource lexemParamName = createLexemByTypeAndName("ParameterNameLexem",parameterName);
@@ -1449,7 +1449,7 @@ public class ProblemClass {
             }
 
             /*
-            Resource intLexem = createLexemByTypeAndName("IntLexem","int");
+            Resource intLexem = createLexemByTypeAndName("IntLexeme","int");
             intLexem.addProperty(inf.getDatatypeProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCurrentLexemNum"), inf.createTypedLiteral(1));
             rv.addProperty(inf.getObjectProperty("http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem"), intLexem);
              */
@@ -1608,7 +1608,7 @@ public class ProblemClass {
 
         //Comma
         HashMap<String,String> comma = new HashMap<>();
-        comma.put("type","CommaLexem");
+        comma.put("type","CommaLexeme");
         comma.put("value",",");
 
         lexemes.add(comma);
@@ -1625,7 +1625,7 @@ public class ProblemClass {
 
         //Type (int)
         HashMap<String,String> intLexem = new HashMap<>();
-        intLexem.put("type","IntLexem");
+        intLexem.put("type","IntLexeme");
         intLexem.put("value","int");
 
         //Type (char)

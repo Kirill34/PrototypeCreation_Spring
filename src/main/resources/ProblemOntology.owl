@@ -52,6 +52,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/problem-ontology#hasAccordingField -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasAccordingField"/>
+    
+
+
     <!-- http://www.semanticweb.org/problem-ontology#hasAceptablePresentation -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasAceptablePresentation">
@@ -71,6 +77,12 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasChangedData">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/problem-ontology#hasData"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasCheckedAccordance -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasCheckedAccordance"/>
     
 
 
@@ -119,6 +131,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasFirstComponent -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasFirstDataElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasFirstDataElement"/>
     
 
 
@@ -173,6 +191,12 @@
     <!-- http://www.semanticweb.org/problem-ontology#hasNextComponent -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextComponent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/problem-ontology#hasNextDataElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/problem-ontology#hasNextDataElement"/>
     
 
 

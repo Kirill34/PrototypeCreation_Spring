@@ -6,11 +6,11 @@ import org.apache.jena.ontology.OntModel;
 
 public class IntegerNumber extends Number{
 
-    private int min;
+    private long min;
 
-    private int max;
+    private long max;
 
-    public IntegerNumber(OntModel ontModel, int min, int max) {
+    public IntegerNumber(OntModel ontModel, long min, long max) {
         super(ontModel, OntologyClasses.Problem.DOMAIN_TYPE_INTEGER_NUMBER);
         this.min=min;
         this.max=max;

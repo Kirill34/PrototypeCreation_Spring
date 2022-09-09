@@ -22,7 +22,7 @@ public class Entity extends DomainType{
         this.setObjectProperty(ObjectProperties.Problem.HAS_FIRST_FIELD,fields.get(0));
         for (int i=1; i<fields.size(); i++)
         {
-            fields.get(i).setNextField(fields.get(i));
+            fields.get(i-1).setNextField(fields.get(i));
         }
     }
 }

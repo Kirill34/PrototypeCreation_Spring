@@ -1,5 +1,6 @@
 package com.example.demo.controller.ontology;
 
+import com.example.demo.controller.ontology.language.lexemes.Lexeme;
 import com.example.demo.controller.ontology.problem.DataElement;
 import com.example.demo.controller.ontology.problem.DataElementImplementation;
 import com.example.demo.controller.ontology.problem.Problem;
@@ -24,7 +25,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.apache.jena.ontology.OntModelSpec.OWL_MEM_MICRO_RULE_INF;
 
@@ -40,7 +43,7 @@ public class Model {
     protected static String DATA_PRESENTATION_RULES = "rules/3.rules";
     protected static String PARAMETERS_RETURNS_RULES = "rules/4.rules";
     protected static String TYPES_RULES = "rules/5.rules";
-    protected static String PROTOTYPE_RULES = "rules/prototype.rules";
+    protected static String PROTOTYPE_RULES = "rules/6.rules";
 
     protected org.apache.jena.rdf.model.Model model = null;
 
@@ -112,15 +115,34 @@ public class Model {
 
         //Ризонер для интерации 4 "Выбор типов параметров и возвращаемого значения"
         reasoners[4] = createReasonerForInteraction(TYPES_RULES);
-        /*
+
         //Ризонер для интеракции 5 "Написание прототипа функции"
         reasoners[5] = createReasonerForInteraction(PROTOTYPE_RULES);
 
-         */
         ontologyModel = ModelFactory.createOntologyModel( OWL_MEM_MICRO_RULE_INF, model);
 
-        ontologyModel.getOntClass(OntologyClasses.Language.INT).addProperty(model.getProperty(LiteralProperties.Language.MIN_VALUE), model.createTypedLiteral(-2147483648L));
-        ontologyModel.getOntClass(OntologyClasses.Language.INT).addProperty(model.getProperty(LiteralProperties.Language.MAX_VALUE), model.createTypedLiteral(2147483647L));
+        ontologyModel.getOntClass(OntologyClasses.Language.CHAR).addProperty(model.getProperty(LiteralProperties.Language.MIN_VALUE), model.createTypedLiteral(-128));
+        ontologyModel.getOntClass(OntologyClasses.Language.CHAR).addProperty(model.getProperty(LiteralProperties.Language.MAX_VALUE), model.createTypedLiteral(127));
+
+        ontologyModel.getOntClass(OntologyClasses.Language.INT).addProperty(model.getProperty(LiteralProperties.Language.MIN_VALUE), model.createTypedLiteral(-2147483648));
+        ontologyModel.getOntClass(OntologyClasses.Language.INT).addProperty(model.getProperty(LiteralProperties.Language.MAX_VALUE), model.createTypedLiteral(2147483647));
+
+        ontologyModel.getOntClass(OntologyClasses.Language.LONG).addProperty(model.getProperty(LiteralProperties.Language.MIN_VALUE), model.createTypedLiteral(-9223372036854775808L));
+        ontologyModel.getOntClass(OntologyClasses.Language.LONG).addProperty(model.getProperty(LiteralProperties.Language.MAX_VALUE), model.createTypedLiteral(9223372036854775807L));
+
+        HashMap<String,String> typesLexemes = new HashMap<>();
+        typesLexemes.put(OntologyClasses.Language.CHAR,OntologyClasses.Language.CHAR_LEXEM);
+        typesLexemes.put(OntologyClasses.Language.INT,OntologyClasses.Language.INT_LEXEM);
+        typesLexemes.put(OntologyClasses.Language.LONG,OntologyClasses.Language.LONG_LEXEM);
+        typesLexemes.put(OntologyClasses.Language.FLOAT,OntologyClasses.Language.FLOAT_LEXEM);
+        for (Map.Entry<String,String> entry : typesLexemes.entrySet())
+        {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            Resource classType = model.getResource(key);
+            Resource classLexeme = model.getResource(value);
+            classType.addProperty(model.getProperty(ObjectProperties.Language.HAS_ACCORDING_LEXEME), classLexeme);
+        }
 
     }
 
@@ -204,9 +226,22 @@ public class Model {
                 DataElementImplementation implementation = ((DataElementImplementationChoice) answer).getImplementation();
                 Resource resource = answer.ontResource;
                 Resource firstComponent = resource.getPropertyResourceValue(ontologyModel.getObjectProperty(ObjectProperties.Session.HAS_FIRST_SESSION_COMPONENT));
-                DataElement dataComponent = implementation.getDataComponents().get(0);
-                SessionComponent component = new SessionComponent(ontologyModel, firstComponent, dataElement, implementation, dataComponent);
-                sessionComponentList.add(component);
+
+
+                for (int i=0; i<implementation.getDataComponents().size(); i++) {
+                    DataElement dataComponent = implementation.getDataComponents().get(i);
+                    SessionComponent component = new SessionComponent(ontologyModel, firstComponent, dataElement, implementation, dataComponent);
+                    sessionComponentList.add(component);
+                    if (i<implementation.getDataComponents().size()-1)
+                        firstComponent = firstComponent.getPropertyResourceValue(ontologyModel.getObjectProperty(ObjectProperties.Session.HAS_NEXT_SESSION_COMPONENT));
+                }
+
+
+                //Добавить еще компоненты сессии
+                for (int i=1; i<sessionComponentList.size(); i++)
+                {
+                    sessionComponentList.get(i-1).setObjectProperty(ObjectProperties.Session.HAS_NEXT_SESSION_COMPONENT, sessionComponentList.get(i));
+                }
             }
 
             return answer.getError();
@@ -223,6 +258,14 @@ public class Model {
         if (answer instanceof LanguageTypeChoice)
         {
             InfModel infModel = ModelFactory.createInfModel(reasoners[4],ontologyModel);
+            org.apache.jena.rdf.model.Model diff = infModel.getDeductionsModel().difference(ontologyModel);
+            ontologyModel.add(diff);
+            return answer.getError();
+        }
+
+        if (answer instanceof LexemeChoice)
+        {
+            InfModel infModel = ModelFactory.createInfModel(reasoners[5],ontologyModel);
             org.apache.jena.rdf.model.Model diff = infModel.getDeductionsModel().difference(ontologyModel);
             ontologyModel.add(diff);
             return answer.getError();

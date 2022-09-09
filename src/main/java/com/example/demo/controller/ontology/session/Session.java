@@ -3,6 +3,7 @@ package com.example.demo.controller.ontology.session;
 import com.example.demo.controller.ontology.AbstractOntologyObject;
 import com.example.demo.controller.ontology.ObjectProperties;
 import com.example.demo.controller.ontology.OntologyClasses;
+import com.example.demo.controller.ontology.language.lexemes.Lexeme;
 import com.example.demo.controller.ontology.session.answer.Answer;
 import model.Problem;
 import org.apache.jena.ontology.OntModel;
@@ -17,6 +18,8 @@ public class Session extends AbstractOntologyObject {
     private List<Answer> answerList = new ArrayList<>();
 
     private com.example.demo.controller.ontology.problem.Problem problem;
+
+    private Lexeme firstPrototypeLexeme = null;
 
     public Session(OntModel ontModel, Student student, com.example.demo.controller.ontology.problem.Problem problem) {
         super(ontModel, OntologyClasses.Session.SESSION);
@@ -43,5 +46,28 @@ public class Session extends AbstractOntologyObject {
 
     public List<Answer> getAnswerList() {
         return answerList;
+    }
+
+    private void setFirstPrototypeLexeme(Lexeme lexeme)
+    {
+        this.firstPrototypeLexeme=lexeme;
+        this.setObjectProperty(ObjectProperties.Language.HAS_FIRST_LEXEME,lexeme);
+    }
+
+    public void addLexeme(Lexeme lexeme)
+    {
+        if (this.firstPrototypeLexeme == null)
+        {
+            setFirstPrototypeLexeme(lexeme);
+        }
+        else
+        {
+            Lexeme currLexeme = firstPrototypeLexeme;
+            while (currLexeme.hasNextLexeme())
+            {
+                currLexeme = currLexeme.getNextLexeme();
+            }
+            currLexeme.setNextLexeme(lexeme);
+        }
     }
 }

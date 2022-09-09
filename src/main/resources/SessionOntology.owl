@@ -59,6 +59,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenTransferMethod -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenTransferMethod"/>
@@ -236,6 +242,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameterName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameterName"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#isCorrectAnswer"/>
@@ -322,6 +334,14 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LanguageTypeChoice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#Answer"/>
     </owl:Class>
     

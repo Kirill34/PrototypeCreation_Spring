@@ -1,0 +1,634 @@
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexeme)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexeme)
+    ->
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexeme)
+    print("Сработало правило 1")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?nextLexeme)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?nextLexeme)
+    ->
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?nextLexeme)
+    print("Сработало правило 2")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustHaveNextLexemeType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    print("Сработало правило 3")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?voidLexeme)
+    (?voidLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    noValue(?voidLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexeme)
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFuncName ?funcName)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
+    equal(?funcName, ?value)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?voidLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    print("Сработало правило 4")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?voidLexeme)
+    (?voidLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFuncName ?funcName)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
+    notEqual(?funcName, ?value)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#FunctionNameExpected)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 5")
+]
+
+
+
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#VoidLexem)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemOfReturnType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 6")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    (?lastLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter ?param)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    print("Сработало правило 7")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    (?lastLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameter)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustHaveNextLexemeType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+    print("Сработало правило 7.1")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    (?lastLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lexeme)
+    noValue(?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfParamList)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 8")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue ?returnValue)
+    (?returnValue http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme ?typeLexeme)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    (?lexeme rdf:type ?typeLexeme)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustHaveNextLexemeType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    print("Сработало правило 9")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasReturnValue ?returnValue)
+    (?returnValue http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme ?typeLexeme)
+    noValue(?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?lexeme rdf:type ?typeLexeme)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartOfReturnType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 10")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustHaveNextLexemeType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#FunctionNameLexem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFuncName ?funcName)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?value)
+    equal(?funcName, ?value)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    print("Сработало правило 11")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar)
+    (?type rdf:type ?rdfType)
+    (?rdfType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme ?typeLexeme)
+    makeSkolem(?lexemeExpectation, ?session, ?sessionComponent, ?type)
+    ->
+    (?lexemeExpectation rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LexemeExpectation)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?typeLexeme)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType ?lexemeExpectation)
+    print("type lexeme: ",?typeLexeme)
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Pointer)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#pointsTo ?pointedType)
+    (?pointedType rdf:type ?rdfType)
+    (?pointedType rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Scalar)
+    (?rdfType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme ?typeLexeme)
+    makeSkolem(?lexemeExpectation, ?session, ?sessionComponent, ?pointedType)
+    makeSkolem(?lexemeExpectation2, ?session, ?sessionComponent, ?type)
+    ->
+    (?lexemeExpectation rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LexemeExpectation)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?typeLexeme)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType ?lexemeExpectation)
+
+    (?lexemeExpectation2 rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LexemeExpectation)
+    (?lexemeExpectation2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#PointerLexem)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType ?lexemeExpectation2)
+
+    print("type lexeme: ",?typeLexeme)
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFirstDataElement ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType ?lexemeExpectation)
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?lexeme rdf:type ?lexemeRDFtype)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?lexemeRDFtype)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation)
+    print("Сработало правило 12")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?implementation http://www.semanticweb.org/problem-ontology#hasFirstComponent ?firstComponent)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasFirstDataElement ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#OpenBracketLexem)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType ?lexemeExpectation)
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?lexemeRDFtype)
+    noValue(?lexeme rdf:type ?lexemeRDFtype)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectStartParamType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("LEXEME RDF TYPE:",?lexemeRDFtype)
+    print("Сработало правило 13")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation)
+    noValue(?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType)
+
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameterName ?paramName)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?paramName)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter ?sessionComponent)
+    print("Сработало правило 14")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation)
+    noValue(?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType)
+
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#ParameterNameLexem)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasParameterName ?paramName)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#value ?lexemeValue)
+    notEqual(?lexemeValue,?paramName)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectNameOfParam)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 15")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType ?lexemeExpectation2)
+
+    (?lexeme rdf:type ?rdfType)
+    (?lexemeExpectation2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?rdfType)
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation2)
+    print("Сработало правило 16")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType ?lexemeExpectation2)
+
+    (?lexemeExpectation2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?rdfType)
+    noValue(?lexeme rdf:type ?rdfType)
+
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#IncorrectLexemParamType)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 17")
+]
+
+[
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType ?lexemeExpectation)
+    noValue(?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation)
+    ->
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation)
+]
+
+[
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType ?lexemeExpectation2)
+    noValue(?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation2)
+    ->
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexemeExpectedType ?lexemeExpectation2)
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+    noValue(?dataElement http://www.semanticweb.org/problem-ontology#hasNextDataElement)
+
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter ?sessionComponent)
+
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    print("Сработало правило 18")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+    noValue(?dataElement http://www.semanticweb.org/problem-ontology#hasNextDataElement)
+
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter ?sessionComponent)
+
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#CommaAfterAllParameters)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 19")
+]
+
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasNextDataElement ?nextDataElement)
+
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter ?sessionComponent)
+
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    print("Сработало правило 20")
+]
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?dataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?dataElement)
+
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+
+    noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasNextDataElement ?nextDataElement)
+
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter ?sessionComponent)
+
+    (?lexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CloseBracketLexem)
+
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NotAllParameters)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    print("Сработало правило 21")
+]
+
+
+[
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?session http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasLexem ?lastLexeme)
+    noValue(?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem)
+    (?lastLexeme rdf:type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#CommaLexem)
+    (?penLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lastLexeme)
+    (?penLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter ?sessionComponent)
+    noValue(?firstComponent http://www.semanticweb.org/problem-ontology#hasNextComponent)
+    (?dataElement http://www.semanticweb.org/problem-ontology#hasNextDataElement ?nextDataElement)
+
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer2)
+    (?answer2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#DataElementImplementation)
+    (?sessionComponent2 rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#SessionComponent)
+    (?sessionComponent2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasAccordingComponent ?firstComponent)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasFirstSessionComponent ?sessionComponent2)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenImplementation ?implementation)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?problem http://www.semanticweb.org/problem-ontology#hasData ?nextDataElement)
+    (?answer2 http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#ofDataElement ?nextDataElement)
+
+    (?sessionComponent2 http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType ?type)
+    (?type http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType ?lexemeExpectation)
+
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasSolvingProblem ?problem)
+    (?session http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasLastAnswer ?answer)
+    (?answer rdf:type http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#LexemeChoice)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasChosenLexeme ?lexeme)
+    noValue(?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError)
+    (?lexeme rdf:type ?lexemeRDFtype)
+    (?lexemeExpectation http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType ?lexemeRDFtype)
+    makeSkolem(?error, ?answer, ?session)
+    ->
+    (?error rdf:type http://www.semanticweb.org/dns/ontologies/2022/1/error-ontology#NoError)
+    (?answer http://www.semanticweb.org/dns/ontologies/2021/10/session-ontology#hasError ?error)
+    (?lastLexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem ?lexeme)
+    (?lexeme http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation ?lexemeExpectation)
+    print("Сработало правило 21")
+]

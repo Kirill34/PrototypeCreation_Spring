@@ -28,9 +28,33 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexeme"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingLexemeExpectation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasAccordingParameter"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCopy -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasCopy"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasExpectedType"/>
     
 
 
@@ -40,15 +64,45 @@
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasFirstLexemeExpectedType"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexem"/>
     
 
 
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasNextLexemeExpectedType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#hasUsefulType"/>
+    
+
+
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#isInPrototypeCode"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustHaveNextLexemeType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustHaveNextLexemeType"/>
     
 
 
@@ -126,6 +180,12 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#min"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#mustBeTransferedByPointer"/>
     
 
 
@@ -355,6 +415,12 @@
     <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#Lexem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LexemeExpectation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/dns/ontologies/2022/0/language-ontology#LexemeExpectation"/>
     
 
 
